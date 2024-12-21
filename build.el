@@ -1,3 +1,5 @@
+(setq org-safe-remote-resources '("https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup"))
+
 (require 'ox-publish)
 
 (require 'package)
