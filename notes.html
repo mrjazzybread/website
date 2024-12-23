@@ -16,25 +16,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6725273">Type declarations</a></li>
-<li><a href="#org349f9e6">Value descriptions</a></li>
-<li><a href="#org6d66ad9"><code>Prop</code> and <code>Bool</code></a></li>
-<li><a href="#orgfc1a1f4">Gospel Type Semantics</a></li>
-<li><a href="#org0abbfb5">Higher order lenses</a></li>
-<li><a href="#org2108a5c">Lemmas</a></li>
-<li><a href="#org51bed43">Open Questions</a></li>
-<li><a href="#org0b7c0db">Exceptional Specifications</a></li>
-<li><a href="#org5c3f2cc">Functor Constraints</a></li>
-<li><a href="#org18f57dc">Miscellaneous changes</a></li>
-<li><a href="#org0c7a832">Updated syntax</a></li>
-<li><a href="#org5015333">Shared Resources</a></li>
+<li><a href="#org5f1f41e">Type declarations</a></li>
+<li><a href="#orgf5a0941">Value descriptions</a></li>
+<li><a href="#orgd9cc13e"><code>Prop</code> and <code>Bool</code></a></li>
+<li><a href="#org559328d">Gospel Type Semantics</a></li>
+<li><a href="#orgab248fc">Higher order lenses</a></li>
+<li><a href="#orgc465a98">Lemmas</a></li>
+<li><a href="#org4c3245a">Open Questions</a></li>
+<li><a href="#orge1e170d">Exceptional Specifications</a></li>
+<li><a href="#org3dd65a9">Functor Constraints</a></li>
+<li><a href="#org10a7a2d">Miscellaneous changes</a></li>
+<li><a href="#org56dccb6">Updated syntax</a></li>
+<li><a href="#org3542058">Shared Resources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org6725273" class="outline-2">
-<h2 id="org6725273">Type declarations</h2>
-<div class="outline-text-2" id="text-org6725273">
+<div id="outline-container-org5f1f41e" class="outline-2">
+<h2 id="org5f1f41e">Type declarations</h2>
+<div class="outline-text-2" id="text-org5f1f41e">
 <p>
 When translating a type declaration into separation logic, we have to
 create, besides the type definition, a representation predicate that
@@ -44,16 +44,16 @@ field in the type specification.
 </p>
 </div>
 
-<div id="outline-container-org049eb69" class="outline-3">
-<h3 id="org049eb69">Unnamed Model Fields</h3>
-<div class="outline-text-3" id="text-org049eb69">
+<div id="outline-container-orged72d34" class="outline-3">
+<h3 id="orged72d34">Unnamed Model Fields</h3>
+<div class="outline-text-3" id="text-orged72d34">
 <p>
 One of the changes we made to the <b>Gospel</b> typechecker was allowing
 <code>model</code> fields to be unnamed. For example, if we wish to specify a queue
 in current gospel whose logical model is a <code>sequence</code>, we must write as
 such.
 </p>
-<pre class="example" id="org73a8eb8">
+<pre class="example" id="org11a2e5b">
 type t
 (*@ model view : int sequence *)
 
@@ -69,7 +69,7 @@ make specifications more verbose than they need be. Although the
 example above is still valid in <b>Gospel</b>, we have developed an alternate
 syntax for cases where types only have a single <code>model</code> field.
 </p>
-<pre class="example" id="orge8d55af">
+<pre class="example" id="orga38468b">
 type t
 (*@ model : int sequence *)
 
@@ -85,9 +85,9 @@ to write and read.
 </div>
 </div>
 
-<div id="outline-container-org82903bc" class="outline-3">
-<h3 id="org82903bc">Multiple Model Fields</h3>
-<div class="outline-text-3" id="text-org82903bc">
+<div id="outline-container-org4f4d634" class="outline-3">
+<h3 id="org4f4d634">Multiple Model Fields</h3>
+<div class="outline-text-3" id="text-org4f4d634">
 <p>
 When creating the representation predicate for a type with named <code>model</code>
 fields, we have the option between creating a predicate with multiple
@@ -103,14 +103,14 @@ names.
 <p>
 Example (assuming <code>x</code> is of type <code>t</code> with two model fields <code>y</code> and <code>z</code>) :
 </p>
-<pre class="example" id="org39bf17f">
+<pre class="example" id="org9f7f726">
 (*@ f x y z
     ensures x.y + y = z *)
 </pre>
 <p>
 would become, during translation
 </p>
-<div class="equation*" id="orged7d0e0">
+<div class="equation*" id="org05c02a4">
 <p>
 {}(f(x, y, z)){P(x, y, z) * y + y = z}
 </p>
@@ -123,9 +123,9 @@ behaviour). While translating to separation logic, I create two types,
 one for the program type and another for the model.
 </p>
 </div>
-<div id="outline-container-orgef6199a" class="outline-4">
-<h4 id="orgef6199a">Naming problems</h4>
-<div class="outline-text-4" id="text-orgef6199a">
+<div id="outline-container-org2458baf" class="outline-4">
+<h4 id="org2458baf">Naming problems</h4>
+<div class="outline-text-4" id="text-org2458baf">
 <p>
 The tricky question to solve however is what names to give these
 types? I think the easiest solution is to give the logical type
@@ -136,14 +136,14 @@ to change anything in the typed specification.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7b4379" class="outline-3">
-<h3 id="orgb7b4379"><a id="org1b2ca7d"></a>Ephemeral and Pure Annotations</h3>
-<div class="outline-text-3" id="text-orgb7b4379">
+<div id="outline-container-org7a52490" class="outline-3">
+<h3 id="org7a52490"><a id="orgbede2f6"></a>Ephemeral and Pure Annotations</h3>
+<div class="outline-text-3" id="text-org7a52490">
 <p>
 It is also possible to not give the type a <code>model</code> field and instead opt
 to give an <code>ephemeral</code> annotation as such
 </p>
-<pre class="example" id="org927579a">
+<pre class="example" id="orgf7ec054">
 type t
 (*@ ephemeral *)
 </pre>
@@ -155,9 +155,9 @@ reflection of the <b>OCaml</b> type.
 </p>
 </div>
 </div>
-<div id="outline-container-org6ab4f52" class="outline-3">
-<h3 id="org6ab4f52">Representation Predicates</h3>
-<div class="outline-text-3" id="text-org6ab4f52">
+<div id="outline-container-org8bdeddc" class="outline-3">
+<h3 id="org8bdeddc">Representation Predicates</h3>
+<div class="outline-text-3" id="text-org8bdeddc">
 <p>
 As stated previously, when we translate a type declaration, we also
 need to generate an appropriate representation predicate. How we do so
@@ -165,9 +165,9 @@ depends on how the type is defined.
 </p>
 </div>
 
-<div id="outline-container-orga154218" class="outline-4">
-<h4 id="orga154218">Abstract Types</h4>
-<div class="outline-text-4" id="text-orga154218">
+<div id="outline-container-orgaa001f7" class="outline-4">
+<h4 id="orgaa001f7">Abstract Types</h4>
+<div class="outline-text-4" id="text-orgaa001f7">
 <p>
 Since we cannot give a representation predicate to a type that is
 undefined in the program, we simply create its signature. This
@@ -177,24 +177,24 @@ representation, that is, the type defined in its <code>model</code> clause.
 <ul class="org-ul">
 <li>If the type is pure, then the program value is the same as the <b>OCaml</b>
 type. In the case where the <code>model</code> is a reflection of the <b>OCaml</b> type
-as described in Section <a href="#org1b2ca7d">Ephemeral and Pure Annotations</a>, no
+as described in Section <a href="#orgbede2f6">Ephemeral and Pure Annotations</a>, no
 representation predicate is generated</li>
 <li>If the type is mutable, then the program value is of type <code>loc</code>.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb345d13" class="outline-4">
-<h4 id="orgb345d13">Concrete Types</h4>
-<div class="outline-text-4" id="text-orgb345d13">
+<div id="outline-container-org84e5770" class="outline-4">
+<h4 id="org84e5770">Concrete Types</h4>
+<div class="outline-text-4" id="text-org84e5770">
 <p>
 TBD
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2628058" class="outline-4">
-<h4 id="org2628058">Note on naming</h4>
-<div class="outline-text-4" id="text-org2628058">
+<div id="outline-container-orgac71f89" class="outline-4">
+<h4 id="orgac71f89">Note on naming</h4>
+<div class="outline-text-4" id="text-orgac71f89">
 <p>
 Generally, the generated representation predicate has the same name
 as the original type, but with the first letter capitalized and an
@@ -205,31 +205,31 @@ so as to make the generated Separation Logic triples simpler to read.
 </div>
 </div>
 </div>
-<div id="outline-container-org007881f" class="outline-3">
-<h3 id="org007881f">Translation of Type declarations</h3>
-<div class="outline-text-3" id="text-org007881f">
-<pre class="example" id="orgb8bc0dd">
+<div id="outline-container-orgd903a93" class="outline-3">
+<h3 id="orgd903a93">Translation of Type declarations</h3>
+<div class="outline-text-3" id="text-orgd903a93">
+<pre class="example" id="org2bcb529">
 type t
 (*@ model : int *)
 </pre>
 <p>
 Translates into 
 </p>
-<pre class="example" id="org0e654b9">
+<pre class="example" id="org00e2254">
 Type t
 Predicate _T (target : t) (model : int)
 </pre>
-<pre class="example" id="org00c4876">
+<pre class="example" id="org9a473b5">
 type t
 (*@ mutable model : int *)
 </pre>
 <p>
 Translates into
 </p>
-<pre class="example" id="org0b253d4">
+<pre class="example" id="org3cdce93">
 Predicate _T (target : loc) (model : int)
 </pre>
-<pre class="example" id="org2aca0d1">
+<pre class="example" id="org3cbd984">
 type t
 (*@ model x : int
     model y : int *)
@@ -237,13 +237,13 @@ type t
 <p>
 Translates into
 </p>
-<pre class="example" id="orgfa944cb">
+<pre class="example" id="org7a1b59e">
 Type t = {x : int; y : int}
 Type _t
 
 Predicate _T (target : t) (model : _t)
 </pre>
-<pre class="example" id="org7eee7a4">
+<pre class="example" id="orge926023">
 type t
 (*@ mutable model x : int
     model y : int
@@ -252,15 +252,15 @@ type t
 <p>
 Translates into
 </p>
-<pre class="example" id="orgfd3f604">
+<pre class="example" id="org81c686a">
 Type t = {x : int; y : int}
 Predicate _T (target : loc) (model : t)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf79ef58" class="outline-3">
-<h3 id="orgf79ef58">Implementation</h3>
-<div class="outline-text-3" id="text-orgf79ef58">
+<div id="outline-container-org99ac897" class="outline-3">
+<h3 id="org99ac897">Implementation</h3>
+<div class="outline-text-3" id="text-org99ac897">
 <ol class="org-ol">
 <li>Check if the type has a specification. If so, retrieve the model,
 if not, assume the model is a reflection of the OCaml type.</li>
@@ -280,9 +280,9 @@ model, as was defined previously.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb112732" class="outline-3">
-<h3 id="orgb112732">Limitations</h3>
-<div class="outline-text-3" id="text-orgb112732">
+<div id="outline-container-org9f6da58" class="outline-3">
+<h3 id="org9f6da58">Limitations</h3>
+<div class="outline-text-3" id="text-org9f6da58">
 <ul class="org-ul">
 <li>When translated into <b>CFML</b>, record fields with names that have
 already been defined don't work (Low priority).</li>
@@ -298,9 +298,9 @@ and representation predicates.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org349f9e6" class="outline-2">
-<h2 id="org349f9e6">Value descriptions</h2>
-<div class="outline-text-2" id="text-org349f9e6">
+<div id="outline-container-orgf5a0941" class="outline-2">
+<h2 id="orgf5a0941">Value descriptions</h2>
+<div class="outline-text-2" id="text-orgf5a0941">
 <p>
 When translating a value description and, more importantly,
 specification, we must take proper care to ensure that all the
@@ -308,16 +308,16 @@ ownership conditions are properly generated and are semantically
 equivalent to their <b>Gospel</b> counterparts.
 </p>
 </div>
-<div id="outline-container-org3e6e3a4" class="outline-3">
-<h3 id="org3e6e3a4">Lenses</h3>
-<div class="outline-text-3" id="text-org3e6e3a4">
+<div id="outline-container-orgaf8e924" class="outline-3">
+<h3 id="orgaf8e924">Lenses</h3>
+<div class="outline-text-3" id="text-orgaf8e924">
 <p>
 To describe ownership of values, we use what are called <i>Lenses</i>;
 lightweight notation to encode representation predicates. For example,
 let us assume once again a queue whose logical <code>model</code> is a sequence of
 integers:
 </p>
-<pre class="example" id="org7a64bf2">
+<pre class="example" id="orgb78f710">
 type t
 (*@ mutable model : int sequence *)
 
@@ -333,7 +333,7 @@ type <code>t</code>. To make this transition, we require a representation predic
 (in <b>Gospel</b>'s case, a lens) that lifts the program value into
 its logical value. In this case, we could write
 </p>
-<pre class="example" id="org46f1049">
+<pre class="example" id="orgae40a27">
 val push : t -&gt; int -&gt; unit
 (*@ f q x
     modifies q @ t
@@ -350,23 +350,23 @@ that we return the same ownership of <code>q</code>. Given these semantics, we
 could translate this specification into the following Separation Logic
 triple (in <b>CFML</b> syntax for simplicity's sake).
 </p>
-<pre class="example" id="org767fd6e">
+<pre class="example" id="org8a8e7df">
 forall (prog_q : loc) (q : int list) (x : int)
 PRE (prog_q ~&gt; Queue q)
 POSTUNIT (prog_q ~&gt; Queue (q ++ [x]))
 </pre>
 <p>
 Important to note that lenses are not exclusive used in
-specifications as we see in the Section on <a href="#org47ad44b">Logical Quantifiers</a>,
+specifications as we see in the Section on <a href="#org2e0d479">Logical Quantifiers</a>,
 however, we will mostly focus on this use case as it is the most
 common as well as the simplest.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org121e9f7" class="outline-3">
-<h3 id="org121e9f7">Ownership clauses</h3>
-<div class="outline-text-3" id="text-org121e9f7">
+<div id="outline-container-orgc6b7bd5" class="outline-3">
+<h3 id="orgc6b7bd5">Ownership clauses</h3>
+<div class="outline-text-3" id="text-orgc6b7bd5">
 <p>
 To describe ownership with lenses, we can use one of the
 following clauses:
@@ -393,9 +393,9 @@ values, we assume a <code>produces</code> with full ownership.
 </p>
 </div>
 </div>
-<div id="outline-container-orgee38c12" class="outline-3">
-<h3 id="orgee38c12">Available Lenses</h3>
-<div class="outline-text-3" id="text-orgee38c12">
+<div id="outline-container-orgf6dfb5f" class="outline-3">
+<h3 id="orgf6dfb5f">Available Lenses</h3>
+<div class="outline-text-3" id="text-orgf6dfb5f">
 <p>
 For now, besides the default lens, we only have access to two
 lenses:
@@ -411,7 +411,7 @@ physical equality is defined in <b>OCaml</b>, it may be desirable to define
 it only for the case when it receives two memory locations. To do
 this, we can state:
 </p>
-<pre class="example" id="org28ad061">
+<pre class="example" id="orgd6cd35b">
 val ph_eq : 'a -&gt; 'a -&gt; bool
 (*@ ph_eq x y
     preserves x @ loc, y @ loc
@@ -424,9 +424,9 @@ can apply the lens <code>loc</code>, in other words, mutable values.
 </ul>
 </div>
 </div>
-<div id="outline-container-orge8d2422" class="outline-3">
-<h3 id="orge8d2422">Limitations</h3>
-<div class="outline-text-3" id="text-orge8d2422">
+<div id="outline-container-org8f74713" class="outline-3">
+<h3 id="org8f74713">Limitations</h3>
+<div class="outline-text-3" id="text-org8f74713">
 <ul class="org-ul">
 <li>No support for polymorphic lenses, in other words, higher
 order representation predicates.</li>
@@ -434,23 +434,23 @@ order representation predicates.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0cc38a8" class="outline-3">
-<h3 id="org0cc38a8">Translations of Lenses</h3>
-<div class="outline-text-3" id="text-org0cc38a8">
+<div id="outline-container-org7595b05" class="outline-3">
+<h3 id="org7595b05">Translations of Lenses</h3>
+<div class="outline-text-3" id="text-org7595b05">
 <p>
 This section will showcase some simple examples of how lenses
 are translated into Separation Logic. To showcase, I will show an
 example of a stack module, its <b>Gospel</b> specification and its <b>CFML</b>
 translation. 
 </p>
-<pre class="example" id="org9ab4122">
+<pre class="example" id="orga6b6baa">
 type 'a t
 (*@ mutable model : 'a Sequence.t *)
 </pre>
 <p>
 Translates into
 </p>
-<pre class="example" id="org5cb75c0">
+<pre class="example" id="orga577016">
 Parameter Stack :
 forall A {Ih : Inhab A} {EA : Enc A},
 sequence A -&gt; loc -&gt; hprop
@@ -474,12 +474,12 @@ separation logic proposition.</li>
 <li>The name of the representation predicate (<code>Stack</code>) is automatically
 inferred from the module name.</li>
 </ul>
-<pre class="example" id="orgda6d99e">
+<pre class="example" id="orgd36b8d3">
 val create : unit -&gt; 'a t
 (*@ q = create ()
     ensures q = empty *)
 </pre>
-<pre class="example" id="org773fae0">
+<pre class="example" id="org0577d28">
 Parameter _create : CFML.Semantics.val.
 
 Parameter _create_spec:
@@ -505,7 +505,7 @@ specification. This is because in this case the <b>Gospel</b> specification
 can be captured without it, although there are cases where it must
 be defined via existential quantification.</li>
 </ul>
-<pre class="example" id="org91dcefe">
+<pre class="example" id="org5c8d9a2">
 val is_empty : 'a t -&gt; bool
 (*@ b = is_empty q
     ensures b &lt;-&gt; q = empty *)
@@ -513,7 +513,7 @@ val is_empty : 'a t -&gt; bool
 <p>
 Translates into:
 </p>
-<pre class="example" id="org59970d4">
+<pre class="example" id="org2f87cfc">
 Parameter _is_empty : CFML.Semantics.val.
 
 Parameter _is_empty_spec : 
@@ -536,7 +536,7 @@ conditions to claim ownership.</li>
 <li>The <code>Bool</code> representation predicate allows us to jump from the <b>OCaml</b>
 <code>bool</code> type to the <b>Coq</b> <code>Prop</code> type.</li>
 </ul>
-<pre class="example" id="org1b3a4dd">
+<pre class="example" id="orge28bc3c">
 val push : 'a t -&gt; 'a -&gt; unit
 (*@ push p x
     modifies p
@@ -545,7 +545,7 @@ val push : 'a t -&gt; 'a -&gt; unit
 <p>
 Translates into:
 </p>
-<pre class="example" id="orgd8f729b">
+<pre class="example" id="orgcb45999">
 Parameter _push : CFML.Semantics.val.
 
 Parameter _push_spec :
@@ -555,7 +555,7 @@ Parameter _push_spec :
   PRE _prog_p ~&gt; Stack_cfml p
   POSTUNIT _prog_p ~&gt; Stack_cfml (cons x p)
 </pre>
-<pre class="example" id="org04feb80">
+<pre class="example" id="orgd6db2b7">
 val pop : 'a t -&gt; 'a
 (*@ r = pop p
     modifies p
@@ -566,7 +566,7 @@ val pop : 'a t -&gt; 'a
 <p>
 Translates into:
 </p>
-<pre class="example" id="orgb24c5c4">
+<pre class="example" id="orgfa78d98">
 Parameter _pop : CFML.Semantics.val.
 
 Parameter _pop_spec :
@@ -593,9 +593,9 @@ generated <b>CFML</b> spec is valid if the stack is not empty.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge02b8b8" class="outline-3">
-<h3 id="orge02b8b8"><a id="org47ad44b"></a> Logical Quantifiers</h3>
-<div class="outline-text-3" id="text-orge02b8b8">
+<div id="outline-container-org341991a" class="outline-3">
+<h3 id="org341991a"><a id="org2e0d479"></a> Logical Quantifiers</h3>
+<div class="outline-text-3" id="text-org341991a">
 <p>
 If we wish to state a property universal to an <b>OCaml</b> type that cannot
 be captured by an invariant, we might find ourselves using an
@@ -603,7 +603,7 @@ axiom. However, if we quantify over an <b>OCaml</b> type, we must apply some
 lens in order to access the model of the value. To give an
 example, let's assume we wish to state that all queues are non-empty:
 </p>
-<pre class="example" id="org85bc7aa">
+<pre class="example" id="orgba019d8">
 (*@ axiom q_empty : forall q : 'a t, q &lt;&gt; Sequence.empty *)
 </pre>
 <p>
@@ -612,7 +612,7 @@ correctly apply the representation predicate in order to use its model
 to express the desired behaviour. One possible translation is as
 follows:
 </p>
-<pre class="example" id="org4e4fbb6">
+<pre class="example" id="org7dcc1d2">
 Parameter q_empty :
 forall A q_loc (q : sequence A),
   Queue q_loc ~&gt; q -*
@@ -631,9 +631,9 @@ remaining with ownership of the value.
 </div>
 </div>
 </div>
-<div id="outline-container-org6d66ad9" class="outline-2">
-<h2 id="org6d66ad9"><code>Prop</code> and <code>Bool</code></h2>
-<div class="outline-text-2" id="text-org6d66ad9">
+<div id="outline-container-orgd9cc13e" class="outline-2">
+<h2 id="orgd9cc13e"><code>Prop</code> and <code>Bool</code></h2>
+<div class="outline-text-2" id="text-orgd9cc13e">
 <p>
 In current <b>Gospel</b>, there is an internal distinction made between
 booleans and propositions, although this distinction is not made
@@ -642,7 +642,7 @@ type checker so that this distinction is not made. This makes
 translations into <b>CFML</b> a bit trickier since <b>Coq</b> does make an explicit
 distinction between the two. For example:
 </p>
-<pre class="example" id="org9cac7b9">
+<pre class="example" id="orgda01aa9">
 function ex (x : bool) (y : bool) =
     true -&gt; x &amp;&amp; y
 </pre>
@@ -659,9 +659,9 @@ some cases require somewhat verbose conversions from <code>Prop</code> to <code>
 </p>
 </div>
 
-<div id="outline-container-org6675c17" class="outline-3">
-<h3 id="org6675c17">How the translation is done:</h3>
-<div class="outline-text-3" id="text-org6675c17">
+<div id="outline-container-org3325f79" class="outline-3">
+<h3 id="org3325f79">How the translation is done:</h3>
+<div class="outline-text-3" id="text-org3325f79">
 <p>
 Most cases are quite straightforward: any function arguments of type
 <code>bool</code> are turned into <code>Prop</code> and all built in logical symbols are translated
@@ -670,9 +670,9 @@ details however worth noting:
 </p>
 </div>
 
-<div id="outline-container-org4279bd3" class="outline-4">
-<h4 id="org4279bd3">Equality</h4>
-<div class="outline-text-4" id="text-org4279bd3">
+<div id="outline-container-org0ea9be6" class="outline-4">
+<h4 id="org0ea9be6">Equality</h4>
+<div class="outline-text-4" id="text-org0ea9be6">
 <p>
 In <b>Gospel</b> the proposition <code>p1 = p2 &lt;-&gt; p1 &lt;-&gt; p2</code> for all <code>p1</code> and
 <code>p2</code>. However, in <b>Coq</b>, since we are targeting the <code>Prop</code> type, this is not
@@ -683,9 +683,9 @@ extensionality is not assumed.
 </p>
 </div>
 </div>
-<div id="outline-container-org8a1c7ac" class="outline-4">
-<h4 id="org8a1c7ac">Pattern Matching</h4>
-<div class="outline-text-4" id="text-org8a1c7ac">
+<div id="outline-container-org6c9fbf6" class="outline-4">
+<h4 id="org6c9fbf6">Pattern Matching</h4>
+<div class="outline-text-4" id="text-org6c9fbf6">
 <p>
 Pattern matching over <code>Prop</code> is impossible in <b>Coq</b>, meaning that we must
 modify <b>Gospel</b> expressions that use boolean pattern matching so that it
@@ -693,13 +693,13 @@ is valid in <b>Coq</b>. Assuming an expression <code>match e with ...</code>, wh
 translate into <b>Coq</b>, <code>e</code> will be of type <code>Prop</code>, meaning we must first
 transform it into a <code>bool</code>. For example:
 </p>
-<pre class="example" id="orgb24ca26">
+<pre class="example" id="org792097f">
 match true || false with ...
 </pre>
 <p>
 Is translated to:
 </p>
-<pre class="example" id="org253a6ae">
+<pre class="example" id="org7500529">
 match Prop_to_bool (True \/ False) with ...
 </pre>
 <p>
@@ -707,23 +707,23 @@ In the case where the pattern is a variable name, then we have to
 redefine a new variable with the same name but of type <code>Prop</code>. For
 example:
 </p>
-<pre class="example" id="orgb51b860">
+<pre class="example" id="org99acc96">
 match true with
 |x -&gt;  x -&gt; true
 </pre>
 <p>
 Is Translated To:
 </p>
-<pre class="example" id="org8b0a5ca">
+<pre class="example" id="org01b90f8">
 match Prop_to_bool True with
 |_x -&gt; let x := Prop_to_bool _x in x -&gt; true
 end
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf84c5bd" class="outline-4">
-<h4 id="orgf84c5bd">Program Variables</h4>
-<div class="outline-text-4" id="text-orgf84c5bd">
+<div id="outline-container-org0058afc" class="outline-4">
+<h4 id="org0058afc">Program Variables</h4>
+<div class="outline-text-4" id="text-org0058afc">
 <p>
 When we have an <b>OCaml</b> function that receives an argument of type <code>bool</code>,
 we cannot simply transform it into an argument of type <code>Prop</code> seeing as
@@ -731,7 +731,7 @@ we cannot simply transform it into an argument of type <code>Prop</code> seeing 
 exist. Therefore it must remain of type <code>bool</code>, and within the spec must
 be turned into a Prop. For example:
 </p>
-<pre class="example" id="org36b0271">
+<pre class="example" id="orgcc782e3">
 val flip : bool -&gt; bool
 (*@ r = flip b
     ensures r &lt;-&gt; b *)
@@ -739,7 +739,7 @@ val flip : bool -&gt; bool
 <p>
 Translates to:
 </p>
-<pre class="example" id="org661a2fd">
+<pre class="example" id="org19f3e22">
 forall (_prog_b : bool) (b : Prop),
 SPEC(flip _prog_b)
 PRE(_prog_b ~&gt; Bool b)
@@ -749,9 +749,9 @@ POST(fun _prog_r : bool -&gt; _prog_r ~&gt; Bool b)
 </div>
 </div>
 </div>
-<div id="outline-container-orgfc1a1f4" class="outline-2">
-<h2 id="orgfc1a1f4">Gospel Type Semantics</h2>
-<div class="outline-text-2" id="text-orgfc1a1f4">
+<div id="outline-container-org559328d" class="outline-2">
+<h2 id="org559328d">Gospel Type Semantics</h2>
+<div class="outline-text-2" id="text-org559328d">
 <p>
 The semantics of our Separation Logic translation are fairly
 straightforward, it has triples, axioms, functions and representation
@@ -767,7 +767,7 @@ representation, being subsumed into the <code>loc</code> type. Additionally, wit
 <b>Gospel</b> terms, the user is never allows to refer to any fields or
 constructors within the <b>OCaml</b> type and is only allowed to talk about
 its logical <code>model</code>, even if the type is pure (unless, of course, if the
-model is a reflection of the <b>OCaml</b> type as described in Section <a href="#org1b2ca7d">Pure
+model is a reflection of the <b>OCaml</b> type as described in Section <a href="#orgbede2f6">Pure
 Annotations</a>.). If at some point we find it useful to talk about
 OCaml values in <b>Gospel</b> terms (e.g. representation predicates) these
 semantics might have to be adjusted. One possibility would be to add
@@ -783,9 +783,9 @@ it is impossible to generate any inconsistencies.
 </div>
 </div>
 
-<div id="outline-container-org0abbfb5" class="outline-2">
-<h2 id="org0abbfb5">Higher order lenses</h2>
-<div class="outline-text-2" id="text-org0abbfb5">
+<div id="outline-container-orgab248fc" class="outline-2">
+<h2 id="orgab248fc">Higher order lenses</h2>
+<div class="outline-text-2" id="text-orgab248fc">
 <p>
 Currently, lenses are first order, meaning we cannot claim
 recursive ownership of polymorphic data types. This greatly limits
@@ -800,9 +800,9 @@ conditions.
 </div>
 </div>
 
-<div id="outline-container-org2108a5c" class="outline-2">
-<h2 id="org2108a5c">Lemmas</h2>
-<div class="outline-text-2" id="text-org2108a5c">
+<div id="outline-container-orgc465a98" class="outline-2">
+<h2 id="orgc465a98">Lemmas</h2>
+<div class="outline-text-2" id="text-orgc465a98">
 <p>
 When translating lemmas from <b>Gospel</b> to Separation Logic, I was at
 first not making any modifications to them. In other words, they were
@@ -820,10 +820,10 @@ into <b>CFML</b>, we transform them into values of type <code>hprop</code>. This
 that <b>Coq</b> will not require the user to prove that their axioms are
 sound. To remedy this, we translate axioms as follows:
 </p>
-<pre class="example" id="orgea5f009">
+<pre class="example" id="orga23656f">
 (*@ axiom A : P *)
 </pre>
-<pre class="example" id="orgeabc07e">
+<pre class="example" id="org5cedceb">
 Parameter A : \[] ==&gt; \[P]
 </pre>
 <p>
@@ -837,13 +837,13 @@ refers to global variables.
 </p>
 </div>
 </div>
-<div id="outline-container-org51bed43" class="outline-2">
-<h2 id="org51bed43">Open Questions</h2>
-<div class="outline-text-2" id="text-org51bed43">
+<div id="outline-container-org4c3245a" class="outline-2">
+<h2 id="org4c3245a">Open Questions</h2>
+<div class="outline-text-2" id="text-org4c3245a">
 </div>
-<div id="outline-container-orged56895" class="outline-3">
-<h3 id="orged56895">Impure Types in Logical Terms</h3>
-<div class="outline-text-3" id="text-orged56895">
+<div id="outline-container-orgbf452fa" class="outline-3">
+<h3 id="orgbf452fa">Impure Types in Logical Terms</h3>
+<div class="outline-text-3" id="text-orgbf452fa">
 <p>
 As stated previously, when we have a type with multiple <code>model</code>
 fields, we create in our intermediate representation a record type
@@ -851,7 +851,7 @@ with each field. This record type will then be the model for this
 type. However, with the <b>Gospel</b> specification, this type does not
 exist, which leaves us with the following question: in the following case:
 </p>
-<pre class="example" id="orgbbb5c75">
+<pre class="example" id="orgb1e9331">
 type t = {ocaml_x : int; ocaml_y : int}
 (*@ mutable model x : int
     mutable model y : int *)
@@ -872,7 +872,7 @@ way, there is a clear divide between the <b>OCaml</b> and the <b>Gospel</b>
 world. Additionally, users may still refer to the model of <code>t</code> in
 situations such as:
 </p>
-<pre class="example" id="org4c3210b">
+<pre class="example" id="org336da7f">
 (*@ predicate test (arg : t) =
     arg.x = arg.y *)
 </pre>
@@ -906,22 +906,22 @@ s ~&gt; pstack m ==&gt; s ~&gt; pstack m * s ~&gt; pstack m
 </p>
 </div>
 </div>
-<div id="outline-container-org6169a31" class="outline-3">
-<h3 id="org6169a31">Recursive Ownership of Elements</h3>
-<div class="outline-text-3" id="text-org6169a31">
+<div id="outline-container-orgb2e4eb3" class="outline-3">
+<h3 id="orgb2e4eb3">Recursive Ownership of Elements</h3>
+<div class="outline-text-3" id="text-orgb2e4eb3">
 <p>
 Currently in Gospel, we have to way of describing recursive ownership
 of data structures with mutable elements.
 </p>
 </div>
-<div id="outline-container-org12d9b6d" class="outline-4">
-<h4 id="org12d9b6d">The Problem</h4>
-<div class="outline-text-4" id="text-org12d9b6d">
+<div id="outline-container-org63675db" class="outline-4">
+<h4 id="org63675db">The Problem</h4>
+<div class="outline-text-4" id="text-org63675db">
 <p>
 If we wished to specify, for example, a stack where its elements could
 be impure, we would like to have a <b>Gospel</b> specification such as:
 </p>
-<pre class="example" id="org002b068">
+<pre class="example" id="orgabf639d">
 type 'a t
 (*@ model : 'a sequence *)
 
@@ -937,7 +937,7 @@ val peek : 'a t -&gt; 'a
 If we assume that <code>'a</code> can be a mutable value, then our translation into
 Separation Logic should look like:
 </p>
-<pre class="example" id="org1878f9e">
+<pre class="example" id="org86ddfa2">
 Parameter Stack : {A} {B} `{Enc A} (l : loc)
               (HO: A -&gt; B -&gt; hprop) (model : sequence A).
 
@@ -955,15 +955,15 @@ duplicating the permission for the value stored in <code>r_loc</code>.
 </div>
 </div>
 
-<div id="outline-container-org3725b82" class="outline-4">
-<h4 id="org3725b82">Magic Wand (in Gospel)</h4>
-<div class="outline-text-4" id="text-org3725b82">
+<div id="outline-container-orga3c5d92" class="outline-4">
+<h4 id="orga3c5d92">Magic Wand (in Gospel)</h4>
+<div class="outline-text-4" id="text-orga3c5d92">
 <p>
 There are a few possibilities to circumvent this issue. The most
 obvious is using the magic wand: in the Gospel spec we could have
 something along the lines of:
 </p>
-<pre class="example" id="orga1a7bcc">
+<pre class="example" id="org22407ae">
 val get : 'a ref -&gt; 'a
 (*@ v = get r
     consumes r @ 'a t
@@ -978,7 +978,7 @@ has been surrendered we regain ownership of <code>q</code> as is described in th
 <code>consumes</code> clause. The post condition of the previous specification
 would now look something like:
 </p>
-<pre class="example" id="org29ba3cb">
+<pre class="example" id="org9603564">
 forall A `{Enc A} q_loc HO q,
 POST(r_loc =&gt; exists r,
        HO r_loc r * Stack q_loc val q * \[hd q = r] *
@@ -989,16 +989,16 @@ POST(r_loc =&gt; exists r,
 </div>
 </div>
 </div>
-<div id="outline-container-org0b7c0db" class="outline-2">
-<h2 id="org0b7c0db">Exceptional Specifications</h2>
-<div class="outline-text-2" id="text-org0b7c0db">
+<div id="outline-container-orge1e170d" class="outline-2">
+<h2 id="orge1e170d">Exceptional Specifications</h2>
+<div class="outline-text-2" id="text-orge1e170d">
 <p>
 With the addition of ownership clauses in <b>Gospel</b>, we also need a way
 of describing ownership in cases of exceptional termination. The
 simplest (and indeed the most common case) is when we return full
 ownership of the data structure.
 </p>
-<pre class="example" id="org3c967ba">
+<pre class="example" id="org2c6c284">
 val pop : 'a t -&gt; 'a
 (*@ r = pop p
     modifies p
@@ -1010,9 +1010,9 @@ val pop : 'a t -&gt; 'a
     ensures p = tl (old p) *)
 </pre>
 </div>
-<div id="outline-container-org63f300d" class="outline-3">
-<h3 id="org63f300d">Problems with ownership clauses</h3>
-<div class="outline-text-3" id="text-org63f300d">
+<div id="outline-container-org02c3abb" class="outline-3">
+<h3 id="org02c3abb">Problems with ownership clauses</h3>
+<div class="outline-text-3" id="text-org02c3abb">
 <p>
 In the nested specification, we state that we return full ownership of
 <code>p</code> as well as stating that <code>p</code> is unchanged and is equal to the <code>empty</code>
@@ -1053,9 +1053,9 @@ assume the non-exceptional <code>produces</code> clause.</li>
 </div>
 </div>
 
-<div id="outline-container-orgbf072c7" class="outline-3">
-<h3 id="orgbf072c7">Changes to the Gospel syntax</h3>
-<div class="outline-text-3" id="text-orgbf072c7">
+<div id="outline-container-org3ec217b" class="outline-3">
+<h3 id="org3ec217b">Changes to the Gospel syntax</h3>
+<div class="outline-text-3" id="text-org3ec217b">
 <p>
 There are now three ways to write exceptional postconditions:
 </p>
@@ -1063,7 +1063,7 @@ There are now three ways to write exceptional postconditions:
 <li><p>
 A list comma separated identifiers
 </p>
-<pre class="example" id="orgf4d4fe3">
+<pre class="example" id="org26f11af">
 raises E1, E2, E3
 </pre></li>
 <li><p>
@@ -1071,7 +1071,7 @@ A nested specification where the only valid clauses are <code>produces</code> an
 <code>ensures</code>. The values <code>x1 x2 ...</code> are the exception's arguments,
 these may be omitted.
 </p>
-<pre class="example" id="org9b6aaf5">
+<pre class="example" id="orgc12c7f0">
 raises E (x1, x2 ..) begin
   produces ...
   ensures ...
@@ -1080,13 +1080,13 @@ end
 <li><p>
 A single exceptional postcondition.
 </p>
-<pre class="example" id="orgdff8861">
+<pre class="example" id="org8a1d003">
 raises E (x1, x2, ...) -&gt; P
 </pre>
 <p>
 Which is just sugar for
 </p>
-<pre class="example" id="orgcef06d5">
+<pre class="example" id="orgc1996ab">
 raises E (x1, x2 ...) begin
   ensures P
 end
@@ -1102,15 +1102,15 @@ named).
 </div>
 </div>
 
-<div id="outline-container-org5c3f2cc" class="outline-2">
-<h2 id="org5c3f2cc">Functor Constraints</h2>
-<div class="outline-text-2" id="text-org5c3f2cc">
+<div id="outline-container-org3dd65a9" class="outline-2">
+<h2 id="org3dd65a9">Functor Constraints</h2>
+<div class="outline-text-2" id="text-org3dd65a9">
 <p>
 Just like we can add constraints to <b>OCaml</b> functor applications, we
 should also be allowed to add additional <b>Gospel</b> constraints. For
 example:
 </p>
-<pre class="example" id="orge003310">
+<pre class="example" id="org9697ad1">
 module Make 
   (H : HashedType)
   (S : SENTINELS with type t = H.t)
@@ -1122,18 +1122,18 @@ module Make
 </pre>
 </div>
 </div>
-<div id="outline-container-org18f57dc" class="outline-2">
-<h2 id="org18f57dc">Miscellaneous changes</h2>
-<div class="outline-text-2" id="text-org18f57dc">
+<div id="outline-container-org10a7a2d" class="outline-2">
+<h2 id="org10a7a2d">Miscellaneous changes</h2>
+<div class="outline-text-2" id="text-org10a7a2d">
 <p>
 Section for minor changes I made in Gospel that aren't relevant for
 other sections.
 </p>
 </div>
 
-<div id="outline-container-orgce2bb69" class="outline-3">
-<h3 id="orgce2bb69"><code>old</code> in Gospel function specifications</h3>
-<div class="outline-text-3" id="text-orgce2bb69">
+<div id="outline-container-org5483fca" class="outline-3">
+<h3 id="org5483fca"><code>old</code> in Gospel function specifications</h3>
+<div class="outline-text-3" id="text-org5483fca">
 <p>
 In <b>Gospel</b> we can use the <code>old</code> constructor in the specification of
 logical functions specifications. In my opinion, this should not be
@@ -1144,9 +1144,9 @@ version of a variable that is never modified.
 </div>
 </div>
 
-<div id="outline-container-org0c7a832" class="outline-2">
-<h2 id="org0c7a832">Updated syntax</h2>
-<div class="outline-text-2" id="text-org0c7a832">
+<div id="outline-container-org56dccb6" class="outline-2">
+<h2 id="org56dccb6">Updated syntax</h2>
+<div class="outline-text-2" id="text-org56dccb6">
 <p>
 In Gospel there is no way to talk about ownership of values when an
 exception is raised. To this end, we propose an updated syntax to
@@ -1164,7 +1164,7 @@ describe the program state before the function is called (<code>requires</code>,
 function returns. For example, the specification for a <code>pop</code> function of
 a queue would be written as:
 </p>
-<pre class="example" id="org7d3e0d6">
+<pre class="example" id="org777429b">
 val pop : 'a queue -&gt; 'a
 (*@ requires not (empty q)
     consumes q
@@ -1179,7 +1179,7 @@ exceptional case. For example, if we wish to describe the <code>pop</code> funct
 without using the precondition <code>not (empty q)</code> and instead with an
 exceptional postcondition.
 </p>
-<pre class="example" id="orga58ad00">
+<pre class="example" id="orge4b334c">
 val pop : 'a queue -&gt; 'a
 (*@ consumes q
     match find q p with
@@ -1198,7 +1198,7 @@ users should be allowed to place <code>modifies</code> clause either before the
 function call or after in a non exceptional branch. Thus, the
 specification for <code>pop</code> could be rewritten as:
 </p>
-<pre class="example" id="orgb318a88">
+<pre class="example" id="org78ddfe5">
 val pop : 'a queue -&gt; 'a
 (*@ modifies q
     match find q p with
@@ -1224,7 +1224,7 @@ prefer/need.
 Note: We didn't discuss if the current Gospel syntax for exceptional
 postconditions should be maintained. For example, could we write 
 </p>
-<pre class="example" id="org0bcf782">
+<pre class="example" id="orga507930">
 raises Not_found -&gt; p = old p = Sequence.empty
 </pre>
 <p>
@@ -1233,9 +1233,9 @@ If so, what should the semantics for this clause be?
 </div>
 </div>
 
-<div id="outline-container-org5015333" class="outline-2">
-<h2 id="org5015333">Shared Resources</h2>
-<div class="outline-text-2" id="text-org5015333">
+<div id="outline-container-org3542058" class="outline-2">
+<h2 id="org3542058">Shared Resources</h2>
+<div class="outline-text-2" id="text-org3542058">
 <p>
 There is currently no way of capturing shared permissions in Gospel,
 all values are exclusively owned by the functions that use them. To
@@ -1252,14 +1252,14 @@ resource G.
 </div>
 
 
-<div id="outline-container-org264d678" class="outline-3">
-<h3 id="org264d678">Mutex example (monomorphic)</h3>
-<div class="outline-text-3" id="text-org264d678">
+<div id="outline-container-org8599e50" class="outline-3">
+<h3 id="org8599e50">Mutex example (monomorphic)</h3>
+<div class="outline-text-3" id="text-org8599e50">
 <p>
 Specification for a mutually exclusive lock that protects a single
 reference.
 </p>
-<pre class="example" id="org59cf259">
+<pre class="example" id="org6ba4195">
 type mutex
 (*@ model protectee : loc *)
 
@@ -1283,10 +1283,10 @@ val try_lock : mutex -&gt; bool
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbeeed37" class="outline-3">
-<h3 id="orgbeeed37">Mutex example</h3>
-<div class="outline-text-3" id="text-orgbeeed37">
-<pre class="example" id="org5672b07">
+<div id="outline-container-orgd27b45e" class="outline-3">
+<h3 id="orgd27b45e">Mutex example</h3>
+<div class="outline-text-3" id="text-orgd27b45e">
+<pre class="example" id="org6809f83">
 type (*@ 's *) mutex
 
 (*@ affine lens acquired (m : 's mutex) *)
@@ -1309,10 +1309,10 @@ val try_lock : (*@ 's *) mutex -&gt; bool
 </pre>
 </div>
 </div>
-<div id="outline-container-org1afbf92" class="outline-3">
-<h3 id="org1afbf92">Explicitly guarded mutex</h3>
-<div class="outline-text-3" id="text-org1afbf92">
-<pre class="example" id="org1a32aaf">
+<div id="outline-container-orgd88bee5" class="outline-3">
+<h3 id="orgd88bee5">Explicitly guarded mutex</h3>
+<div class="outline-text-3" id="text-orgd88bee5">
+<pre class="example" id="org2512800">
 type 'a mutex
 
 type 'a guard
@@ -1335,10 +1335,10 @@ val peek : 'a guard -&gt; 'a
 </pre>
 </div>
 </div>
-<div id="outline-container-org4224417" class="outline-3">
-<h3 id="org4224417">Explicitly guarded mutex v2</h3>
-<div class="outline-text-3" id="text-org4224417">
-<pre class="example" id="org8c4b99f">
+<div id="outline-container-orgceca945" class="outline-3">
+<h3 id="orgceca945">Explicitly guarded mutex v2</h3>
+<div class="outline-text-3" id="text-orgceca945">
+<pre class="example" id="orga550837">
 type 'a mutex
 
 type 'a guard
@@ -1364,10 +1364,10 @@ val try_lock : (*@ 's *) mutex -&gt; bool
 </pre>
 </div>
 </div>
-<div id="outline-container-org6fc15ec" class="outline-3">
-<h3 id="org6fc15ec">Shared Lock</h3>
-<div class="outline-text-3" id="text-org6fc15ec">
-<pre class="example" id="org54a5502">
+<div id="outline-container-orga2de0ae" class="outline-3">
+<h3 id="orga2de0ae">Shared Lock</h3>
+<div class="outline-text-3" id="text-orga2de0ae">
+<pre class="example" id="org038277b">
 type (*@ 'a *) rw_lock
 (*@ ephemeral *)
 
