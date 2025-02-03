@@ -1,6 +1,5 @@
 #!/bin/sh
 cd content
-wget -O notes.org $NOTES
 wget -O econfig.org $CONFIG
 cd ..
 emacs -Q --script build.el

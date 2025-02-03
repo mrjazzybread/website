@@ -13,14 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: github-pages
     env:
-      NOTES: ${{ secrets.NOTES }}
       CONFIG: ${{ secrets.CONFIG }}
     steps:
       - name: Check out
         uses: actions/checkout@v1
-
-      - name: Test
-        run: echo $NOTES
 
       - name: Install Emacs
         run: sudo apt install emacs-nox --yes
