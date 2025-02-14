@@ -1089,7 +1089,8 @@ Rewrite the first spec for clarity
 fibonacci with big int
 
 * Internal Changes to Gospel
-** TODO Normalise AST constructors for function applications
+** DONE Normalise AST constructors for function applications
+- State "DONE"       from "TODO"       [2025-02-14 Fri 13:13]
 Currently Gospel has four constructors for function applications:
 
 - ~Tidapp~ for application of an identifier to a list of arguments.
@@ -1137,10 +1138,45 @@ pros:
   into Inferno, meaning we only have to ensure that all of our
   constraints are correct.
 
-** 👁️👄👁️ Inferno Efficiency
+*** Things left to do
+- [ ] Type declarations
+  - [ ] Abstract type definitions
+  - [ ] ADTs
+  - [ ] Record types
+  - [ ] Type aliases
+- [ ] Logical Function declarations
+  - [ ] Recursive definitions
+- [ ] Modules
+  - [ ] Module Alias
+  - [ ] Functors
+  - [ ] Module Constraints
+    - [ ] ~With type~
+    - [ ] ~With module~
+- [ ] Module types
+  - [ ] List of Signature
+  - [ ] Functors
+  - [ ] Module type Constraint
+    - [ ] ~With type~
+    - [ ] Type substitution
+  - [ ] Module alias
+- [ ] Value descriptions
+- [ ] Module opens
+- [ ] Exceptions
+- [-] Terms
+  - [ ] Told
+  - [X] Pattern matching
+  - [ ] Records
+  - [ ] Constructors
+
+*** Issues
+- When we introduce a quantified variable, it may be annotated with a type such
+  as: ~forall x : 'a~. Currently, our typechecker does not work if ~'a~ has already
+  been bound somewhere else. In order to fix this, we will have to keep track of
+  all type variables in scope while building the inferno constraint.
+** DONE Inferno Efficiency
+- State "DONE"       from "👁️👄👁️"       [2025-02-14 Fri 13:13]
 One possible downside is that I'm not sure with regards with
 efficiency how Inferno behaves. More specifically, when does Inferno
 populate the data structures it needs for type unification? Is it when
 the constraint is built or when ~solve~ is called? If the later, there
 are some real questions with regards to efficiency
-
