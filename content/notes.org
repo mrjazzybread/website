@@ -19,7 +19,7 @@ such.
 type t
 (*@ model view : int sequence *)
 
-val push : t -> int -> unit 
+val push : t -> int -> unit
 (*@ push q x
     ensures q.view = old q.view ++ [x] *)
  #+end_example
@@ -102,7 +102,7 @@ representation, that is, the type defined in its ~model~ clause.
 + If the type is mutable, then the program value is of type ~loc~.
 *** Concrete Types
 TBD
-  
+
 *** Note on naming
 Generally, the generated representation predicate has the same name
 as the original type, but with the first letter capitalized and an
@@ -115,7 +115,7 @@ so as to make the generated Separation Logic triples simpler to read.
   type t
   (*@ model : int *)
 #+end_example
- Translates into 
+ Translates into
 #+ATTR_LATEX: :environment cfml
 #+begin_example coq
   Type t
@@ -131,7 +131,7 @@ Translates into
 #+begin_example coq
 Predicate _T (target : loc) (model : int)
 #+end_example
-#+ATTR_LATEX: :environment gospel 
+#+ATTR_LATEX: :environment gospel
 #+begin_example ocaml
    type t
    (*@ model x : int
@@ -142,7 +142,7 @@ Translates into
 #+begin_example coq
   Type t = {x : int; y : int}
   Type _t
-  
+
   Predicate _T (target : t) (model : _t)
 #+end_example
 #+end_example#+ATTR_LATEX: :environment gospel
@@ -182,7 +182,7 @@ Translates into
   since in these cases we would need to define an explicit
   representation predicate in {{{Gospel}}}, which is not yet possible.
   + Additionally, we must consider the relationship between invariants
-    and representation predicates. 
+    and representation predicates.
 * Value descriptions
 When translating a value description and its specification, we must
 take proper care to ensure that all the ownership conditions are
@@ -282,7 +282,7 @@ lenses:
 This section will showcase some simple examples of how lenses
 are translated into Separation Logic. To showcase, I will show an
 example of a stack module, its {{{Gospel}}} specification and its {{{CFML}}}
-translation. 
+translation.
 #+ATTR_LATEX: :environment gospel
 #+begin_example ocaml
 type 'a t
@@ -309,7 +309,7 @@ A few details about this translation:
   argument is the {{{CFML}}} type for memory locations. Its return is a
   separation logic proposition.
 + The name of the representation predicate (~Stack~) is automatically
-  inferred from the module name. 
+  inferred from the module name.
 #+ATTR_LATEX: :environment gospel
 #+begin_example ocaml
 val create : unit -> 'a t
@@ -327,7 +327,7 @@ Parameter _create_spec:
 #+end_example
 A few more details
 + Since the original specification does not have any ownership clauses
-  that reference the return value, we assume ~produces q @ t~. 
+  that reference the return value, we assume ~produces q @ t~.
 + Just like in the original program, we create an abstract function
   definition as well as a triple.
 + The ~create~ specification returns a variable ~_prog_q~ which is not
@@ -350,8 +350,8 @@ Translates into:
 #+begin_example coq
 Parameter _is_empty : CFML.Semantics.val.
 
-Parameter _is_empty_spec : 
-  forall (A : Type) (IH : Inhab a) (EA : Enc a) 
+Parameter _is_empty_spec :
+  forall (A : Type) (IH : Inhab a) (EA : Enc a)
     (_prog_q : loc) (q : sequence a),
   SPEC (_is_empty _prog_q)
   PRE _prog_q ~> Stack_cfml q
@@ -379,7 +379,7 @@ Translates into:
 Parameter _push : CFML.Semantics.val.
 
 Parameter _push_spec :
-  forall (a : Type) (aIh : Inhab a) (Ea : Enc a) 
+  forall (a : Type) (aIh : Inhab a) (Ea : Enc a)
     (_prog_p : loc) (p : sequence a) (x : a),
   SPEC (_push _prog_p x)
   PRE _prog_p ~> Stack_cfml p
@@ -400,7 +400,7 @@ Translates into:
 Parameter _pop : CFML.Semantics.val.
 
 Parameter _pop_spec :
-  forall (a : Type) (aIh : Inhab a) (Ea : Enc a) 
+  forall (a : Type) (aIh : Inhab a) (Ea : Enc a)
     (_prog_p : loc) (p : sequence a),
   p <> empty ->
   SPEC (_pop _prog_p)
@@ -569,7 +569,7 @@ allowing for a higher level of granularity when describing ownership
 conditions.
 
 * Lemmas
-Translating lemmas into 
+Translating lemmas into
 The tricky part is that when we translate terms from Separation Logic
 into {{{CFML}}}, we transform them into values of type ~hprop~. This means
 that {{{Coq}}} will not require the user to prove that their axioms are
@@ -636,10 +636,10 @@ alternatives to this would be:
 
 TODO:
 duplicable definition (only needed for CFML)
-Lemma duplicable : 
+Lemma duplicable :
        forall s m,
-       Duplicable (s ~> pstack m). 
-       
+       Duplicable (s ~> pstack m).
+
 s ~> pstack m ==> s ~> pstack m * s ~> pstack m
 ** Recursive Ownership of Elements
 
@@ -673,7 +673,7 @@ forall A `{Enc A} q_loc HO q,
 PRE(Stack q_loc HO q)
 CODE(peek s)
 POST(r_loc => exists r,
-       HO r_loc r * Stack q_loc HO q * \[hd q = r])           
+       HO r_loc r * Stack q_loc HO q * \[hd q = r])
 #+end_example
 Although this makes intuitive sense, it is unsound, seeing as we are
 duplicating the permission for the value stored in ~r_loc~.
@@ -744,7 +744,7 @@ fully satisfying:
   solution. Although this means that the desugaring of ~preserves~ is
   context dependent, it makes intuitive sense and does not break
   things in a fundemental way).
-  
+
 - We could have a default which states that if no ownership clause is
   given then we assume we return the same ownership that we receive,
   that is, the exceptional ~produces~ clause is the same as the
@@ -796,13 +796,13 @@ should also be allowed to add additional {{{Gospel}}} constraints. For
 example:
 #+ATTR_LATEX: :environment ocamlenv
 #+begin_example ocaml
-module Make 
+module Make
   (H : HashedType)
   (S : SENTINELS with type t = H.t)
   : SET with type element = H.t
   (*@ with predicate equiv = H.equiv and
            function  tomb = S.tomb   and
-           function  void = S.void 
+           function  void = S.void
            *)
 #+end_example
 * Updated syntax
@@ -810,7 +810,7 @@ module Make
 In Gospel there is no way to talk about ownership of values when an
 exception is raised. To this end, we propose an updated syntax to
 allow users to write multiple specifications for each possible raised
-exception. 
+exception.
 
 Currently, Gospel specifications start with a header where we define
 the names of the arguments and return values, which is then followed
@@ -887,7 +887,7 @@ notion of resources guarding other resources.
 In Leaf, the authors introduce the ⤔ operator where G ⤔ P means that
 the resource G guards the resource P. In other words, we can exchange
 exclusive ownership of resource G to obtain shared ownership of a
-resource G. 
+resource G.
 
 ** Mutex example (monomorphic)
 Specification for a mutually exclusive lock that protects a single
@@ -947,7 +947,7 @@ type 'a guard
 (*@ ephemeral *)
 
 val create : 'a -> 'a mutex
-(*@ consumes s 
+(*@ consumes s
     create s *)
 
 val lock : 'a mutex -> 'a guard
@@ -969,7 +969,7 @@ type 'a mutex
 type 'a guard
 
 val create : 'a -> 'a mutex
-(*@ consumes s 
+(*@ consumes s
     create s *)
 
 val lock : 'a mutex -> 'a guard
@@ -1139,13 +1139,13 @@ pros:
   constraints are correct.
 
 *** Things left to do
-- [ ] Type declarations
-  - [ ] Abstract type definitions
+- [-] Type declarations
+  - [X] Abstract type definitions
   - [ ] ADTs
   - [ ] Record types
-  - [ ] Type aliases
-- [ ] Logical Function declarations
-  - [ ] Recursive definitions
+  - [X] Type aliases
+- [X] Logical Function declarations
+  - [X] Recursive definitions
 - [ ] Modules
   - [ ] Module Alias
   - [ ] Functors
@@ -1169,10 +1169,8 @@ pros:
   - [ ] Constructors
 
 *** Issues
-- When we introduce a quantified variable, it may be annotated with a type such
-  as: ~forall x : 'a~. Currently, our typechecker does not work if ~'a~ has already
-  been bound somewhere else. In order to fix this, we will have to keep track of
-  all type variables in scope while building the inferno constraint.
+- Recursive type declarations are not supported.
+
 ** DONE Inferno Efficiency
 - State "DONE"       from "👁️👄👁️"       [2025-02-14 Fri 13:13]
 One possible downside is that I'm not sure with regards with
@@ -1180,3 +1178,7 @@ efficiency how Inferno behaves. More specifically, when does Inferno
 populate the data structures it needs for type unification? Is it when
 the constraint is built or when ~solve~ is called? If the later, there
 are some real questions with regards to efficiency
+* Type checker architecture
+
+After we parse the {{{Gospel}}} annotated {{{OCaml}}} interface file, we transform
+the
