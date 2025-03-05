@@ -1141,17 +1141,17 @@ pros:
 *** Things left to do
 - [-] Type declarations
   - [X] Abstract type definitions
-  - [ ] ADTs
+  - [X] ADTs
   - [ ] Record types
   - [X] Type aliases
 - [X] Logical Function declarations
   - [X] Recursive definitions
-- [ ] Modules
+- [-] Modules
   - [ ] Module Alias
   - [ ] Functors
-  - [ ] Module Constraints
+  - [-] Module Constraints
     - [ ] ~With type~
-    - [ ] ~With module~
+    - [X] ~With module~
 - [ ] Module types
   - [ ] List of Signature
   - [ ] Functors
@@ -1178,6 +1178,12 @@ efficiency how Inferno behaves. More specifically, when does Inferno
 populate the data structures it needs for type unification? Is it when
 the constraint is built or when ~solve~ is called? If the later, there
 are some real questions with regards to efficiency
+
+** 👁️👄👁️ Gospel specifications in OCaml AST
+In the [[file:~/phd/gospel/DESIGN.md][design]] document Nicolas mentioned that Gospel specifications
+should be inserted directly in the OCaml AST instead of in a copy of
+it. I don't know how that would work in practice.
+
 * Type checker architecture
 
 After we parse the {{{Gospel}}} annotated {{{OCaml}}} interface file, we transform
