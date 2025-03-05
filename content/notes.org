@@ -1140,20 +1140,21 @@ pros:
 
 *** Things left to do
 - [-] Type declarations
+  - [ ] Mutually Recursive type declarations
   - [X] Abstract type definitions
   - [X] ADTs
   - [ ] Record types
   - [X] Type aliases
 - [X] Logical Function declarations
   - [X] Recursive definitions
-- [-] Modules
+- [ ] Modules
   - [ ] Module Alias
   - [ ] Functors
-  - [-] Module Constraints
+  - [ ] Module Constraints
     - [ ] ~With type~
-    - [X] ~With module~
+    - [ ] ~With module~
 - [ ] Module types
-  - [ ] List of Signature
+  - [ ] List of Signatures
   - [ ] Functors
   - [ ] Module type Constraint
     - [ ] ~With type~
@@ -1169,7 +1170,114 @@ pros:
   - [ ] Constructors
 
 *** Issues
-- Recursive type declarations are not supported.
+- During name resolution, we keep all the definitions of all currently
+  processed files in memory. We should save these to a file and read
+  them when necessary.
+
+- I would prefer if types like ~integer~, ~prop~, etc, were in the Gospel
+  standard library although I am not sure how to do this.
+*** Design of the typechecker.
+After parsing a {{{Gospel}}} annotated {{{OCaml}}} file and creating an untyped
+{{{Gospel}}} AST we go through each signature and perform a series of
+intermediate checks, these include:
+
+- Name resolution: In Gospel (like in OCaml), the name we use to
+  reference a variable depends on where we reference it. For example,
+  if we define a function [f] in a module [M], within that module,
+  that function's name is [f], but outside of that module it is
+  [M.f]. If we [open] the module, both names are valid. Since Inferno
+  does not support any of these mechanisms, we must take care to tag
+  every variable with a unique identifier. In our previous example,
+  regardless of what name we use to reference [f], each instance of
+  that variable will be tagged with the same identifier. This means
+  when we build our constraints, it won't matter that the name of the
+  variable is context dependent, since Inferno will only look at the
+  unique identifier. A consequence of this is that that there should
+  be no unbound variables when we build the Inferno constraint, since
+  to tag every variable we must keep track of what variables have been
+  defined.
+
+- Infix operators: During parsing, we use the [Tinfix] constructor to mark a
+  chain of infix operators. After parsing however, this constructor is
+  redundant since during typechecking, it is equivalent to two nested [Tapply]
+  constructors. Therefore, to simplify building the Inferno constraint, we
+  remove this constructor from all terms and replace it with [Tapply].
+  Although this step could be done in [Checker], it makes more sense to do it
+  during this phase.
+
+- Duplicate names: There are some contexts in Gospel where we are not allowed
+  to introduce the same variable twice into scope (e.g. duplicate function
+  arguments). Since Inferno has no way to track this natively, we must handle
+  this manually.
+
+After these checks are complete, we create a copy of the signature
+where every identifier has been replaced with a uniquely tagged
+variable. If the signature has any {{{Gospel}}} terms, it is fed into the
+Inferno solver.
+
+*** Design of the solver
+Note: this section assumes some familiarity with Inferno
+
+Most of the solver is pretty standard: we traverse the Gospel
+signature, take care to put every variable in scope using ~def~
+constraints (meaning all local variables are created using a
+monomorphic scheme) and using the ~hastype~ function to infer the types
+of each sub term. There are, nevertheless, a few features that are not
+directly supported by Inferno that we had to implement ourselves:
+
+- Named type variables: When a user gives a name to a Gospel type
+  variable it is considered /rigid/, meaning it cannot be unified with
+  any other type. This means that {{{Gospel}}} functions such as:
+
+  ~function x : 'a = 0~
+
+  Are ill typed since the rigid type variable ~'a~ cannot be unified
+  with ~integer~. Although Inferno does have enough infrastructure that
+  we could easily introduce a ~forall~ combinator that would create a
+  rigid type variable, we went with a different approach. When we
+  encounter a type annotation, we transform it into a deep type (an
+  encoding provided by Inferno to turn types into Inferno
+  variables). When we encounter a named type variable, instead of
+  turning it into a ~deep~ variable that can be unified with other
+  types, we create a ~Tvar~ structure which can only be unified with
+  other ~Tvar~ with the same identifier.
+
+  The reason why we don't use the rigid variables provided by Inferno
+  is because of error messages. When we turn a Gospel type variable
+  into an Inferno variable, there is no way to associate it with its
+  name. This means when the Inferno variable is decoded back into a
+  Gospel type variable, Inferno does no provide us with a way to give
+  it its original name. This is problematic because it would mean
+  error messages could not display the correct Gospel type. For
+  example:
+
+  ~function f (s1 : 'a sequence) (s2 : 'b sequence) = s1 = s2~
+
+  Should produce the message "mismatch between the type ~'a sequence~
+  and ~'b sequence~". However, there is no way for Inferno to get back
+  to the original names ~'a~ and ~'b~.
+
+- Top level definitions: if we feed the following signature into
+  Inferno ~axiom eq : x = y~ it will raise an ~Unbound~ exception, since
+  the names ~x~ and ~y~ are not defined within the scope of the
+  axiom. However, it is possibly that the names ~x~ and ~y~ were defined
+  previously in the top level. Since the Inferno solver cannot be used
+  in such a way that it "remembers" previous constraints it solve, we
+  mark variables as ~local~ during name resolution if they are defined
+  in the term. When we are building a constraint, if we encounter a
+  variable ~x~ that is not ~local~, we go through the environment we
+  create during name resolution and find the type of ~x~.
+
+  When we turn the type of ~x~ into a deep type, its type variables are
+  turned into /flexible/ Inferno variables using the ~exist~ binder,
+  meaning they can be unified with other types. This ensures that top
+  level definitions are /let polymorphic/.
+
+  Note: although it is technically possible to map a list of top level
+  signatures to a sequence of nested ~def~ constraints, this is not
+  worth it since it leads to a very messy implementation where the
+  complexity added is much greater than simply keeping track of the
+  types of top level signatures.
 
 ** DONE Inferno Efficiency
 - State "DONE"       from "👁️👄👁️"       [2025-02-14 Fri 13:13]
@@ -1184,7 +1292,10 @@ In the [[file:~/phd/gospel/DESIGN.md][design]] document Nicolas mentioned that G
 should be inserted directly in the OCaml AST instead of in a copy of
 it. I don't know how that would work in practice.
 
-* Type checker architecture
+** DONE Recursive flag in OCaml AST for types
+- State "DONE"       from "👁️👄👁️"       [2025-03-05 Wed 14:15]
+In the {{{OCaml}}} AST, types are always marked as recursive, I don't
+understand why.
 
-After we parse the {{{Gospel}}} annotated {{{OCaml}}} interface file, we transform
-the
+Answer: turns out OCaml has a ~nonrec~ annotation that allows you to
+specify that a type is non recursive.
