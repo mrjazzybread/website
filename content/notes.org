@@ -1257,6 +1257,11 @@ directly supported by Inferno that we had to implement ourselves:
   and ~'b sequence~". However, there is no way for Inferno to get back
   to the original names ~'a~ and ~'b~.
 
+  Note: This works because we only use ~def~ constraints to introduce
+  new variable names which means that each variable has a monomorphic
+  type scheme, if we switch to a polymorphic type scheme, we probably
+  need to use Inferno's rigid type variables.
+
 - Top level definitions: if we feed the following signature into
   Inferno ~axiom eq : x = y~ it will raise an ~Unbound~ exception, since
   the names ~x~ and ~y~ are not defined within the scope of the
