@@ -11,9 +11,9 @@
 </head>
 <body>
 <div id="content" class="content">
-<div id="outline-container-org95b8473" class="outline-2">
-<h2 id="org95b8473">Package Configuration</h2>
-<div class="outline-text-2" id="text-org95b8473">
+<div id="outline-container-org117a981" class="outline-2">
+<h2 id="org117a981">Package Configuration</h2>
+<div class="outline-text-2" id="text-org117a981">
 <p>
 Add MELPA to the list of recognized archives
 </p>
@@ -65,9 +65,9 @@ GNU keys to enable downloading packages
 </div>
 </div>
 </div>
-<div id="outline-container-org0ed57be" class="outline-2">
-<h2 id="org0ed57be">EXWM</h2>
-<div class="outline-text-2" id="text-org0ed57be">
+<div id="outline-container-orge7c8b42" class="outline-2">
+<h2 id="orge7c8b42">EXWM</h2>
+<div class="outline-text-2" id="text-orge7c8b42">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exwm)
 </pre>
@@ -125,13 +125,31 @@ network manager and other background applications will be.
 Hide the mode line in X windows
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(add-hook 'exwm-manage-finish-hook #'exwm-layout-hide-mode-line)
+<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(add-hook 'exwm-manage-finish-hook #'exwm-layout-hide-mode-line)</span>
+</pre>
+</div>
+
+<p>
+Package to zoom in on a window
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> zoom-window)
+</pre>
+</div>
+
+<p>
+Resize focused window
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> golden-ratio)
+(golden-ratio-mode)
 </pre>
 </div>
 </div>
-<div id="outline-container-org40b605e" class="outline-3">
-<h3 id="org40b605e">Keybindings for desktop utilities</h3>
-<div class="outline-text-3" id="text-org40b605e">
+
+<div id="outline-container-org6edcf27" class="outline-3">
+<h3 id="org6edcf27">Keybindings for desktop utilities</h3>
+<div class="outline-text-3" id="text-org6edcf27">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -197,9 +215,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org92e09c9" class="outline-3">
-<h3 id="org92e09c9">Background processes</h3>
-<div class="outline-text-3" id="text-org92e09c9">
+<div id="outline-container-org1501a81" class="outline-3">
+<h3 id="org1501a81">Background processes</h3>
+<div class="outline-text-3" id="text-org1501a81">
 <p>
 Helper function to run a program in the background
 </p>
@@ -295,9 +313,9 @@ Compositor
 </div>
 </div>
 
-<div id="outline-container-org9df8703" class="outline-3">
-<h3 id="org9df8703">GPG</h3>
-<div class="outline-text-3" id="text-org9df8703">
+<div id="outline-container-org215b6f6" class="outline-3">
+<h3 id="org215b6f6">GPG</h3>
+<div class="outline-text-3" id="text-org215b6f6">
 <p>
 I never know man
 </p>
@@ -321,9 +339,9 @@ I never know man
 </div>
 </div>
 
-<div id="outline-container-orgd3f83ec" class="outline-3">
-<h3 id="orgd3f83ec">Multiple monitors</h3>
-<div class="outline-text-3" id="text-orgd3f83ec">
+<div id="outline-container-orge8ad8c8" class="outline-3">
+<h3 id="orge8ad8c8">Multiple monitors</h3>
+<div class="outline-text-3" id="text-orge8ad8c8">
 <p>
 Set the initial workspace for each display
 </p>
@@ -368,14 +386,16 @@ Update displays
 Background image
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(start-process-shell-command <span style="font-style: italic;">"feh"</span> nil <span style="font-style: italic;">"feh --bg-scale ~/.config/bg/lain.jpeg"</span>)
+<pre class="src src-emacs-lisp">(start-process-shell-command
+ <span style="font-style: italic;">"feh"</span> nil
+ <span style="font-style: italic;">"feh --bg-scale ~/.config/bg/lain.jpeg --bg-scale ~/.config/bg/lain-hands.jpeg"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org7cbee70" class="outline-3">
-<h3 id="org7cbee70">Keybindings</h3>
-<div class="outline-text-3" id="text-org7cbee70">
+<div id="outline-container-org0b0360c" class="outline-3">
+<h3 id="org0b0360c">Keybindings</h3>
+<div class="outline-text-3" id="text-org0b0360c">
 <p>
 Reset EXWM
 </p>
@@ -404,8 +424,7 @@ Kill the current buffer and delete the window
 <pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>)
                   (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
                     (<span style="font-weight: bold;">progn</span>
-                    (kill-this-buffer)
-                    (delete-window))))
+                    (kill-this-buffer))))
 </pre>
 </div>
 
@@ -478,9 +497,9 @@ Keybindings to switch the current workspace
 </div>
 </div>
 
-<div id="outline-container-org19824fe" class="outline-2">
-<h2 id="org19824fe">Some Miscellaneous Configurations</h2>
-<div class="outline-text-2" id="text-org19824fe">
+<div id="outline-container-org51a4867" class="outline-2">
+<h2 id="org51a4867">Some Miscellaneous Configurations</h2>
+<div class="outline-text-2" id="text-org51a4867">
 <p>
 enable creation of pairs of brackets or quotes when one is inserted.
 </p>
@@ -676,9 +695,9 @@ indentation
 </pre>
 </div>
 </div>
-<div id="outline-container-org57155df" class="outline-3">
-<h3 id="org57155df"><code>utf-8</code></h3>
-<div class="outline-text-3" id="text-org57155df">
+<div id="outline-container-org111cdb0" class="outline-3">
+<h3 id="org111cdb0"><code>utf-8</code></h3>
+<div class="outline-text-3" id="text-org111cdb0">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -692,9 +711,9 @@ indentation
 </div>
 </div>
 </div>
-<div id="outline-container-org88a76ff" class="outline-3">
-<h3 id="org88a76ff">Backup files</h3>
-<div class="outline-text-3" id="text-org88a76ff">
+<div id="outline-container-orgb000af2" class="outline-3">
+<h3 id="orgb000af2">Backup files</h3>
+<div class="outline-text-3" id="text-orgb000af2">
 <p>
 Ensures that backups and auto-saves go to a separate directory instead
 of stinking up the working directory.
@@ -716,9 +735,9 @@ Adds themes folder to custom themes
 </div>
 </div>
 </div>
-<div id="outline-container-org0887492" class="outline-3">
-<h3 id="org0887492">Miscellaneous Packages</h3>
-<div class="outline-text-3" id="text-org0887492">
+<div id="outline-container-org9ee32b6" class="outline-3">
+<h3 id="org9ee32b6">Miscellaneous Packages</h3>
+<div class="outline-text-3" id="text-org9ee32b6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> pacmacs)
 (<span style="font-weight: bold;">use-package</span> fireplace)
@@ -743,9 +762,9 @@ Adds themes folder to custom themes
 </div>
 </div>
 </div>
-<div id="outline-container-orgfe2d235" class="outline-3">
-<h3 id="orgfe2d235">Repeat mode</h3>
-<div class="outline-text-3" id="text-orgfe2d235">
+<div id="outline-container-org90a5593" class="outline-3">
+<h3 id="org90a5593">Repeat mode</h3>
+<div class="outline-text-3" id="text-org90a5593">
 <p>
 This allows me to easily switch to another buffer using "p" and "n"
 when I have already used a buffer navigation command.
@@ -770,13 +789,13 @@ Disable repeat mode in Dired
 </div>
 </div>
 </div>
-<div id="outline-container-orgc82d593" class="outline-2">
-<h2 id="orgc82d593">Coding Packages</h2>
-<div class="outline-text-2" id="text-orgc82d593">
+<div id="outline-container-orga7ebad1" class="outline-2">
+<h2 id="orga7ebad1">Coding Packages</h2>
+<div class="outline-text-2" id="text-orga7ebad1">
 </div>
-<div id="outline-container-orgee35aad" class="outline-3">
-<h3 id="orgee35aad"><code>Flymake</code></h3>
-<div class="outline-text-3" id="text-orgee35aad">
+<div id="outline-container-orgb0ab99d" class="outline-3">
+<h3 id="orgb0ab99d"><code>Flymake</code></h3>
+<div class="outline-text-3" id="text-orgb0ab99d">
 <p>
 Package used by Eglot for highlighting errors
 </p>
@@ -790,9 +809,9 @@ Package used by Eglot for highlighting errors
 </div>
 </div>
 </div>
-<div id="outline-container-org25c2c21" class="outline-3">
-<h3 id="org25c2c21">Corfu</h3>
-<div class="outline-text-3" id="text-org25c2c21">
+<div id="outline-container-org97a97ce" class="outline-3">
+<h3 id="org97a97ce">Corfu</h3>
+<div class="outline-text-3" id="text-org97a97ce">
 <p>
 Package for completion suggestions
 </p>
@@ -809,9 +828,9 @@ Package for completion suggestions
 </div>
 </div>
 
-<div id="outline-container-org9ebddb9" class="outline-3">
-<h3 id="org9ebddb9">OCaml packages</h3>
-<div class="outline-text-3" id="text-org9ebddb9">
+<div id="outline-container-org0b8c86e" class="outline-3">
+<h3 id="org0b8c86e">OCaml packages</h3>
+<div class="outline-text-3" id="text-org0b8c86e">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ocaml-compile</span> ()
   (<span style="font-weight: bold;">setq</span> compile-command <span style="font-style: italic;">"~/.config/ocompile.sh"</span>)
@@ -838,9 +857,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-org0e406b7" class="outline-3">
-<h3 id="org0e406b7">Rust packages</h3>
-<div class="outline-text-3" id="text-org0e406b7">
+<div id="outline-container-orgd792b1c" class="outline-3">
+<h3 id="orgd792b1c">Rust packages</h3>
+<div class="outline-text-3" id="text-orgd792b1c">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic
   <span style="font-weight: bold;">:config</span> (<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot))
@@ -848,9 +867,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-orge414979" class="outline-3">
-<h3 id="orge414979"><code>Eglot</code></h3>
-<div class="outline-text-3" id="text-orge414979">
+<div id="outline-container-orga7d82d6" class="outline-3">
+<h3 id="orga7d82d6"><code>Eglot</code></h3>
+<div class="outline-text-3" id="text-orga7d82d6">
 <p>
 Package for language servers
 </p>
@@ -871,30 +890,28 @@ Neat eldoc popup
 </div>
 </div>
 </div>
-<div id="outline-container-org1859c79" class="outline-3">
-<h3 id="org1859c79">Git packages</h3>
-<div class="outline-text-3" id="text-org1859c79">
+<div id="outline-container-orge9ac180" class="outline-3">
+<h3 id="orge9ac180">Git packages</h3>
+<div class="outline-text-3" id="text-orge9ac180">
 <p>
 I will always use <code>magit</code> though. <code>magit</code> :)
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> magit
   <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> magit-mode-map
-                (<span style="font-style: italic;">"C-c C-p"</span> . magit-section-up)))
+              (<span style="font-style: italic;">"C-c C-p"</span> . magit-section-up)))
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">magit-fullscreen</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (magit-status)
-  (delete-other-windows))
+(<span style="font-weight: bold;">setq</span> magit-display-buffer-function
+      #'magit-display-buffer-traditional)
 
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-x g"</span> #'magit-fullscreen)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-x g"</span> #'magit-status)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org35eced8" class="outline-3">
-<h3 id="org35eced8">Miscellaneous Coding Packages</h3>
-<div class="outline-text-3" id="text-org35eced8">
+<div id="outline-container-org8645c41" class="outline-3">
+<h3 id="org8645c41">Miscellaneous Coding Packages</h3>
+<div class="outline-text-3" id="text-org8645c41">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> yaml-mode)
 </pre>
@@ -902,9 +919,9 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org14d9daa" class="outline-2">
-<h2 id="org14d9daa"><code>Dired</code></h2>
-<div class="outline-text-2" id="text-org14d9daa">
+<div id="outline-container-org2dc7940" class="outline-2">
+<h2 id="org2dc7940"><code>Dired</code></h2>
+<div class="outline-text-2" id="text-org2dc7940">
 <p>
 Deleted files are moved to the trash folder
 </p>
@@ -1041,13 +1058,13 @@ Quickly browse files in read only mode
 </div>
 </div>
 </div>
-<div id="outline-container-org61497e0" class="outline-2">
-<h2 id="org61497e0">Org</h2>
-<div class="outline-text-2" id="text-org61497e0">
+<div id="outline-container-org4cd0a2a" class="outline-2">
+<h2 id="org4cd0a2a">Org</h2>
+<div class="outline-text-2" id="text-org4cd0a2a">
 </div>
-<div id="outline-container-org6aca347" class="outline-3">
-<h3 id="org6aca347">Some Basic Bookkeeping</h3>
-<div class="outline-text-3" id="text-org6aca347">
+<div id="outline-container-org6bf19ea" class="outline-3">
+<h3 id="org6bf19ea">Some Basic Bookkeeping</h3>
+<div class="outline-text-3" id="text-org6bf19ea">
 <p>
 Some helpful variables
 </p>
@@ -1115,9 +1132,9 @@ This is very important
 </div>
 </div>
 </div>
-<div id="outline-container-org1992eac" class="outline-3">
-<h3 id="org1992eac">Appearance</h3>
-<div class="outline-text-3" id="text-org1992eac">
+<div id="outline-container-org94ee64e" class="outline-3">
+<h3 id="org94ee64e">Appearance</h3>
+<div class="outline-text-3" id="text-org94ee64e">
 <p>
 Hide emphasis markers and macro braces
 </p>
@@ -1203,9 +1220,9 @@ Automatically converts strings to emojis
 </pre>
 </div>
 </div>
-<div id="outline-container-org0d38216" class="outline-4">
-<h4 id="org0d38216">Org Pretty Symbols</h4>
-<div class="outline-text-4" id="text-org0d38216">
+<div id="outline-container-orgea16dde" class="outline-4">
+<h4 id="orgea16dde">Org Pretty Symbols</h4>
+<div class="outline-text-4" id="text-orgea16dde">
 <p>
 Function for adding pretty symbols for Org mode. Most of these are
 just so that Org mode environments aren't awful to look at.
@@ -1237,9 +1254,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org8163196" class="outline-3">
-<h3 id="org8163196">Org capture templates</h3>
-<div class="outline-text-3" id="text-org8163196">
+<div id="outline-container-org3eaadab" class="outline-3">
+<h3 id="org3eaadab">Org capture templates</h3>
+<div class="outline-text-3" id="text-org3eaadab">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-capture-templates
       '(
@@ -1271,9 +1288,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-orge04cd1c" class="outline-3">
-<h3 id="orge04cd1c">Org Keywords</h3>
-<div class="outline-text-3" id="text-orge04cd1c">
+<div id="outline-container-org8963da8" class="outline-3">
+<h3 id="org8963da8">Org Keywords</h3>
+<div class="outline-text-3" id="text-org8963da8">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-todo-keywords
       '((sequence <span style="font-style: italic;">"APPOINTMENT(p)"</span> <span style="font-style: italic;">"TODO(t)"</span> <span style="font-style: italic;">"IN-PROGRESS(i@/!)"</span> <span style="font-style: italic;">"VERIFYING(v!)"</span> <span style="font-style: italic;">"BLOCKED(b@)"</span> <span style="font-style: italic;">"&#128065;&#65039;&#128068;&#128065;&#65039;(q)"</span> <span style="font-style: italic;">"|"</span> <span style="font-style: italic;">"DONE(d!)"</span> <span style="font-style: italic;">"OBE(o@!)"</span> <span style="font-style: italic;">"WONT-DO(w@/!)"</span> )
@@ -1293,9 +1310,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc0044f" class="outline-3">
-<h3 id="orgbc0044f">Inserting Org Example Blocks</h3>
-<div class="outline-text-3" id="text-orgbc0044f">
+<div id="outline-container-orgaddafd7" class="outline-3">
+<h3 id="orgaddafd7">Inserting Org Example Blocks</h3>
+<div class="outline-text-3" id="text-orgaddafd7">
 <p>
 Function for wrapping text around a block
 </p>
@@ -1359,9 +1376,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org62ff80d" class="outline-3">
-<h3 id="org62ff80d">Remove Spell Checking in Code Blocks</h3>
-<div class="outline-text-3" id="text-org62ff80d">
+<div id="outline-container-org3c934ca" class="outline-3">
+<h3 id="org3c934ca">Remove Spell Checking in Code Blocks</h3>
+<div class="outline-text-3" id="text-org3c934ca">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_SRC"</span> . <span style="font-style: italic;">"#\\+END_SRC"</span>))
 (add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_EXAMPLE"</span> . <span style="font-style: italic;">"#\\+END_EXAMPLE"</span>))
@@ -1376,9 +1393,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org3fca0f6" class="outline-3">
-<h3 id="org3fca0f6">Org Key Bindings and Hooks</h3>
-<div class="outline-text-3" id="text-org3fca0f6">
+<div id="outline-container-org237a7b3" class="outline-3">
+<h3 id="org237a7b3">Org Key Bindings and Hooks</h3>
+<div class="outline-text-3" id="text-org237a7b3">
 <p>
 Global key bindings to access and update the agenda.
 </p>
@@ -1404,9 +1421,9 @@ Concise way of using the previous definitions to configure Org.
 </div>
 </div>
 </div>
-<div id="outline-container-orgaa95838" class="outline-3">
-<h3 id="orgaa95838">French Notes</h3>
-<div class="outline-text-3" id="text-orgaa95838">
+<div id="outline-container-orgd204c5a" class="outline-3">
+<h3 id="orgd204c5a">French Notes</h3>
+<div class="outline-text-3" id="text-orgd204c5a">
 <p>
 Function for inserting a conjugation table for french verbs
 </p>
@@ -1436,9 +1453,9 @@ Function for inserting a conjugation table for french verbs
 </div>
 </div>
 </div>
-<div id="outline-container-org93e67a5" class="outline-3">
-<h3 id="org93e67a5">LaTeX export</h3>
-<div class="outline-text-3" id="text-org93e67a5">
+<div id="outline-container-org9d42e02" class="outline-3">
+<h3 id="org9d42e02">LaTeX export</h3>
+<div class="outline-text-3" id="text-org9d42e02">
 <p>
 Add common scientific paper classes.
 </p>
@@ -1498,9 +1515,9 @@ Function to create a latex project.
 </div>
 </div>
 </div>
-<div id="outline-container-orgf5f84d4" class="outline-3">
-<h3 id="orgf5f84d4">Org Roam</h3>
-<div class="outline-text-3" id="text-orgf5f84d4">
+<div id="outline-container-org1e0924f" class="outline-3">
+<h3 id="org1e0924f">Org Roam</h3>
+<div class="outline-text-3" id="text-org1e0924f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam
   <span style="font-weight: bold;">:custom</span>
@@ -1540,9 +1557,9 @@ Capture templates for org roam.
 </div>
 </div>
 </div>
-<div id="outline-container-orga93a29b" class="outline-2">
-<h2 id="orga93a29b">PDFs</h2>
-<div class="outline-text-2" id="text-orga93a29b">
+<div id="outline-container-org0d98d95" class="outline-2">
+<h2 id="org0d98d95">PDFs</h2>
+<div class="outline-text-2" id="text-org0d98d95">
 <p>
 Opens the current file in <code>zathura</code> and kills the Doc View buffer.
 </p>
@@ -1566,9 +1583,9 @@ When we open a PDF in Emacs, open it in <code>zathura</code> instead.
 </div>
 </div>
 </div>
-<div id="outline-container-org5c970d0" class="outline-2">
-<h2 id="org5c970d0">Proof General</h2>
-<div class="outline-text-2" id="text-org5c970d0">
+<div id="outline-container-org1b07e8d" class="outline-2">
+<h2 id="org1b07e8d">Proof General</h2>
+<div class="outline-text-2" id="text-org1b07e8d">
 <p>
 Function for a more convenient Coq buffer split.
 </p>
@@ -1610,9 +1627,9 @@ Weird arrow :/
 </div>
 </div>
 </div>
-<div id="outline-container-org7f193d0" class="outline-2">
-<h2 id="org7f193d0">Settings for Text Mode</h2>
-<div class="outline-text-2" id="text-org7f193d0">
+<div id="outline-container-org46e7ac0" class="outline-2">
+<h2 id="org46e7ac0">Settings for Text Mode</h2>
+<div class="outline-text-2" id="text-org46e7ac0">
 <p>
 Enable auto-fill.
 </p>
@@ -1679,9 +1696,9 @@ Disable word completion in text-mode
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9e036b" class="outline-2">
-<h2 id="orgb9e036b"><code>Eshell</code></h2>
-<div class="outline-text-2" id="text-orgb9e036b">
+<div id="outline-container-org5f91e70" class="outline-2">
+<h2 id="org5f91e70"><code>Eshell</code></h2>
+<div class="outline-text-2" id="text-org5f91e70">
 <p>
 Fish like suggestions for <code>eshell</code>
 </p>
@@ -1855,9 +1872,9 @@ another window in the same frame, it selects that buffer by default
 </pre>
 </div>
 </div>
-<div id="outline-container-org1491fef" class="outline-3">
-<h3 id="org1491fef"><code>Eshell</code> configuration</h3>
-<div class="outline-text-3" id="text-org1491fef">
+<div id="outline-container-orgf3fde4d" class="outline-3">
+<h3 id="orgf3fde4d"><code>Eshell</code> configuration</h3>
+<div class="outline-text-3" id="text-orgf3fde4d">
 <p>
 Startup configuration. Sets the opam environment variables and runs
 <code>fastfetch</code>.
@@ -1886,9 +1903,9 @@ Startup configuration. Sets the opam environment variables and runs
 </div>
 </div>
 </div>
-<div id="outline-container-org4691257" class="outline-3">
-<h3 id="org4691257">Configuration for Visual Commands</h3>
-<div class="outline-text-3" id="text-org4691257">
+<div id="outline-container-org44907d9" class="outline-3">
+<h3 id="org44907d9">Configuration for Visual Commands</h3>
+<div class="outline-text-3" id="text-org44907d9">
 <p>
 We use eat to run any commands that require visuals
 </p>
@@ -1902,9 +1919,9 @@ We use eat to run any commands that require visuals
 </div>
 </div>
 </div>
-<div id="outline-container-org657156b" class="outline-2">
-<h2 id="org657156b">Ivy</h2>
-<div class="outline-text-2" id="text-org657156b">
+<div id="outline-container-org8aca390" class="outline-2">
+<h2 id="org8aca390">Ivy</h2>
+<div class="outline-text-2" id="text-org8aca390">
 <p>
 Default ivy configuration
 </p>
@@ -2035,9 +2052,9 @@ as a brick
 </div>
 </div>
 </div>
-<div id="outline-container-orgbfd8a05" class="outline-2">
-<h2 id="orgbfd8a05">Appearance</h2>
-<div class="outline-text-2" id="text-orgbfd8a05">
+<div id="outline-container-org4911355" class="outline-2">
+<h2 id="org4911355">Appearance</h2>
+<div class="outline-text-2" id="text-org4911355">
 <p>
 Disable Splash Screen
 </p>
@@ -2101,11 +2118,19 @@ Transparent emacs frames.
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 </pre>
 </div>
+
+<p>
+Display time in mode line
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(display-time-mode 1)
+</pre>
 </div>
 </div>
-<div id="outline-container-orgb15f8c1" class="outline-2">
-<h2 id="orgb15f8c1">Email</h2>
-<div class="outline-text-2" id="text-orgb15f8c1">
+</div>
+<div id="outline-container-org7633343" class="outline-2">
+<h2 id="org7633343">Email</h2>
+<div class="outline-text-2" id="text-org7633343">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
 
@@ -2211,27 +2236,6 @@ Transparent emacs frames.
 (<span style="font-weight: bold;">setq</span> mu4e-search-threads nil)
 
 (<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org61f804c" class="outline-2">
-<h2 id="org61f804c">Window Management</h2>
-<div class="outline-text-2" id="text-org61f804c">
-<p>
-Resizes the active window according to the gold ratio (extremely dope).
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> golden-ratio)
-(golden-ratio-mode 1)
-</pre>
-</div>
-
-<p>
-Full screen
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> zoom-window)
 </pre>
 </div>
 </div>
