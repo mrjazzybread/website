@@ -11,9 +11,9 @@
 </head>
 <body>
 <div id="content" class="content">
-<div id="outline-container-orga42fadc" class="outline-2">
-<h2 id="orga42fadc">Package Configuration</h2>
-<div class="outline-text-2" id="text-orga42fadc">
+<div id="outline-container-orgc1ccde4" class="outline-2">
+<h2 id="orgc1ccde4">Package Configuration</h2>
+<div class="outline-text-2" id="text-orgc1ccde4">
 <p>
 Add MELPA to the list of recognized archives
 </p>
@@ -65,9 +65,9 @@ GNU keys to enable downloading packages
 </div>
 </div>
 </div>
-<div id="outline-container-org63d3c65" class="outline-2">
-<h2 id="org63d3c65">EXWM</h2>
-<div class="outline-text-2" id="text-org63d3c65">
+<div id="outline-container-orgd6a6cae" class="outline-2">
+<h2 id="orgd6a6cae">EXWM</h2>
+<div class="outline-text-2" id="text-orgd6a6cae">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exwm)
 </pre>
@@ -155,10 +155,23 @@ This piece of code prevents this.
                        (xcb:flush exwm--connection))))
 </pre>
 </div>
+
+<p>
+Switch to workspace 0 and open eshell at startup.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">exwm-init</span> ()
+  (<span style="font-weight: bold;">progn</span>
+    (exwm-workspace-switch-create 0)
+    (eshell)))
+
+(add-hook 'exwm-init-hook #'exwm-init)
+</pre>
 </div>
-<div id="outline-container-orgbb4ca2c" class="outline-3">
-<h3 id="orgbb4ca2c">Keybindings for desktop utilities</h3>
-<div class="outline-text-3" id="text-orgbb4ca2c">
+</div>
+<div id="outline-container-org1067f3d" class="outline-3">
+<h3 id="org1067f3d">Keybindings for desktop utilities</h3>
+<div class="outline-text-3" id="text-org1067f3d">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -224,9 +237,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org57b620d" class="outline-3">
-<h3 id="org57b620d">Background processes</h3>
-<div class="outline-text-3" id="text-org57b620d">
+<div id="outline-container-org8e2dee7" class="outline-3">
+<h3 id="org8e2dee7">Background processes</h3>
+<div class="outline-text-3" id="text-org8e2dee7">
 <p>
 Helper function to run a program in the background
 </p>
@@ -322,9 +335,9 @@ Compositor
 </div>
 </div>
 
-<div id="outline-container-org6b4d821" class="outline-3">
-<h3 id="org6b4d821">GPG</h3>
-<div class="outline-text-3" id="text-org6b4d821">
+<div id="outline-container-orgf2516d0" class="outline-3">
+<h3 id="orgf2516d0">GPG</h3>
+<div class="outline-text-3" id="text-orgf2516d0">
 <p>
 I never know man
 </p>
@@ -348,9 +361,9 @@ I never know man
 </div>
 </div>
 
-<div id="outline-container-orge108379" class="outline-3">
-<h3 id="orge108379">Multiple monitors</h3>
-<div class="outline-text-3" id="text-orge108379">
+<div id="outline-container-orgc22b7e0" class="outline-3">
+<h3 id="orgc22b7e0">Multiple monitors</h3>
+<div class="outline-text-3" id="text-orgc22b7e0">
 <p>
 Set the initial workspace for each display
 </p>
@@ -394,9 +407,9 @@ Update displays
 </div>
 </div>
 </div>
-<div id="outline-container-org884206f" class="outline-3">
-<h3 id="org884206f">Keybindings</h3>
-<div class="outline-text-3" id="text-org884206f">
+<div id="outline-container-org04e562a" class="outline-3">
+<h3 id="org04e562a">Keybindings</h3>
+<div class="outline-text-3" id="text-org04e562a">
 <p>
 Reset EXWM
 </p>
@@ -493,9 +506,9 @@ Keybindings to switch the current workspace
 </div>
 </div>
 </div>
-<div id="outline-container-orge2d1cd7" class="outline-2">
-<h2 id="orge2d1cd7">Some Miscellaneous Configurations</h2>
-<div class="outline-text-2" id="text-orge2d1cd7">
+<div id="outline-container-orge90d679" class="outline-2">
+<h2 id="orge90d679">Some Miscellaneous Configurations</h2>
+<div class="outline-text-2" id="text-orge90d679">
 <p>
 enable creation of pairs of brackets or quotes when one is inserted.
 </p>
@@ -674,9 +687,9 @@ indentation
 </pre>
 </div>
 </div>
-<div id="outline-container-org2a820ee" class="outline-3">
-<h3 id="org2a820ee"><code>utf-8</code></h3>
-<div class="outline-text-3" id="text-org2a820ee">
+<div id="outline-container-orgb8607df" class="outline-3">
+<h3 id="orgb8607df"><code>utf-8</code></h3>
+<div class="outline-text-3" id="text-orgb8607df">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -690,9 +703,9 @@ indentation
 </div>
 </div>
 </div>
-<div id="outline-container-orgc250ae2" class="outline-3">
-<h3 id="orgc250ae2">Backup files</h3>
-<div class="outline-text-3" id="text-orgc250ae2">
+<div id="outline-container-org95017f0" class="outline-3">
+<h3 id="org95017f0">Backup files</h3>
+<div class="outline-text-3" id="text-org95017f0">
 <p>
 Ensures that backups and auto-saves go to a separate directory instead
 of stinking up the working directory.
@@ -716,9 +729,9 @@ Adds themes folder to custom themes
 </div>
 </div>
 </div>
-<div id="outline-container-orgdd79a69" class="outline-3">
-<h3 id="orgdd79a69">Miscellaneous Packages</h3>
-<div class="outline-text-3" id="text-orgdd79a69">
+<div id="outline-container-org80c8128" class="outline-3">
+<h3 id="org80c8128">Miscellaneous Packages</h3>
+<div class="outline-text-3" id="text-org80c8128">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> pacmacs)
 (<span style="font-weight: bold;">use-package</span> fireplace)
@@ -743,9 +756,9 @@ Adds themes folder to custom themes
 </div>
 </div>
 </div>
-<div id="outline-container-org9ec809e" class="outline-3">
-<h3 id="org9ec809e">Repeat mode</h3>
-<div class="outline-text-3" id="text-org9ec809e">
+<div id="outline-container-orgde0c5f5" class="outline-3">
+<h3 id="orgde0c5f5">Repeat mode</h3>
+<div class="outline-text-3" id="text-orgde0c5f5">
 <p>
 This allows me to easily switch to another buffer using "p" and "n"
 when I have already used a buffer navigation command.
@@ -770,13 +783,13 @@ Disable repeat mode in Dired
 </div>
 </div>
 </div>
-<div id="outline-container-org7ef55cf" class="outline-2">
-<h2 id="org7ef55cf">Coding Packages</h2>
-<div class="outline-text-2" id="text-org7ef55cf">
+<div id="outline-container-org85b4a03" class="outline-2">
+<h2 id="org85b4a03">Coding Packages</h2>
+<div class="outline-text-2" id="text-org85b4a03">
 </div>
-<div id="outline-container-orgc9af3e5" class="outline-3">
-<h3 id="orgc9af3e5"><code>Flymake</code></h3>
-<div class="outline-text-3" id="text-orgc9af3e5">
+<div id="outline-container-orgd480ba6" class="outline-3">
+<h3 id="orgd480ba6"><code>Flymake</code></h3>
+<div class="outline-text-3" id="text-orgd480ba6">
 <p>
 Package used by Eglot for highlighting errors
 </p>
@@ -790,9 +803,9 @@ Package used by Eglot for highlighting errors
 </div>
 </div>
 </div>
-<div id="outline-container-orga31c67c" class="outline-3">
-<h3 id="orga31c67c">Corfu</h3>
-<div class="outline-text-3" id="text-orga31c67c">
+<div id="outline-container-orgcfe1815" class="outline-3">
+<h3 id="orgcfe1815">Corfu</h3>
+<div class="outline-text-3" id="text-orgcfe1815">
 <p>
 Package for completion suggestions
 </p>
@@ -809,9 +822,9 @@ Package for completion suggestions
 </div>
 </div>
 
-<div id="outline-container-orga948058" class="outline-3">
-<h3 id="orga948058">OCaml packages</h3>
-<div class="outline-text-3" id="text-orga948058">
+<div id="outline-container-orgf6f0c54" class="outline-3">
+<h3 id="orgf6f0c54">OCaml packages</h3>
+<div class="outline-text-3" id="text-orgf6f0c54">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ocaml-compile</span> ()
   (<span style="font-weight: bold;">setq</span> compile-command <span style="font-style: italic;">"~/.config/ocompile.sh"</span>)
@@ -833,9 +846,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-org7ec4019" class="outline-3">
-<h3 id="org7ec4019">Rust packages</h3>
-<div class="outline-text-3" id="text-org7ec4019">
+<div id="outline-container-orgc3ddedf" class="outline-3">
+<h3 id="orgc3ddedf">Rust packages</h3>
+<div class="outline-text-3" id="text-orgc3ddedf">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic
   <span style="font-weight: bold;">:config</span> (<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot))
@@ -843,9 +856,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-org512a0c0" class="outline-3">
-<h3 id="org512a0c0"><code>Eglot</code></h3>
-<div class="outline-text-3" id="text-org512a0c0">
+<div id="outline-container-orgceb0d52" class="outline-3">
+<h3 id="orgceb0d52"><code>Eglot</code></h3>
+<div class="outline-text-3" id="text-orgceb0d52">
 <p>
 Package for language servers
 </p>
@@ -866,9 +879,9 @@ Neat eldoc popup
 </div>
 </div>
 </div>
-<div id="outline-container-org9b1509d" class="outline-3">
-<h3 id="org9b1509d">Git packages</h3>
-<div class="outline-text-3" id="text-org9b1509d">
+<div id="outline-container-org8b2a436" class="outline-3">
+<h3 id="org8b2a436">Git packages</h3>
+<div class="outline-text-3" id="text-org8b2a436">
 <p>
 I will always use <code>magit</code> though. <code>magit</code> :)
 </p>
@@ -885,9 +898,9 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-orgdd011ae" class="outline-3">
-<h3 id="orgdd011ae">Miscellaneous Coding Packages</h3>
-<div class="outline-text-3" id="text-orgdd011ae">
+<div id="outline-container-orgf59101b" class="outline-3">
+<h3 id="orgf59101b">Miscellaneous Coding Packages</h3>
+<div class="outline-text-3" id="text-orgf59101b">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> yaml-mode)
 </pre>
@@ -895,9 +908,9 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org4ecdfde" class="outline-2">
-<h2 id="org4ecdfde"><code>Dired</code></h2>
-<div class="outline-text-2" id="text-org4ecdfde">
+<div id="outline-container-org91c5c22" class="outline-2">
+<h2 id="org91c5c22"><code>Dired</code></h2>
+<div class="outline-text-2" id="text-org91c5c22">
 <p>
 Deleted files are moved to the trash folder
 </p>
@@ -1032,15 +1045,30 @@ Quickly browse files in read only mode
 (define-key view-mode-map (kbd <span style="font-style: italic;">"p"</span>) 'view-previous-file)
 </pre>
 </div>
+<p>
+Change <code>ls</code> switches to use human readable file sizes
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-listing-switches <span style="font-style: italic;">"-alh"</span>)
+</pre>
+</div>
+<p>
+When copying a file, have it so if there is another dired buffer open in
+another window in the same frame, it selects that buffer by default
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-dwim-target t)
+</pre>
 </div>
 </div>
-<div id="outline-container-org5dcc2ea" class="outline-2">
-<h2 id="org5dcc2ea">Org</h2>
-<div class="outline-text-2" id="text-org5dcc2ea">
 </div>
-<div id="outline-container-orga9f728f" class="outline-3">
-<h3 id="orga9f728f">Some Basic Bookkeeping</h3>
-<div class="outline-text-3" id="text-orga9f728f">
+<div id="outline-container-orge4ce5a2" class="outline-2">
+<h2 id="orge4ce5a2">Org</h2>
+<div class="outline-text-2" id="text-orge4ce5a2">
+</div>
+<div id="outline-container-org65310e7" class="outline-3">
+<h3 id="org65310e7">Some Basic Bookkeeping</h3>
+<div class="outline-text-3" id="text-org65310e7">
 <p>
 Some helpful variables
 </p>
@@ -1108,9 +1136,9 @@ This is very important
 </div>
 </div>
 </div>
-<div id="outline-container-org0e31b65" class="outline-3">
-<h3 id="org0e31b65">Appearance</h3>
-<div class="outline-text-3" id="text-org0e31b65">
+<div id="outline-container-org4e14f09" class="outline-3">
+<h3 id="org4e14f09">Appearance</h3>
+<div class="outline-text-3" id="text-org4e14f09">
 <p>
 Hide emphasis markers and macro braces
 </p>
@@ -1196,9 +1224,9 @@ Automatically converts strings to emojis
 </pre>
 </div>
 </div>
-<div id="outline-container-orgb8a037a" class="outline-4">
-<h4 id="orgb8a037a">Org Pretty Symbols</h4>
-<div class="outline-text-4" id="text-orgb8a037a">
+<div id="outline-container-org2813c2b" class="outline-4">
+<h4 id="org2813c2b">Org Pretty Symbols</h4>
+<div class="outline-text-4" id="text-org2813c2b">
 <p>
 Function for adding pretty symbols for Org mode. Most of these are
 just so that Org mode environments aren't awful to look at.
@@ -1230,9 +1258,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-orga37c6c5" class="outline-3">
-<h3 id="orga37c6c5">Org capture templates</h3>
-<div class="outline-text-3" id="text-orga37c6c5">
+<div id="outline-container-org1d1e021" class="outline-3">
+<h3 id="org1d1e021">Org capture templates</h3>
+<div class="outline-text-3" id="text-org1d1e021">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-capture-templates
       '(
@@ -1264,9 +1292,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org566efc5" class="outline-3">
-<h3 id="org566efc5">Org Keywords</h3>
-<div class="outline-text-3" id="text-org566efc5">
+<div id="outline-container-org5b37ed2" class="outline-3">
+<h3 id="org5b37ed2">Org Keywords</h3>
+<div class="outline-text-3" id="text-org5b37ed2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-todo-keywords
       '((sequence <span style="font-style: italic;">"APPOINTMENT(p)"</span> <span style="font-style: italic;">"TODO(t)"</span> <span style="font-style: italic;">"IN-PROGRESS(i@/!)"</span> <span style="font-style: italic;">"VERIFYING(v!)"</span> <span style="font-style: italic;">"BLOCKED(b@)"</span> <span style="font-style: italic;">"&#128065;&#65039;&#128068;&#128065;&#65039;(q)"</span> <span style="font-style: italic;">"|"</span> <span style="font-style: italic;">"DONE(d!)"</span> <span style="font-style: italic;">"OBE(o@!)"</span> <span style="font-style: italic;">"WONT-DO(w@/!)"</span> )
@@ -1286,9 +1314,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org26a7a8b" class="outline-3">
-<h3 id="org26a7a8b">Inserting Org Example Blocks</h3>
-<div class="outline-text-3" id="text-org26a7a8b">
+<div id="outline-container-orgcf5e0ea" class="outline-3">
+<h3 id="orgcf5e0ea">Inserting Org Example Blocks</h3>
+<div class="outline-text-3" id="text-orgcf5e0ea">
 <p>
 Function for wrapping text around a block
 </p>
@@ -1352,9 +1380,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org6da8c80" class="outline-3">
-<h3 id="org6da8c80">Remove Spell Checking in Code Blocks</h3>
-<div class="outline-text-3" id="text-org6da8c80">
+<div id="outline-container-orgf6e7dbd" class="outline-3">
+<h3 id="orgf6e7dbd">Remove Spell Checking in Code Blocks</h3>
+<div class="outline-text-3" id="text-orgf6e7dbd">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_SRC"</span> . <span style="font-style: italic;">"#\\+END_SRC"</span>))
 (add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_EXAMPLE"</span> . <span style="font-style: italic;">"#\\+END_EXAMPLE"</span>))
@@ -1369,9 +1397,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org4722e8c" class="outline-3">
-<h3 id="org4722e8c">Org Key Bindings and Hooks</h3>
-<div class="outline-text-3" id="text-org4722e8c">
+<div id="outline-container-orgdead426" class="outline-3">
+<h3 id="orgdead426">Org Key Bindings and Hooks</h3>
+<div class="outline-text-3" id="text-orgdead426">
 <p>
 Global key bindings to access and update the agenda.
 </p>
@@ -1397,9 +1425,9 @@ Concise way of using the previous definitions to configure Org.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc2d0656" class="outline-3">
-<h3 id="orgc2d0656">French Notes</h3>
-<div class="outline-text-3" id="text-orgc2d0656">
+<div id="outline-container-org925f236" class="outline-3">
+<h3 id="org925f236">French Notes</h3>
+<div class="outline-text-3" id="text-org925f236">
 <p>
 Function for inserting a conjugation table for french verbs
 </p>
@@ -1429,9 +1457,9 @@ Function for inserting a conjugation table for french verbs
 </div>
 </div>
 </div>
-<div id="outline-container-org43f2ef2" class="outline-3">
-<h3 id="org43f2ef2">LaTeX export</h3>
-<div class="outline-text-3" id="text-org43f2ef2">
+<div id="outline-container-orge583de6" class="outline-3">
+<h3 id="orge583de6">LaTeX export</h3>
+<div class="outline-text-3" id="text-orge583de6">
 <p>
 Add common scientific paper classes.
 </p>
@@ -1491,9 +1519,9 @@ Function to create a latex project.
 </div>
 </div>
 </div>
-<div id="outline-container-org999cf43" class="outline-3">
-<h3 id="org999cf43">Org Roam</h3>
-<div class="outline-text-3" id="text-org999cf43">
+<div id="outline-container-orgde1ae56" class="outline-3">
+<h3 id="orgde1ae56">Org Roam</h3>
+<div class="outline-text-3" id="text-orgde1ae56">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam
   <span style="font-weight: bold;">:custom</span>
@@ -1533,9 +1561,9 @@ Capture templates for org roam.
 </div>
 </div>
 </div>
-<div id="outline-container-org4a0efab" class="outline-2">
-<h2 id="org4a0efab">PDFs</h2>
-<div class="outline-text-2" id="text-org4a0efab">
+<div id="outline-container-org58cdd01" class="outline-2">
+<h2 id="org58cdd01">PDFs</h2>
+<div class="outline-text-2" id="text-org58cdd01">
 <p>
 Opens the current file in <code>zathura</code> and kills the Doc View buffer.
 </p>
@@ -1559,9 +1587,9 @@ When we open a PDF in Emacs, open it in <code>zathura</code> instead.
 </div>
 </div>
 </div>
-<div id="outline-container-orge5acb77" class="outline-2">
-<h2 id="orge5acb77">Proof General</h2>
-<div class="outline-text-2" id="text-orge5acb77">
+<div id="outline-container-org3b84702" class="outline-2">
+<h2 id="org3b84702">Proof General</h2>
+<div class="outline-text-2" id="text-org3b84702">
 <p>
 Function for a more convenient Coq buffer split.
 </p>
@@ -1603,9 +1631,9 @@ Weird arrow :/
 </div>
 </div>
 </div>
-<div id="outline-container-orgae31fd5" class="outline-2">
-<h2 id="orgae31fd5">Settings for Text Mode</h2>
-<div class="outline-text-2" id="text-orgae31fd5">
+<div id="outline-container-org0032825" class="outline-2">
+<h2 id="org0032825">Settings for Text Mode</h2>
+<div class="outline-text-2" id="text-org0032825">
 <p>
 Enable auto-fill.
 </p>
@@ -1673,232 +1701,9 @@ Disable word completion in text-mode
 </div>
 </div>
 </div>
-<div id="outline-container-org2b3755f" class="outline-2">
-<h2 id="org2b3755f"><code>Eshell</code></h2>
-<div class="outline-text-2" id="text-org2b3755f">
-<p>
-Fish like suggestions for <code>eshell</code>
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> company)
-
-(<span style="font-weight: bold;">use-package</span> esh-autosuggest
-  <span style="font-weight: bold;">:hook</span> (eshell-mode . esh-autosuggest-mode)
-  <span style="font-weight: bold;">:custom</span> (eshell-history-size 50000)
-  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">since esh autosuggest uses the eshell history, we increase it so</span>
-  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">that we have more possible suggesions</span>
-  <span style="font-weight: bold;">:custom</span> (company-minimum-prefix-length 1)
-  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> esh-autosuggest-active-map
-              (<span style="font-style: italic;">"C-f"</span> . esh-autosuggest-complete-word)
-              (<span style="font-style: italic;">"C-e"</span> . company-complete))
-  )
-</pre>
-</div>
-<p>
-Pretty <code>eshell</code> prompt
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(load-file <span style="font-style: italic;">"/home/tiago/.config/prompt.el"</span>)
-(<span style="font-weight: bold;">setq</span> eshell-prompt-function #'epe-theme-dakrone)
-</pre>
-</div>
-
-<p>
-Function for clearing the shell
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-clear</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  <span style="font-style: italic;">"Clear the eshell buffer."</span>
-  (<span style="font-weight: bold;">let</span> ((inhibit-read-only t))
-    (erase-buffer)
-    (eshell-send-input)
-    (beginning-of-buffer)
-    (kill-line)
-    (end-of-buffer)
-    ))
-</pre>
-</div>
-<p>
-Function for getting to the base of any project. Useful for spawning
-shells since having it at the root of the project is generally more
-convenient.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">project-files</span>
-  '(<span style="font-style: italic;">"dune-project"</span> <span style="font-style: italic;">"package.json"</span>
-    <span style="font-style: italic;">"CoqProject"</span> <span style="font-style: italic;">"Makefile"</span>
-    )
-  )
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-base</span> ()
-  (<span style="font-weight: bold;">or</span> (equal default-directory <span style="font-style: italic;">"/"</span>)
-      (not (eq (seq-intersection
-         (directory-files <span style="font-style: italic;">"."</span>)
-         project-files
-         'equal
-         ) <span style="font-weight: bold;">nil)</span>
-      ))
-  )
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-to-base</span> ()
-  (<span style="font-weight: bold;">let</span> ((c default-directory))
-  (<span style="font-weight: bold;">progn</span>
-    (<span style="font-weight: bold;">while</span> (not (is-base))
-      (find-file <span style="font-style: italic;">".."</span>))
-    (<span style="font-weight: bold;">when</span> (equal default-directory <span style="font-style: italic;">"/"</span>)
-        (find-file c)
-        )
-  )))
-</pre>
-</div>
-<p>
-Always spawns eshell on a new terminal
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">multi-eshell</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">let</span> ((b (current-buffer)))
-  (<span style="font-weight: bold;">when</span> (seq-find
-         (<span style="font-weight: bold;">lambda</span> (val)
-           (equal <span style="font-style: italic;">"*eshell*"</span> (buffer-name val)))
-         (buffer-list))
-    (switch-to-buffer <span style="font-style: italic;">"*eshell*"</span>)
-    (rename-uniquely))
-  (switch-to-buffer b)
-  (eshell)))
-</pre>
-</div>
-<p>
-Key binding for spawning a new instance of <code>eshell</code> at the root of a
-project.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-spawn</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (select-frame (make-frame))
-  (get-to-base)
-  (multi-eshell))
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-c C-SPC"</span> 'eshell-spawn)
-</pre>
-</div>
-<p>
-Delete duplicates in the <code>eshell</code> history
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-hist-ignoredups t)
-</pre>
-</div>
-<p>
-Function to run <code>eshell</code> command.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-send-command</span> (s)
-  (<span style="font-weight: bold;">interactive</span>)
-  (eshell-return-to-prompt)
-  (insert s)
-  (eshell-send-input))
-</pre>
-</div>
-<p>
-Change <code>ls</code> switches to use human readable file sizes
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-listing-switches <span style="font-style: italic;">"-alh"</span>)
-</pre>
-</div>
-<p>
-Augments <code>eshell</code>'s completion framework so that it behaves more like
-fish (e.g. "pacman -S &#x2026;" completes the name of the package)
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> fish-completion)
-(global-fish-completion-mode 1)
-</pre>
-</div>
-<p>
-I never know man
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-cmpl-dir-ignore <span style="font-style: italic;">"\\`</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">CVS</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">/\\'"</span>)
-</pre>
-</div>
-<p>
-Add rust packages to path
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(add-to-list 'exec-path <span style="font-style: italic;">"~/.cargo/bin"</span>)
-</pre>
-</div>
-<p>
-When copying a file, have it so if there is another dired buffer open in
-another window in the same frame, it selects that buffer by default
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-dwim-target t)
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-envs</span> (l) (<span style="font-weight: bold;">dolist</span> (p (nth 0 l)) (setenv (nth 0 p) (nth 1 p))))
-</pre>
-</div>
-</div>
-<div id="outline-container-orgbc03bca" class="outline-3">
-<h3 id="orgbc03bca"><code>Eshell</code> configuration</h3>
-<div class="outline-text-3" id="text-orgbc03bca">
-<p>
-Startup configuration. Sets the opam environment variables and runs
-<code>fastfetch</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(add-hook 'eshell-mode-hook
-        (<span style="font-weight: bold;">lambda</span> ()
-          (define-key eshell-mode-map (kbd <span style="font-style: italic;">"C-l"</span>) #'eshell-clear)))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">startup</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (eshell-send-command <span style="font-style: italic;">"opam-set &amp;&amp; fastfetch"</span>)
-  (<span style="font-weight: bold;">let</span> ((inhibit-read-only t))
-    (eshell-previous-prompt 1)
-    (beginning-of-line)
-    (kill-line)
-    (kill-line)
-    (eshell-next-prompt 1)))
-
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">eshell</span>)
-(<span style="font-weight: bold;">use-package</span> eshell
-  <span style="font-weight: bold;">:hook</span> (eshell-mode . startup)
-  <span style="font-weight: bold;">:custom</span> (eshell-banner-message <span style="font-style: italic;">""</span>)
-  )
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org322b4df" class="outline-3">
-<h3 id="org322b4df">Configuration for Visual Commands</h3>
-<div class="outline-text-3" id="text-org322b4df">
-<p>
-We use eat to run any commands that require visuals
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eat
-  <span style="font-weight: bold;">:custom</span> (eat-kill-buffer-on-exit t)
-  <span style="font-weight: bold;">:hook</span> (eshell-mode . eat-eshell-mode)
-  )
-</pre>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-org710d347" class="outline-2">
-<h2 id="org710d347">Ivy</h2>
-<div class="outline-text-2" id="text-org710d347">
+<div id="outline-container-orgf1a36b3" class="outline-2">
+<h2 id="orgf1a36b3">Ivy</h2>
+<div class="outline-text-2" id="text-orgf1a36b3">
 <p>
 Default ivy configuration
 </p>
@@ -2070,9 +1875,9 @@ as a brick
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf22575" class="outline-2">
-<h2 id="orgcf22575">Appearance</h2>
-<div class="outline-text-2" id="text-orgcf22575">
+<div id="outline-container-orgfdc41dd" class="outline-2">
+<h2 id="orgfdc41dd">Appearance</h2>
+<div class="outline-text-2" id="text-orgfdc41dd">
 <p>
 Disable Splash Screen
 </p>
@@ -2148,9 +1953,9 @@ Display time in mode line
 </div>
 </div>
 
-<div id="outline-container-org9b8dc01" class="outline-2">
-<h2 id="org9b8dc01">Email</h2>
-<div class="outline-text-2" id="text-org9b8dc01">
+<div id="outline-container-org4f058e0" class="outline-2">
+<h2 id="org4f058e0">Email</h2>
+<div class="outline-text-2" id="text-org4f058e0">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
 
@@ -2257,6 +2062,214 @@ Display time in mode line
 
 (<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d80430" class="outline-2">
+<h2 id="org3d80430"><code>Eshell</code></h2>
+<div class="outline-text-2" id="text-org3d80430">
+<p>
+Fish like suggestions for <code>eshell</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> company)
+
+(<span style="font-weight: bold;">use-package</span> esh-autosuggest
+  <span style="font-weight: bold;">:hook</span> (eshell-mode . esh-autosuggest-mode)
+  <span style="font-weight: bold;">:custom</span> (eshell-history-size 50000)
+  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">since esh autosuggest uses the eshell history, we increase it so</span>
+  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">that we have more possible suggesions</span>
+  <span style="font-weight: bold;">:custom</span> (company-minimum-prefix-length 1)
+  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> esh-autosuggest-active-map
+              (<span style="font-style: italic;">"C-f"</span> . esh-autosuggest-complete-word)
+              (<span style="font-style: italic;">"C-e"</span> . company-complete))
+  )
+</pre>
+</div>
+<p>
+Pretty <code>eshell</code> prompt
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(load-file <span style="font-style: italic;">"/home/tiago/.config/prompt.el"</span>)
+(<span style="font-weight: bold;">setq</span> eshell-prompt-function #'epe-theme-dakrone)
+</pre>
+</div>
+
+<p>
+Function for clearing the shell
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-clear</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  <span style="font-style: italic;">"Clear the eshell buffer."</span>
+  (<span style="font-weight: bold;">let</span> ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)
+    (beginning-of-buffer)
+    (kill-line)
+    (end-of-buffer)
+    ))
+</pre>
+</div>
+<p>
+Function for getting to the base of any project. Useful for spawning
+shells since having it at the root of the project is generally more
+convenient.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">project-files</span>
+  '(<span style="font-style: italic;">"dune-project"</span> <span style="font-style: italic;">"package.json"</span>
+    <span style="font-style: italic;">"CoqProject"</span> <span style="font-style: italic;">"Makefile"</span>
+    )
+  )
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-base</span> ()
+  (<span style="font-weight: bold;">or</span> (equal default-directory <span style="font-style: italic;">"/"</span>)
+      (not (eq (seq-intersection
+         (directory-files <span style="font-style: italic;">"."</span>)
+         project-files
+         'equal
+         ) <span style="font-weight: bold;">nil)</span>
+      ))
+  )
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-to-base</span> ()
+  (<span style="font-weight: bold;">let</span> ((c default-directory))
+  (<span style="font-weight: bold;">progn</span>
+    (<span style="font-weight: bold;">while</span> (not (is-base))
+      (find-file <span style="font-style: italic;">".."</span>))
+    (<span style="font-weight: bold;">when</span> (equal default-directory <span style="font-style: italic;">"/"</span>)
+        (find-file c)
+        )
+  )))
+</pre>
+</div>
+<p>
+Always spawns eshell on a new terminal
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">multi-eshell</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> ((b (current-buffer)))
+  (<span style="font-weight: bold;">when</span> (seq-find
+         (<span style="font-weight: bold;">lambda</span> (val)
+           (equal <span style="font-style: italic;">"*eshell*"</span> (buffer-name val)))
+         (buffer-list))
+    (switch-to-buffer <span style="font-style: italic;">"*eshell*"</span>)
+    (rename-uniquely))
+  (switch-to-buffer b)
+  (eshell)))
+</pre>
+</div>
+<p>
+Key binding for spawning a new instance of <code>eshell</code> at the root of a
+project.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-spawn</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (select-frame (make-frame))
+  (get-to-base)
+  (multi-eshell))
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-c C-SPC"</span> 'eshell-spawn)
+</pre>
+</div>
+<p>
+Delete duplicates in the <code>eshell</code> history
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-hist-ignoredups t)
+</pre>
+</div>
+<p>
+Function to run <code>eshell</code> command.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-send-command</span> (s)
+  (<span style="font-weight: bold;">interactive</span>)
+  (eshell-return-to-prompt)
+  (insert s)
+  (eshell-send-input))
+</pre>
+</div>
+<p>
+Augments <code>eshell</code>'s completion framework so that it behaves more like
+fish (e.g. "pacman -S &#x2026;" completes the name of the package)
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> fish-completion)
+(global-fish-completion-mode 1)
+</pre>
+</div>
+<p>
+I never know man
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-cmpl-dir-ignore <span style="font-style: italic;">"\\`</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">CVS</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">/\\'"</span>)
+</pre>
+</div>
+<p>
+Add rust packages to path
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-to-list 'exec-path <span style="font-style: italic;">"~/.cargo/bin"</span>)
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-envs</span> (l) (<span style="font-weight: bold;">dolist</span> (p (nth 0 l)) (setenv (nth 0 p) (nth 1 p))))
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf3ac6b9" class="outline-3">
+<h3 id="orgf3ac6b9"><code>Eshell</code> configuration</h3>
+<div class="outline-text-3" id="text-orgf3ac6b9">
+<p>
+Startup configuration. Sets the opam environment variables and runs
+<code>fastfetch</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-hook 'eshell-mode-hook
+        (<span style="font-weight: bold;">lambda</span> ()
+          (define-key eshell-mode-map (kbd <span style="font-style: italic;">"C-l"</span>) #'eshell-clear)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">startup</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (eshell-send-command <span style="font-style: italic;">"opam-set &amp;&amp; fastfetch"</span>)
+  (<span style="font-weight: bold;">let</span> ((inhibit-read-only t))
+    (eshell-previous-prompt 1)
+    (beginning-of-line)
+    (kill-line)
+    (kill-line)
+    (eshell-next-prompt 1)))
+
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">eshell</span>)
+(<span style="font-weight: bold;">use-package</span> eshell
+  <span style="font-weight: bold;">:hook</span> (eshell-mode . startup)
+  <span style="font-weight: bold;">:custom</span> (eshell-banner-message <span style="font-style: italic;">""</span>)
+  )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge8fc284" class="outline-3">
+<h3 id="orge8fc284">Configuration for Visual Commands</h3>
+<div class="outline-text-3" id="text-orge8fc284">
+<p>
+We use eat to run any commands that require visuals
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eat
+  <span style="font-weight: bold;">:custom</span> (eat-kill-buffer-on-exit t)
+  <span style="font-weight: bold;">:hook</span> (eshell-mode . eat-eshell-mode)
+  )
+</pre>
+</div>
 </div>
 </div>
 </div>
