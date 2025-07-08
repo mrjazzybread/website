@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exwm)
+</pre>
+</div>
+<p>
+Setting the initial workspace number
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-workspace-number 4)
+</pre>
+</div>
+<p>
+Make it so that EXWM buffers are named after the window they are managing
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-hook 'exwm-update-class-hook
+        (<span style="font-weight: bold;">lambda</span> () (exwm-workspace-rename-buffer exwm-class-name)))
+</pre>
+</div>
+
+<p>
+In an EXWM buffer, the bindings on the left are mapped to the bindings
+on the right. This way, we can use Emacs keybindings in X windows.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-simulation-keys
+      '(([?\C-b] . [left])
+        ([?\C-f] . [right])
+      ([?\M-f] . [C-right])
+      ([?\M-b] . [C-left])
+        ([?\C-p] . [up])
+        ([?\C-n] . [down])
+        ([?\C-a] . [home])
+        ([?\C-e] . [end])
+        ([?\M-v] . [prior])
+      ([?\M-w] . [C-c])
+      ([?\C-y] . [C-v])
+      ([?\C-_] . [C-z])
+        ([?\C-v] . [next])
+        ([?\C-d] . [delete])
+      ([?\C-s] . [C-f])
+        ([?\C-k] . [S-end delete])
+      ([?\C- ] . [C-a])
+      ([?\C-g] . [escape])
+      ([?\C-j] . [S-return])
+      ([?\C-w] . [C-x])
+      ))
+</pre>
+</div>
+<p>
+Minor mode to rename Firefox EXWM buffers to the names of the
+respective tabs.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exwm-firefox-core)
+(load-file <span style="font-style: italic;">"~/exwm-firefox.el"</span>)
+(exwm-firefox-mode 1)
+</pre>
+</div>
+<p>
+Enable a system tray in the minibuffer. This is where icons for the
+network manager and other background applications will be.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-systemtray-mode)
+</pre>
+</div>
+<p>
+Better splitting of windows
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-split-window-right</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> arg)
+  <span style="font-style: italic;">"Split the current window 70/30 rather than 50/50.
+A single-digit prefix argument gives the top window arg*10%.
+   Writeroom window must be treated specially."</span>
+  (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"P"</span>)
+  (<span style="font-weight: bold;">let</span> ((proportion (* (<span style="font-weight: bold;">or</span> arg 6)
+                     (<span style="font-weight: bold;">if</span> writeroom-mode 0.14 0.1))))
+    (split-window-right (round (* proportion (window-width))))))
+
+(global-set-key (kbd <span style="font-style: italic;">"C-x 3"</span>) 'my-split-window-right)
+</pre>
+</div>
+
+<p>
+Sometimes when switching to an X window, EXWM does not focus on it.
+This piece of code prevents this.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(advice-add #'exwm-layout--hide
+            <span style="font-weight: bold;">:after</span> (<span style="font-weight: bold;">lambda</span> (id)
+                     (<span style="font-weight: bold;">with-current-buffer</span> (exwm--id-&gt;buffer id)
+                       (<span style="font-weight: bold;">setq</span> exwm--ewmh-state
+                             (delq xcb:Atom:_NET_WM_STATE_HIDDEN exwm--ewmh-state))
+                       (exwm-layout--set-ewmh-state id)
+                       (xcb:flush exwm--connection))))
+</pre>
+</div>
+<p>
+Functions to shutdown and reboot the system
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/shutdown</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (shell-command <span style="font-style: italic;">"shutdown -h now"</span>))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/reboot</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (shell-command <span style="font-style: italic;">"shutdown -r now"</span>))
+</pre>
+</div>
+<p>
+Mouse follows focus
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exwm-mff)
+(add-hook 'exwm-init-hook #'exwm-mff-mode)
+</pre>
+</div>
+
+<p>
+Inner "Gaps"
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(window-divider-mode 1)
+(<span style="font-weight: bold;">setq</span> window-divider-default-bottom-width 6)
+(<span style="font-weight: bold;">setq</span> window-divider-default-right-width 6)
+(menu-bar-bottom-and-right-window-divider)
+</pre>
+</div>
+<p>
+EXWM allows switching to X windows in a different workspace.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-workspace-show-all-buffers 1)
+(<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
+</pre>
+</div>
+<div id="outline-container-org575f169" class="outline-2">
+<h2 id="org575f169">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org575f169">
+<p>
+We use the <code>desktop-environment</code> package to help us change the volume,
+adjust brightness, etc&#x2026;
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> desktop-environment)
+(desktop-environment-mode 1)
+</pre>
+</div>
+
+<p>
+Disable the keybinding for locking the screen as we use this binding
+for window navigation
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key desktop-environment-mode-map (kbd <span style="font-style: italic;">"s-l"</span>) nil t)
+</pre>
+</div>
+
+<p>
+Command for muting the volume
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> desktop-environment-volume-toggle-command
+      <span style="font-style: italic;">"amixer -D pulse set Master 1+ toggle"</span>)
+</pre>
+</div>
+
+<p>
+Command for setting the volume
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> desktop-environment-volume-set-command
+      <span style="font-style: italic;">"~/.config/vol_set.sh %s"</span>)
+</pre>
+</div>
+
+<p>
+Command for getting the current value of the volume
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> desktop-environment-volume-get-command
+      <span style="font-style: italic;">"amixer -D pulse get Master"</span>)
+</pre>
+</div>
+
+<p>
+Command for screenshots
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> desktop-environment-screenshot-directory
+      <span style="font-style: italic;">"~/pictures"</span>)
+</pre>
+</div>
+
+<p>
+Locking the screen also pauses any media
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> desktop-environment-screenlock-command <span style="font-style: italic;">"~/.config/lock.sh"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd3f03c7" class="outline-2">
+<h2 id="orgd3f03c7">Background processes</h2>
+<div class="outline-text-2" id="text-orgd3f03c7">
+<p>
+Helper function to run a program in the background
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/run-in-background</span> (command)
+  (<span style="font-weight: bold;">let</span> ((command-parts (split-string command <span style="font-style: italic;">"[ ]+"</span>)))
+    (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
+</pre>
+</div>
+
+<p>
+Network manager applet
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"nm-applet"</span>)
+</pre>
+</div>
+
+<p>
+Sound display
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"volumeicon"</span>)
+</pre>
+</div>
+
+<p>
+Messaging apps
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"discord --start-minimized"</span>)
+(efs/run-in-background <span style="font-style: italic;">"slack --startup"</span>)
+</pre>
+</div>
+
+<p>
+Music player
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"mpd"</span>)
+(efs/run-in-background <span style="font-style: italic;">"mpd-notification"</span>)
+(start-process-shell-command <span style="font-style: italic;">"work"</span> nil <span style="font-style: italic;">"~/.config/work.sh"</span>)
+</pre>
+</div>
+
+<p>
+Update config files
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(start-process-shell-command <span style="font-style: italic;">"config"</span> nil <span style="font-style: italic;">"~/.update.sh"</span>)
+</pre>
+</div>
+
+<p>
+Auto-pause media when headphones are disconnected
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"bash ~/.config/autopause.sh"</span>)
+</pre>
+</div>
+
+<p>
+Auto-mount usb drives
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"udiskie"</span>)
+</pre>
+</div>
+
+<p>
+Notification daemon
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"dunst"</span>)
+</pre>
+</div>
+
+<p>
+Battery notifications
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"cbatticon"</span>)
+</pre>
+</div>
+
+<p>
+Compositor
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"picom"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org948c040" class="outline-2">
+<h2 id="org948c040">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org948c040">
+<p>
+Set the initial workspace for each display
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-randr-workspace-monitor-plist
+      '(0 <span style="font-style: italic;">"HDMI-1-0"</span> 1 <span style="font-style: italic;">"HDMI-1-0"</span> 2 <span style="font-style: italic;">"HDMI-1-0"</span>))
+</pre>
+</div>
+
+<p>
+Mouse warping
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-workspace-warp-cursor t)
+</pre>
+</div>
+
+<p>
+Focus follows mouse
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mouse-atuoselect-window t
+      focus-follows-mouse t)
+</pre>
+</div>
+
+<p>
+Have autorandr running in the background to ensure that extra monitors
+are correctly configured.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/update-displays</span> ()
+  (efs/run-in-background <span style="font-style: italic;">"autorandr --change --force"</span>)
+  (message <span style="font-style: italic;">"Display config: %s"</span>
+           (string-trim (shell-command-to-string <span style="font-style: italic;">"autorandr --current"</span>)))
+  (start-process-shell-command
+   <span style="font-style: italic;">"feh"</span> nil
+   <span style="font-style: italic;">"feh --bg-scale ~/.config/bg/lain-dark.jpeg --bg-scale ~/.config/bg/lain-hands.jpeg"</span>))
+
+(add-hook 'exwm-randr-screen-change-hook #'efs/update-displays)
+(exwm-randr-mode 1)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org26cc308" class="outline-2">
+<h2 id="org26cc308">Keybindings</h2>
+<div class="outline-text-2" id="text-org26cc308">
+<p>
+Reset EXWM
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-r"</span>) 'exwm-reset)
+</pre>
+</div>
+
+<p>
+Switch workspace
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-w"</span>) 'exwm-workspace-switch)
+</pre>
+</div>
+
+<p>
+Kill the current buffer and delete the window
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>)
+                  (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
+                    (<span style="font-weight: bold;">progn</span>
+                    (kill-this-buffer))))
+</pre>
+</div>
+
+<p>
+Window movement
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-l"</span>) 'windmove-right)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-j"</span>) 'windmove-left)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-i"</span>) 'windmove-up)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-k"</span>) 'windmove-down)
+</pre>
+</div>
+
+<p>
+Window management
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-L"</span>) 'windmove-swap-states-right)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-J"</span>) 'windmove-swap-states-left)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-I"</span>) 'windmove-swap-states-up)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-K"</span>) 'windmove-swap-states-down)
+</pre>
+</div>
+
+<p>
+Start a desktop application using <i>counsel linux app</i> in a new window
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">open-app</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (counsel-linux-app))
+
+(<span style="font-weight: bold;">setq</span> counsel-linux-app-format-function
+      #'counsel-linux-app-format-function-name-only)
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-d"</span>) 'open-app)
+</pre>
+</div>
+
+<p>
+Suspend the computer
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-&lt;escape&gt;"</span>) 'desktop-environment-lock-screen)
+</pre>
+</div>
+
+<p>
+Open web browser
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">run-firefox</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (efs/run-in-background <span style="font-style: italic;">"firefox"</span>))
+
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-&lt;return&gt;"</span>) 'run-firefox)
+</pre>
+</div>
+<p>
+Lists all of my firefox tabs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-firefox</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">minibuffer-with-setup-hook</span>
+      (<span style="font-weight: bold;">lambda</span> () (insert <span style="font-style: italic;">"firefox"</span>))
+    (call-interactively #'ivy-switch-buffer)))
+
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-f"</span>) #'list-firefox)
+</pre>
+</div>
+<p>
+Keybindings to switch the current workspace
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-global-keys
+    `( ,@(mapcar (<span style="font-weight: bold;">lambda</span> (i)
+                  `(,(kbd (format <span style="font-style: italic;">"s-%d"</span> i)) .
+                    (<span style="font-weight: bold;">lambda</span> ()
+                      (<span style="font-weight: bold;">interactive</span>)
+                      (exwm-workspace-switch-create ,(- i 1)))))
+                (number-sequence 1 9))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org492a483" class="outline-2">
+<h2 id="org492a483">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org492a483">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(scratch-buffer)
+(exwm-enable)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
+</div>
+</body>
+</html>
