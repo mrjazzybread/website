@@ -150,9 +150,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-orge5e6606" class="outline-2">
-<h2 id="orge5e6606">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orge5e6606">
+<div id="outline-container-orgb468535" class="outline-2">
+<h2 id="orgb468535">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgb468535">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +218,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org912033e" class="outline-2">
-<h2 id="org912033e">Background processes</h2>
-<div class="outline-text-2" id="text-org912033e">
+<div id="outline-container-orgd60cbb3" class="outline-2">
+<h2 id="orgd60cbb3">Background processes</h2>
+<div class="outline-text-2" id="text-orgd60cbb3">
 <p>
 Helper function to run a program in the background
 </p>
@@ -251,8 +251,10 @@ Sound display
 Messaging apps
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"discord --start-minimized"</span>)
-(efs/run-in-background <span style="font-style: italic;">"slack --startup"</span>)
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"discord"</span>)
+(efs/run-in-background <span style="font-style: italic;">"slack"</span>)
+(efs/run-in-background <span style="font-style: italic;">"firefox --new-window https://web.whatsapp.com/"</span>)
+(efs/run-in-background <span style="font-style: italic;">"firefox --new-window https://web.telegram.org/k/"</span>)
 </pre>
 </div>
 
@@ -315,10 +317,9 @@ Compositor
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgcf4b158" class="outline-2">
-<h2 id="orgcf4b158">Multiple monitors</h2>
-<div class="outline-text-2" id="text-orgcf4b158">
+<div id="outline-container-org209be59" class="outline-2">
+<h2 id="org209be59">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org209be59">
 <p>
 Set the initial workspace for each display
 </p>
@@ -364,9 +365,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgaf9b5f8" class="outline-2">
-<h2 id="orgaf9b5f8">Keybindings</h2>
-<div class="outline-text-2" id="text-orgaf9b5f8">
+<div id="outline-container-org90ba446" class="outline-2">
+<h2 id="org90ba446">Keybindings</h2>
+<div class="outline-text-2" id="text-org90ba446">
 <p>
 Reset EXWM
 </p>
@@ -384,13 +385,18 @@ Switch workspace
 </div>
 
 <p>
-Kill the current buffer and delete the window
+Kill the current buffer unless it is a messaging app so that I can
+receive notifications in the background.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>)
-                  (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
-                    (<span style="font-weight: bold;">progn</span>
-                    (kill-this-buffer))))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-except-message-apps</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">if</span> (member (buffer-name)
+            '(<span style="font-style: italic;">"discord"</span> <span style="font-style: italic;">"*firefox: Telegram Web*"</span> <span style="font-style: italic;">"*firefox: WhatsApp*"</span>))
+      (previous-buffer)
+    (kill-this-buffer)))
+
+(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-except-message-apps)
 </pre>
 </div>
 
@@ -477,9 +483,13 @@ Keybindings to switch the current workspace
 </div>
 </div>
 </div>
-<div id="outline-container-orgb44f12b" class="outline-2">
-<h2 id="orgb44f12b">Enable EXWM</h2>
-<div class="outline-text-2" id="text-orgb44f12b">
+<div id="outline-container-org196b323" class="outline-2">
+<h2 id="org196b323">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org196b323">
+<p>
+I call <code>scratch-buffer</code> first so that each new workspace opens in a
+scratch buffer.  The call to <code>exwm-enable</code> is what actually starts EXWM
+</p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(scratch-buffer)
 (exwm-enable)
