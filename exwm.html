@@ -150,9 +150,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-orgd2bec2b" class="outline-2">
-<h2 id="orgd2bec2b">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orgd2bec2b">
+<div id="outline-container-orga0bb7eb" class="outline-2">
+<h2 id="orga0bb7eb">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orga0bb7eb">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +218,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-orga883e67" class="outline-2">
-<h2 id="orga883e67">Background processes</h2>
-<div class="outline-text-2" id="text-orga883e67">
+<div id="outline-container-org6dc410e" class="outline-2">
+<h2 id="org6dc410e">Background processes</h2>
+<div class="outline-text-2" id="text-org6dc410e">
 <p>
 Helper function to run a program in the background
 </p>
@@ -309,9 +309,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-org6ee93c5" class="outline-2">
-<h2 id="org6ee93c5">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org6ee93c5">
+<div id="outline-container-org4631988" class="outline-2">
+<h2 id="org4631988">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org4631988">
 <p>
 Set the initial workspace for each display
 </p>
@@ -357,9 +357,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc524f0c" class="outline-2">
-<h2 id="orgc524f0c">Keybindings</h2>
-<div class="outline-text-2" id="text-orgc524f0c">
+<div id="outline-container-org0bf8be8" class="outline-2">
+<h2 id="org0bf8be8">Keybindings</h2>
+<div class="outline-text-2" id="text-org0bf8be8">
 <p>
 Reset EXWM
 </p>
@@ -475,15 +475,20 @@ Keybindings to switch the current workspace
 </div>
 </div>
 </div>
-<div id="outline-container-orgc381036" class="outline-2">
-<h2 id="orgc381036">Enable EXWM</h2>
-<div class="outline-text-2" id="text-orgc381036">
+<div id="outline-container-org6b0e646" class="outline-2">
+<h2 id="org6b0e646">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org6b0e646">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
-scratch buffer.  The call to <code>exwm-enable</code> is what actually starts EXWM
+scratch buffer.  I then call server-start to turn the Emacs instance
+into a daemon.  This is so that when a program tries to open a text
+editor, it can connect to the Emacs instance without reloading the
+config. The call to <code>exwm-enable</code> is what actually starts EXWM.
 </p>
+
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(scratch-buffer)
+(server-start)
 (exwm-wm-mode)
 </pre>
 </div>
