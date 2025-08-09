@@ -150,9 +150,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-org8f1bafb" class="outline-2">
-<h2 id="org8f1bafb">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org8f1bafb">
+<div id="outline-container-org1fc1133" class="outline-2">
+<h2 id="org1fc1133">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org1fc1133">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +218,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org6c2eaa8" class="outline-2">
-<h2 id="org6c2eaa8">Background processes</h2>
-<div class="outline-text-2" id="text-org6c2eaa8">
+<div id="outline-container-orgb152a9b" class="outline-2">
+<h2 id="orgb152a9b">Background processes</h2>
+<div class="outline-text-2" id="text-orgb152a9b">
 <p>
 Helper function to run a program in the background
 </p>
@@ -325,9 +325,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-org80c6d52" class="outline-2">
-<h2 id="org80c6d52">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org80c6d52">
+<div id="outline-container-org2aef849" class="outline-2">
+<h2 id="org2aef849">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org2aef849">
 <p>
 Set the initial workspace for each display
 </p>
@@ -373,9 +373,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org28ac689" class="outline-2">
-<h2 id="org28ac689">Keybindings</h2>
-<div class="outline-text-2" id="text-org28ac689">
+<div id="outline-container-org550d3af" class="outline-2">
+<h2 id="org550d3af">Keybindings</h2>
+<div class="outline-text-2" id="text-org550d3af">
 <p>
 Reset EXWM
 </p>
@@ -400,7 +400,8 @@ receive notifications in the background.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-except-message-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">if</span> (is-messaging-app)
-      (previous-buffer)
+      (previous
+     -buffer)
     (kill-this-buffer)))
 
 (exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-except-message-apps)
@@ -490,9 +491,9 @@ Keybindings to switch the current workspace
 </div>
 </div>
 </div>
-<div id="outline-container-org6deb543" class="outline-2">
-<h2 id="org6deb543">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org6deb543">
+<div id="outline-container-org8f82072" class="outline-2">
+<h2 id="org8f82072">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org8f82072">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
