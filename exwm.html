@@ -150,9 +150,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-orgd17c7e9" class="outline-2">
-<h2 id="orgd17c7e9">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orgd17c7e9">
+<div id="outline-container-org196effd" class="outline-2">
+<h2 id="org196effd">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org196effd">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +218,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org49638c4" class="outline-2">
-<h2 id="org49638c4">Background processes</h2>
-<div class="outline-text-2" id="text-org49638c4">
+<div id="outline-container-org23881ee" class="outline-2">
+<h2 id="org23881ee">Background processes</h2>
+<div class="outline-text-2" id="text-org23881ee">
 <p>
 Helper function to run a program in the background
 </p>
@@ -278,7 +278,7 @@ workspace 4.
 Music player
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"mpd &amp;&amp; mpd-notification &amp;&amp; ~/.config/work.sh"</span>)
+<pre class="src src-emacs-lisp">(start-process-shell-command <span style="font-style: italic;">"mpd"</span> nil <span style="font-style: italic;">"mpd &amp;&amp; ~/.config/work.sh &amp;&amp; mpd-notification"</span>)
 </pre>
 </div>
 
@@ -323,9 +323,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-orgf296677" class="outline-2">
-<h2 id="orgf296677">Multiple monitors</h2>
-<div class="outline-text-2" id="text-orgf296677">
+<div id="outline-container-orge2fab4f" class="outline-2">
+<h2 id="orge2fab4f">Multiple monitors</h2>
+<div class="outline-text-2" id="text-orge2fab4f">
 <p>
 Set the initial workspace for each display
 </p>
@@ -371,9 +371,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7ac2fc" class="outline-2">
-<h2 id="orgc7ac2fc">Keybindings</h2>
-<div class="outline-text-2" id="text-orgc7ac2fc">
+<div id="outline-container-org67ab0e9" class="outline-2">
+<h2 id="org67ab0e9">Keybindings</h2>
+<div class="outline-text-2" id="text-org67ab0e9">
 <p>
 Reset EXWM
 </p>
@@ -398,8 +398,7 @@ receive notifications in the background.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-except-message-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">if</span> (is-messaging-app)
-      (previous
-     -buffer)
+      (previous-buffer)
     (kill-this-buffer)))
 
 (exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-except-message-apps)
@@ -489,9 +488,9 @@ Keybindings to switch the current workspace
 </div>
 </div>
 </div>
-<div id="outline-container-orgea344b7" class="outline-2">
-<h2 id="orgea344b7">Enable EXWM</h2>
-<div class="outline-text-2" id="text-orgea344b7">
+<div id="outline-container-org9d38b82" class="outline-2">
+<h2 id="org9d38b82">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org9d38b82">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
