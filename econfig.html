@@ -16,9 +16,9 @@
 <pre class="src src-emacs-lisp">(load-file <span style="font-style: italic;">"~/.config/sensitive.el"</span>)
 </pre>
 </div>
-<div id="outline-container-org5a03b05" class="outline-2">
-<h2 id="org5a03b05">Package Configuration</h2>
-<div class="outline-text-2" id="text-org5a03b05">
+<div id="outline-container-orgd25ddf1" class="outline-2">
+<h2 id="orgd25ddf1">Package Configuration</h2>
+<div class="outline-text-2" id="text-orgd25ddf1">
 <p>
 Add MELPA to the list of recognized archives
 </p>
@@ -71,9 +71,9 @@ GNU keys to enable downloading packages
 </div>
 </div>
 </div>
-<div id="outline-container-orged7dc53" class="outline-2">
-<h2 id="orged7dc53">Some Miscellaneous Configurations</h2>
-<div class="outline-text-2" id="text-orged7dc53">
+<div id="outline-container-org9285fe2" class="outline-2">
+<h2 id="org9285fe2">Some Miscellaneous Configurations</h2>
+<div class="outline-text-2" id="text-org9285fe2">
 <p>
 enable creation of pairs of brackets or quotes when one is inserted.
 </p>
@@ -261,10 +261,35 @@ visualisation.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> markdown-hide-markup t)
 </pre>
 </div>
+<p>
+Better keybinding to run a shell command
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"M-s s"</span>) #'async-shell-command)
+</pre>
 </div>
-<div id="outline-container-orgb21e320" class="outline-3">
-<h3 id="orgb21e320"><code>utf-8</code></h3>
-<div class="outline-text-3" id="text-orgb21e320">
+<p>
+When running a shell command, do not display the command buffer until
+there is output.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> async-shell-command-display-buffer nil)
+</pre>
+</div>
+<p>
+Command to insert the current file name
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-c w"</span>)
+              (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
+                (insert (buffer-file-name
+                         (window-buffer (minibuffer-selected-window))))))
+</pre>
+</div>
+</div>
+<div id="outline-container-org6c76e3a" class="outline-3">
+<h3 id="org6c76e3a"><code>utf-8</code></h3>
+<div class="outline-text-3" id="text-org6c76e3a">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -279,9 +304,9 @@ visualisation.
 </div>
 </div>
 </div>
-<div id="outline-container-orgeebec80" class="outline-3">
-<h3 id="orgeebec80">Backup files</h3>
-<div class="outline-text-3" id="text-orgeebec80">
+<div id="outline-container-orgf3287d2" class="outline-3">
+<h3 id="orgf3287d2">Backup files</h3>
+<div class="outline-text-3" id="text-orgf3287d2">
 <p>
 Ensures that backups and auto-saves go to a separate directory instead
 of stinking up the working directory.
@@ -296,9 +321,9 @@ of stinking up the working directory.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd294cf8" class="outline-3">
-<h3 id="orgd294cf8">Miscellaneous Packages</h3>
-<div class="outline-text-3" id="text-orgd294cf8">
+<div id="outline-container-org447d520" class="outline-3">
+<h3 id="org447d520">Miscellaneous Packages</h3>
+<div class="outline-text-3" id="text-org447d520">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> pacmacs)
 (<span style="font-weight: bold;">use-package</span> fireplace)
@@ -319,9 +344,9 @@ of stinking up the working directory.
 </div>
 </div>
 </div>
-<div id="outline-container-org8114157" class="outline-3">
-<h3 id="org8114157">Repeat mode</h3>
-<div class="outline-text-3" id="text-org8114157">
+<div id="outline-container-org94293c1" class="outline-3">
+<h3 id="org94293c1">Repeat mode</h3>
+<div class="outline-text-3" id="text-org94293c1">
 <p>
 This allows me to easily switch to another buffer using "p" and "n"
 when I have already used a buffer navigation command.
@@ -347,30 +372,28 @@ Disable repeat mode in Dired
 </div>
 </div>
 </div>
-<div id="outline-container-orgad0268c" class="outline-3">
-<h3 id="orgad0268c">Popup windows</h3>
-<div class="outline-text-3" id="text-orgad0268c">
+<div id="outline-container-org1764769" class="outline-3">
+<h3 id="org1764769">Popup windows</h3>
+<div class="outline-text-3" id="text-org1764769">
 <p>
 I use the <code>shackle</code> package to control the behaviour of pop up windows.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> shackle)
-(<span style="font-weight: bold;">setq</span> shackle-select-reused-windows t)
+<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(use-package shackle)
+</span>(<span style="font-weight: bold;">setq</span> shackle-select-reused-windows t)
 (<span style="font-weight: bold;">setq</span> shackle-rules
       '((<span style="font-style: italic;">"*compilation*"</span> <span style="font-weight: bold;">:same</span> t)
-      ('magit-status-mode <span style="font-weight: bold;">:same</span> t))
-
-      )
+      ('magit-status-mode <span style="font-weight: bold;">:same</span> t)))
 (<span style="font-weight: bold;">setq</span> shackle-inhibit-window-quit-on-same-windows t)
 (shackle-mode 1)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org1951e6e" class="outline-3">
-<h3 id="org1951e6e">GPG</h3>
-<div class="outline-text-3" id="text-org1951e6e">
+<div id="outline-container-org4a488fc" class="outline-3">
+<h3 id="org4a488fc">GPG</h3>
+<div class="outline-text-3" id="text-org4a488fc">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">let's get encryption established
 </span>(<span style="font-weight: bold;">use-package</span> pinentry)
@@ -394,13 +417,13 @@ I use the <code>shackle</code> package to control the behaviour of pop up window
 </div>
 </div>
 </div>
-<div id="outline-container-org4bf5c7e" class="outline-2">
-<h2 id="org4bf5c7e">Coding Packages</h2>
-<div class="outline-text-2" id="text-org4bf5c7e">
+<div id="outline-container-org58c89d8" class="outline-2">
+<h2 id="org58c89d8">Coding Packages</h2>
+<div class="outline-text-2" id="text-org58c89d8">
 </div>
-<div id="outline-container-org86ec455" class="outline-3">
-<h3 id="org86ec455"><code>Flymake</code></h3>
-<div class="outline-text-3" id="text-org86ec455">
+<div id="outline-container-orgaddb3a2" class="outline-3">
+<h3 id="orgaddb3a2"><code>Flymake</code></h3>
+<div class="outline-text-3" id="text-orgaddb3a2">
 <p>
 Package used by Eglot for highlighting errors
 </p>
@@ -414,9 +437,9 @@ Package used by Eglot for highlighting errors
 </div>
 </div>
 </div>
-<div id="outline-container-orgaa4b06d" class="outline-3">
-<h3 id="orgaa4b06d">Company</h3>
-<div class="outline-text-3" id="text-orgaa4b06d">
+<div id="outline-container-orgb54c9de" class="outline-3">
+<h3 id="orgb54c9de">Company</h3>
+<div class="outline-text-3" id="text-orgb54c9de">
 <p>
 Package for completion suggestions
 </p>
@@ -436,9 +459,9 @@ Package for completion suggestions
 </div>
 </div>
 
-<div id="outline-container-org42335ae" class="outline-3">
-<h3 id="org42335ae">OCaml packages</h3>
-<div class="outline-text-3" id="text-org42335ae">
+<div id="outline-container-org033162b" class="outline-3">
+<h3 id="org033162b">OCaml packages</h3>
+<div class="outline-text-3" id="text-org033162b">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ocaml-compile</span> ()
   (<span style="font-weight: bold;">setq</span> compile-command <span style="font-style: italic;">"~/.config/ocompile.sh"</span>))
@@ -457,9 +480,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-org4b5082b" class="outline-3">
-<h3 id="org4b5082b">Rust packages</h3>
-<div class="outline-text-3" id="text-org4b5082b">
+<div id="outline-container-orge6e79a8" class="outline-3">
+<h3 id="orge6e79a8">Rust packages</h3>
+<div class="outline-text-3" id="text-orge6e79a8">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic
   <span style="font-weight: bold;">:config</span> (<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot))
@@ -467,9 +490,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-org36883b9" class="outline-3">
-<h3 id="org36883b9"><code>Eglot</code></h3>
-<div class="outline-text-3" id="text-org36883b9">
+<div id="outline-container-orgd6337f2" class="outline-3">
+<h3 id="orgd6337f2"><code>Eglot</code></h3>
+<div class="outline-text-3" id="text-orgd6337f2">
 <p>
 Package for language servers
 </p>
@@ -494,9 +517,9 @@ Neat eldoc popup
 </div>
 </div>
 </div>
-<div id="outline-container-org726d319" class="outline-3">
-<h3 id="org726d319">Git packages</h3>
-<div class="outline-text-3" id="text-org726d319">
+<div id="outline-container-orgd15bcaf" class="outline-3">
+<h3 id="orgd15bcaf">Git packages</h3>
+<div class="outline-text-3" id="text-orgd15bcaf">
 <p>
 I will always use <code>magit</code> though. <code>magit</code> :)
 </p>
@@ -516,9 +539,9 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org8f0bdd7" class="outline-3">
-<h3 id="org8f0bdd7">Miscellaneous Coding Packages</h3>
-<div class="outline-text-3" id="text-org8f0bdd7">
+<div id="outline-container-org3bd76ff" class="outline-3">
+<h3 id="org3bd76ff">Miscellaneous Coding Packages</h3>
+<div class="outline-text-3" id="text-org3bd76ff">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> yaml-mode)
 </pre>
@@ -526,9 +549,9 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org4f9dd60" class="outline-2">
-<h2 id="org4f9dd60"><code>Dired</code></h2>
-<div class="outline-text-2" id="text-org4f9dd60">
+<div id="outline-container-org85aec45" class="outline-2">
+<h2 id="org85aec45"><code>Dired</code></h2>
+<div class="outline-text-2" id="text-org85aec45">
 <p>
 Deleted files are moved to the trash folder
 </p>
@@ -684,13 +707,13 @@ another window in the same frame, it selects that buffer by default
 </div>
 </div>
 </div>
-<div id="outline-container-org3ce0545" class="outline-2">
-<h2 id="org3ce0545">Org</h2>
-<div class="outline-text-2" id="text-org3ce0545">
+<div id="outline-container-org0ba487f" class="outline-2">
+<h2 id="org0ba487f">Org</h2>
+<div class="outline-text-2" id="text-org0ba487f">
 </div>
-<div id="outline-container-orgb395c8b" class="outline-3">
-<h3 id="orgb395c8b">Some Basic Bookkeeping</h3>
-<div class="outline-text-3" id="text-orgb395c8b">
+<div id="outline-container-orgd05db41" class="outline-3">
+<h3 id="orgd05db41">Some Basic Bookkeeping</h3>
+<div class="outline-text-3" id="text-orgd05db41">
 <p>
 Some helpful variables
 </p>
@@ -757,9 +780,9 @@ This is very important
 </div>
 </div>
 </div>
-<div id="outline-container-org1de876a" class="outline-3">
-<h3 id="org1de876a">Appearance</h3>
-<div class="outline-text-3" id="text-org1de876a">
+<div id="outline-container-orgb238e44" class="outline-3">
+<h3 id="orgb238e44">Appearance</h3>
+<div class="outline-text-3" id="text-orgb238e44">
 <p>
 Hide emphasis markers and macro braces
 </p>
@@ -852,9 +875,9 @@ Org agenda takes up the full window
 </pre>
 </div>
 </div>
-<div id="outline-container-orgeda800a" class="outline-4">
-<h4 id="orgeda800a">Org Pretty Symbols</h4>
-<div class="outline-text-4" id="text-orgeda800a">
+<div id="outline-container-orgc4f0940" class="outline-4">
+<h4 id="orgc4f0940">Org Pretty Symbols</h4>
+<div class="outline-text-4" id="text-orgc4f0940">
 <p>
 Function for adding pretty symbols for Org mode. Most of these are
 just so that Org mode environments aren't awful to look at.
@@ -886,9 +909,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-orga85f793" class="outline-3">
-<h3 id="orga85f793">Org capture templates</h3>
-<div class="outline-text-3" id="text-orga85f793">
+<div id="outline-container-org50d728e" class="outline-3">
+<h3 id="org50d728e">Org capture templates</h3>
+<div class="outline-text-3" id="text-org50d728e">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-capture-templates
       '(
@@ -920,9 +943,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org19b26a4" class="outline-3">
-<h3 id="org19b26a4">Org Keywords</h3>
-<div class="outline-text-3" id="text-org19b26a4">
+<div id="outline-container-org78eb804" class="outline-3">
+<h3 id="org78eb804">Org Keywords</h3>
+<div class="outline-text-3" id="text-org78eb804">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-todo-keywords
       '((sequence <span style="font-style: italic;">"APPOINTMENT(p)"</span> <span style="font-style: italic;">"TODO(t)"</span> <span style="font-style: italic;">"IN-PROGRESS(i@/!)"</span> <span style="font-style: italic;">"VERIFYING(v!)"</span> <span style="font-style: italic;">"BLOCKED(b@)"</span> <span style="font-style: italic;">"&#128065;&#65039;&#128068;&#128065;&#65039;(q)"</span> <span style="font-style: italic;">"|"</span> <span style="font-style: italic;">"DONE(d!)"</span> <span style="font-style: italic;">"OBE(o@!)"</span> <span style="font-style: italic;">"WONT-DO(w@/!)"</span> )
@@ -942,9 +965,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org74a3251" class="outline-3">
-<h3 id="org74a3251">Inserting Org Example Blocks</h3>
-<div class="outline-text-3" id="text-org74a3251">
+<div id="outline-container-org7781199" class="outline-3">
+<h3 id="org7781199">Inserting Org Example Blocks</h3>
+<div class="outline-text-3" id="text-org7781199">
 <p>
 Function for wrapping text around a block
 </p>
@@ -1008,9 +1031,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org6fcee45" class="outline-3">
-<h3 id="org6fcee45">Remove Spell Checking in Code Blocks</h3>
-<div class="outline-text-3" id="text-org6fcee45">
+<div id="outline-container-org93de8d3" class="outline-3">
+<h3 id="org93de8d3">Remove Spell Checking in Code Blocks</h3>
+<div class="outline-text-3" id="text-org93de8d3">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_SRC"</span> . <span style="font-style: italic;">"#\\+END_SRC"</span>))
 (add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_EXAMPLE"</span> . <span style="font-style: italic;">"#\\+END_EXAMPLE"</span>))
@@ -1025,9 +1048,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org444ebde" class="outline-3">
-<h3 id="org444ebde">Org Key Bindings and Hooks</h3>
-<div class="outline-text-3" id="text-org444ebde">
+<div id="outline-container-org65e6608" class="outline-3">
+<h3 id="org65e6608">Org Key Bindings and Hooks</h3>
+<div class="outline-text-3" id="text-org65e6608">
 <p>
 Global key bindings to access and update the agenda.
 </p>
@@ -1053,9 +1076,9 @@ Concise way of using the previous definitions to configure Org.
 </div>
 </div>
 </div>
-<div id="outline-container-org3bdf377" class="outline-3">
-<h3 id="org3bdf377">French Notes</h3>
-<div class="outline-text-3" id="text-org3bdf377">
+<div id="outline-container-org4c7c613" class="outline-3">
+<h3 id="org4c7c613">French Notes</h3>
+<div class="outline-text-3" id="text-org4c7c613">
 <p>
 Function for inserting a conjugation table for french verbs
 </p>
@@ -1085,9 +1108,9 @@ Function for inserting a conjugation table for french verbs
 </div>
 </div>
 </div>
-<div id="outline-container-org854dbff" class="outline-3">
-<h3 id="org854dbff">LaTeX export</h3>
-<div class="outline-text-3" id="text-org854dbff">
+<div id="outline-container-org20788b7" class="outline-3">
+<h3 id="org20788b7">LaTeX export</h3>
+<div class="outline-text-3" id="text-org20788b7">
 <p>
 Add common scientific paper classes.
 </p>
@@ -1153,9 +1176,9 @@ Disable exporting with table of contents.
 </div>
 </div>
 
-<div id="outline-container-orgc1a3482" class="outline-3">
-<h3 id="orgc1a3482">Org Roam</h3>
-<div class="outline-text-3" id="text-orgc1a3482">
+<div id="outline-container-org77f0ddc" class="outline-3">
+<h3 id="org77f0ddc">Org Roam</h3>
+<div class="outline-text-3" id="text-org77f0ddc">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam
     <span style="font-weight: bold;">:custom</span>
@@ -1205,9 +1228,9 @@ Capture template for org roam dailies
 </div>
 </div>
 </div>
-<div id="outline-container-org8ea15fe" class="outline-2">
-<h2 id="org8ea15fe">PDFs</h2>
-<div class="outline-text-2" id="text-org8ea15fe">
+<div id="outline-container-org2988fc6" class="outline-2">
+<h2 id="org2988fc6">PDFs</h2>
+<div class="outline-text-2" id="text-org2988fc6">
 <p>
 Opens the current file in <code>zathura</code> and kills the Doc View buffer.
 </p>
@@ -1251,9 +1274,9 @@ When using pdf-tools, always use the minor mode for continuous scroll
 </div>
 </div>
 </div>
-<div id="outline-container-org2731324" class="outline-2">
-<h2 id="org2731324">Proof General</h2>
-<div class="outline-text-2" id="text-org2731324">
+<div id="outline-container-orgebbae4b" class="outline-2">
+<h2 id="orgebbae4b">Proof General</h2>
+<div class="outline-text-2" id="text-orgebbae4b">
 <p>
 Function for a more convenient Coq buffer split.
 </p>
@@ -1293,9 +1316,9 @@ Weird arrow :/
 </pre>
 </div>
 </div>
-<div id="outline-container-orgabeabec" class="outline-3">
-<h3 id="orgabeabec">Unicode Symbols for Iris</h3>
-<div class="outline-text-3" id="text-orgabeabec">
+<div id="outline-container-org4dbe7e6" class="outline-3">
+<h3 id="org4dbe7e6">Unicode Symbols for Iris</h3>
+<div class="outline-text-3" id="text-org4dbe7e6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Input of unicode symbols
 </span>(<span style="font-weight: bold;">use-package</span> math-symbol-lists)
@@ -1377,9 +1400,9 @@ Weird arrow :/
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7fc3b3" class="outline-2">
-<h2 id="orgb7fc3b3">Settings for Text Mode</h2>
-<div class="outline-text-2" id="text-orgb7fc3b3">
+<div id="outline-container-orgd7b89ac" class="outline-2">
+<h2 id="orgd7b89ac">Settings for Text Mode</h2>
+<div class="outline-text-2" id="text-orgd7b89ac">
 <p>
 Enable auto-fill.
 </p>
@@ -1448,9 +1471,9 @@ Disable word completion in text-mode
 </div>
 </div>
 </div>
-<div id="outline-container-org944f9be" class="outline-2">
-<h2 id="org944f9be">Ivy</h2>
-<div class="outline-text-2" id="text-org944f9be">
+<div id="outline-container-org100d9a0" class="outline-2">
+<h2 id="org100d9a0">Ivy</h2>
+<div class="outline-text-2" id="text-org100d9a0">
 <p>
 Default ivy configuration
 </p>
@@ -1622,9 +1645,9 @@ as a brick
 </div>
 </div>
 </div>
-<div id="outline-container-org84cddcb" class="outline-2">
-<h2 id="org84cddcb">Appearance</h2>
-<div class="outline-text-2" id="text-org84cddcb">
+<div id="outline-container-org105a3e9" class="outline-2">
+<h2 id="org105a3e9">Appearance</h2>
+<div class="outline-text-2" id="text-org105a3e9">
 <p>
 Disable Splash Screen
 </p>
@@ -1708,121 +1731,121 @@ Display time in mode line
 </div>
 </div>
 
-<div id="outline-container-orgc307397" class="outline-2">
-<h2 id="orgc307397">Email</h2>
-<div class="outline-text-2" id="text-orgc307397">
+<div id="outline-container-org49b6378" class="outline-2">
+<h2 id="org49b6378">Email</h2>
+<div class="outline-text-2" id="text-org49b6378">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
+<pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
 
-(<span style="font-weight: bold;">setq</span> user-mail-address <span style="font-style: italic;">"tl.soares@campus.fct.unl.pt"</span>)
+  (<span style="font-weight: bold;">setq</span> user-mail-address <span style="font-style: italic;">"tl.soares@campus.fct.unl.pt"</span>)
 
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">mu4e</span>)
+  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">mu4e</span>)
 
-(<span style="font-weight: bold;">use-package</span> mu4e
-  <span style="font-weight: bold;">:ensure</span> nil
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:load-path "/usr/share/emacs/site-lisp/mu4e/"
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:defer 20 ; Wait until 20 seconds after startup
-</span>  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> mu4e-headers-mode-map
-            (<span style="font-style: italic;">"q"</span> . mu4e-dashboard))
-  <span style="font-weight: bold;">:config</span>
+  (<span style="font-weight: bold;">use-package</span> mu4e
+    <span style="font-weight: bold;">:ensure</span> nil
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:load-path "/usr/share/emacs/site-lisp/mu4e/"
+</span>    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:defer 20 ; Wait until 20 seconds after startup
+</span>    <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> mu4e-headers-mode-map
+              (<span style="font-style: italic;">"q"</span> . mu4e-dashboard))
+    <span style="font-weight: bold;">:config</span>
 
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This is set to '</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">t</span><span style="font-weight: bold; font-style: italic;">' to avoid mail syncing issues when using mbsync
-</span>  (<span style="font-weight: bold;">setq</span> mu4e-change-filenames-when-moving t)
-  (<span style="font-weight: bold;">setq</span> mu4e-context-policy <span style="font-style: italic;">"pick-first"</span>)
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Refresh mail using isync every minute
-</span>  (<span style="font-weight: bold;">setq</span> mu4e-update-interval 60)
-  (<span style="font-weight: bold;">setq</span> mu4e-get-mail-command <span style="font-style: italic;">"mbsync -a"</span>)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This is set to '</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">t</span><span style="font-weight: bold; font-style: italic;">' to avoid mail syncing issues when using mbsync
+</span>    (<span style="font-weight: bold;">setq</span> mu4e-change-filenames-when-moving t)
+    (<span style="font-weight: bold;">setq</span> mu4e-context-policy <span style="font-style: italic;">"pick-first"</span>)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Refresh mail using isync every minute
+</span>    (<span style="font-weight: bold;">setq</span> mu4e-update-interval 60)
+    (<span style="font-weight: bold;">setq</span> mu4e-get-mail-command <span style="font-style: italic;">"mbsync -a"</span>)
 
-  (<span style="font-weight: bold;">setq</span> mu4e-maildir <span style="font-style: italic;">"~/mail"</span>)
+    (<span style="font-weight: bold;">setq</span> mu4e-maildir <span style="font-style: italic;">"~/mail"</span>)
 
-  (<span style="font-weight: bold;">setq</span> mu4e-contexts
-        (list
-         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Work account
-</span>         (make-mu4e-context
-          <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"FCT"</span>
-          <span style="font-weight: bold;">:match-func</span>
-          (<span style="font-weight: bold;">lambda</span> (msg)
-            (<span style="font-weight: bold;">when</span> msg
-              (string-prefix-p <span style="font-style: italic;">"/gmail"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
-          <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email1)
-                  (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
-                (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.gmail.com"</span>)
-                (smtpmail-smtp-service . 465)
-                (smtpmail-stream-type . ssl)
-                  (mu4e-drafts-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>)
-                  (mu4e-sent-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Sent Mail"</span>)
-                  (mu4e-refile-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>)
-                  (mu4e-trash-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>)))
-       (make-mu4e-context
-          <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Inria"</span>
-          <span style="font-weight: bold;">:match-func</span>
-          (<span style="font-weight: bold;">lambda</span> (msg)
-            (<span style="font-weight: bold;">when</span> msg
-              (string-prefix-p <span style="font-style: italic;">"/inria"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
-          <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email2)
-                  (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
-                (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.inria.fr"</span>)
-                (smtpmail-smtp-service . 587)
-                (smtpmail-stream-type . nil)
-                  (mu4e-drafts-folder  . <span style="font-style: italic;">"/inria/Drafts"</span>)
-                  (mu4e-sent-folder  . <span style="font-style: italic;">"/inria/Sent"</span>)
-                  (mu4e-trash-folder  . <span style="font-style: italic;">"/inria/Trash"</span>)))
+    (<span style="font-weight: bold;">setq</span> mu4e-contexts
+          (list
+           <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Work account
+</span>           (make-mu4e-context
+            <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"FCT"</span>
+            <span style="font-weight: bold;">:match-func</span>
+            (<span style="font-weight: bold;">lambda</span> (msg)
+              (<span style="font-weight: bold;">when</span> msg
+                (string-prefix-p <span style="font-style: italic;">"/gmail"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+            <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email1)
+                    (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
+                  (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.gmail.com"</span>)
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type . ssl)
+                    (mu4e-drafts-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>)
+                    (mu4e-sent-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Sent Mail"</span>)
+                    (mu4e-refile-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>)
+                    (mu4e-trash-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>)))
+         (make-mu4e-context
+            <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Inria"</span>
+            <span style="font-weight: bold;">:match-func</span>
+            (<span style="font-weight: bold;">lambda</span> (msg)
+              (<span style="font-weight: bold;">when</span> msg
+                (string-prefix-p <span style="font-style: italic;">"/inria"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+            <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email2)
+                    (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
+                  (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.inria.fr"</span>)
+                  (smtpmail-smtp-service . 587)
+                  (smtpmail-stream-type . nil)
+                    (mu4e-drafts-folder  . <span style="font-style: italic;">"/inria/Drafts"</span>)
+                    (mu4e-sent-folder  . <span style="font-style: italic;">"/inria/Sent"</span>)
+                    (mu4e-trash-folder  . <span style="font-style: italic;">"/inria/Trash"</span>)))
 
-       )
-      )
-  (<span style="font-weight: bold;">setq</span> mu4e-maildir-shortcuts
-      '((<span style="font-style: italic;">"/gmail/inbox"</span>             . ?f)
-          (<span style="font-style: italic;">"/inria/inbox"</span>             . ?i)
-          (<span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>     . ?t)
-          (<span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>    . ?d)
-          (<span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>  . ?a)))
-  )
+         )
+        )
+    (<span style="font-weight: bold;">setq</span> mu4e-maildir-shortcuts
+        '((<span style="font-style: italic;">"/gmail/inbox"</span>             . ?f)
+            (<span style="font-style: italic;">"/inria/inbox"</span>             . ?i)
+            (<span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>     . ?t)
+            (<span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>    . ?d)
+            (<span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>  . ?a)))
+    )
 
-(<span style="font-weight: bold;">use-package</span> mu4e-alert)
-(mu4e-alert-enable-notifications)
+  (<span style="font-weight: bold;">use-package</span> mu4e-alert)
+  (mu4e-alert-enable-notifications)
 
-(<span style="font-weight: bold;">use-package</span> go-translate)
-(<span style="font-weight: bold;">setq</span> gt-langs '(fr en))
-(<span style="font-weight: bold;">setq</span> gt-default-translator (gt-translator <span style="font-weight: bold;">:engines</span> (gt-google-engine)))
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
+<span style="font-weight: bold; font-style: italic;">;  </span><span style="font-weight: bold; font-style: italic;">(use-package go-translate)
+</span> <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">(setq gt-langs '(fr en))
+</span>  <span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(setq gt-default-translator (gt-translator :engines (gt-google-engine)))
 </span>
-(<span style="font-weight: bold;">setq</span> gt-default-translator
-      (gt-translator
-       <span style="font-weight: bold;">:taker</span>   (gt-taker <span style="font-weight: bold;">:text</span> 'buffer <span style="font-weight: bold;">:pick</span> 'paragraph)  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">config the Taker
-</span>       <span style="font-weight: bold;">:engines</span> (list (gt-bing-engine) (gt-google-engine)) <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">specify the Engines
-</span>       <span style="font-weight: bold;">:render</span>  (gt-buffer-render)))                       <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">config the Render
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
 </span>
-(<span style="font-weight: bold;">setq</span> mu4e-headers-fields '((<span style="font-weight: bold;">:human-date</span> . 12) (<span style="font-weight: bold;">:from</span> . 22) (<span style="font-weight: bold;">:subject</span>)))
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it send all paragraphs in the buffer to Bing and Google,
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and output the results with a new Buffer.
+<span style="font-weight: bold; font-style: italic;">;  </span><span style="font-weight: bold; font-style: italic;">(setq gt-default-translator
+</span> <span style="font-weight: bold; font-style: italic;">;       </span><span style="font-weight: bold; font-style: italic;">(gt-translator
+</span>  <span style="font-weight: bold; font-style: italic;">;       </span><span style="font-weight: bold; font-style: italic;">:taker   (gt-taker :text 'buffer :pick 'paragraph)  ; config the Taker
+</span>   <span style="font-weight: bold; font-style: italic;">;      </span><span style="font-weight: bold; font-style: italic;">:engines (list (gt-bing-engine) (gt-google-engine)) ; specify the Engines
+</span>    <span style="font-weight: bold; font-style: italic;">;     </span><span style="font-weight: bold; font-style: italic;">:render  (gt-buffer-render)))                       ; config the Render
 </span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
+  (<span style="font-weight: bold;">setq</span> mu4e-headers-fields '((<span style="font-weight: bold;">:human-date</span> . 12) (<span style="font-weight: bold;">:from</span> . 22) (<span style="font-weight: bold;">:subject</span>)))
+
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it send all paragraphs in the buffer to Bing and Google,
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and output the results with a new Buffer.
 </span>
-(add-hook 'mu4e-view-mode-hook #'writeroom-mode)
-(add-hook 'mu4e-headers-mode-hook #'writeroom-mode)
-(add-hook 'message-mode-hook #'auto-fill-mode)
-(load <span style="font-style: italic;">"~/.mu4e-dashboard/mu4e-dashboard.el"</span>)
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
+</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
+</span>
+  (add-hook 'mu4e-view-mode-hook #'writeroom-mode)
+  (add-hook 'mu4e-headers-mode-hook #'writeroom-mode)
+  (add-hook 'message-mode-hook #'auto-fill-mode)
+  (load <span style="font-style: italic;">"~/.mu4e-dashboard/mu4e-dashboard.el"</span>)
 
-(mu4e)
+  (mu4e)
 
-(<span style="font-weight: bold;">setq</span> message-cite-reply-position 'above)
+  (<span style="font-weight: bold;">setq</span> message-cite-reply-position 'above)
 
-(<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
+  (<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1a9348d" class="outline-2">
-<h2 id="org1a9348d"><code>Eshell</code></h2>
-<div class="outline-text-2" id="text-org1a9348d">
+<div id="outline-container-orge519c06" class="outline-2">
+<h2 id="orge519c06"><code>Eshell</code></h2>
+<div class="outline-text-2" id="text-orge519c06">
 <p>
 Fish like suggestions for <code>eshell</code>
 </p>
@@ -1991,9 +2014,9 @@ Buffer name matches eshell directory
 </pre>
 </div>
 </div>
-<div id="outline-container-org6123c10" class="outline-3">
-<h3 id="org6123c10"><code>Eshell</code> configuration</h3>
-<div class="outline-text-3" id="text-org6123c10">
+<div id="outline-container-org931689e" class="outline-3">
+<h3 id="org931689e"><code>Eshell</code> configuration</h3>
+<div class="outline-text-3" id="text-org931689e">
 <p>
 Startup configuration. Sets the opam environment variables and runs
 <code>fastfetch</code>.
@@ -2022,9 +2045,9 @@ Startup configuration. Sets the opam environment variables and runs
 </div>
 </div>
 </div>
-<div id="outline-container-org27038b4" class="outline-3">
-<h3 id="org27038b4">Configuration for Visual Commands</h3>
-<div class="outline-text-3" id="text-org27038b4">
+<div id="outline-container-orgcfbcda0" class="outline-3">
+<h3 id="orgcfbcda0">Configuration for Visual Commands</h3>
+<div class="outline-text-3" id="text-orgcfbcda0">
 <p>
 We use eat to run any commands that require visuals
 </p>
@@ -2033,6 +2056,19 @@ We use eat to run any commands that require visuals
   <span style="font-weight: bold;">:custom</span> (eat-kill-buffer-on-exit t)
   <span style="font-weight: bold;">:hook</span> (eshell-mode . eat-eshell-mode)
   )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0f3b652" class="outline-3">
+<h3 id="org0f3b652">Remember <code>sudo</code></h3>
+<div class="outline-text-3" id="text-org0f3b652">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">em-tramp</span>)
+(<span style="font-weight: bold;">setq</span> eshell-prefer-lisp-functions t)
+(<span style="font-weight: bold;">setq</span> eshell-prefer-lisp-variables t)
+(<span style="font-weight: bold;">setq</span> password-cache t)
+(<span style="font-weight: bold;">setq</span> password-cache-expiry 86400)
 </pre>
 </div>
 <p>
@@ -2178,9 +2214,9 @@ EXWM allows switching to X windows in a different workspace.
 </pre>
 </div>
 </div>
-<div id="outline-container-org8ce7a0d" class="outline-4">
-<h4 id="org8ce7a0d">Keybindings for desktop utilities</h4>
-<div class="outline-text-4" id="text-org8ce7a0d">
+<div id="outline-container-orgda9d3ad" class="outline-4">
+<h4 id="orgda9d3ad">Keybindings for desktop utilities</h4>
+<div class="outline-text-4" id="text-orgda9d3ad">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -2246,9 +2282,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org435f870" class="outline-4">
-<h4 id="org435f870">Background processes</h4>
-<div class="outline-text-4" id="text-org435f870">
+<div id="outline-container-org18bd59d" class="outline-4">
+<h4 id="org18bd59d">Background processes</h4>
+<div class="outline-text-4" id="text-org18bd59d">
 <p>
 Helper function to run a program in the background
 </p>
@@ -2283,8 +2319,7 @@ workspace 4.
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (efs/run-in-background <span style="font-style: italic;">"discord"</span>)
-  (efs/run-in-background <span style="font-style: italic;">"slack"</span>))
+  (efs/run-in-background <span style="font-style: italic;">"discord"</span>))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-messaging-app</span> ()
   (member (buffer-name)
@@ -2293,7 +2328,6 @@ workspace 4.
 
 (add-hook 'exwm-manage-finish-hook
         (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
-          (message <span style="font-style: italic;">"wow"</span>)
           (<span style="font-weight: bold;">when</span> (is-messaging-app)
               (exwm-workspace-move-window 4)
             )))
@@ -2306,7 +2340,7 @@ workspace 4.
 Music player
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(start-process-shell-command <span style="font-style: italic;">"mpd"</span> nil <span style="font-style: italic;">"mpd &amp;&amp; ~/.config/work.sh &amp;&amp; mpd-notification"</span>)
+<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"mpd &amp;&amp; mpd-notification &amp;&amp; ~/.config/work.sh"</span>)
 </pre>
 </div>
 
@@ -2351,9 +2385,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-orgb71dacd" class="outline-4">
-<h4 id="orgb71dacd">Multiple monitors</h4>
-<div class="outline-text-4" id="text-orgb71dacd">
+<div id="outline-container-org454d286" class="outline-4">
+<h4 id="org454d286">Multiple monitors</h4>
+<div class="outline-text-4" id="text-org454d286">
 <p>
 Set the initial workspace for each display
 </p>
@@ -2391,7 +2425,7 @@ are correctly configured.
            (string-trim (shell-command-to-string <span style="font-style: italic;">"autorandr --current"</span>)))
   (start-process-shell-command
    <span style="font-style: italic;">"feh"</span> nil
-   <span style="font-style: italic;">"feh --bg-scale ~/.config/bg/lain-dark.jpeg --bg-scale ~/.config/bg/lain-hands.jpeg"</span>))
+   <span style="font-style: italic;">"feh --bg-scale ~/.config/bg/lain.jpeg --bg-scale ~/.config/bg/lain-hands.jpeg"</span>))
 
 (add-hook 'exwm-randr-screen-change-hook #'efs/update-displays)
 (exwm-randr-mode 1)
@@ -2399,25 +2433,28 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgca9d27b" class="outline-4">
-<h4 id="orgca9d27b">Keybindings</h4>
-<div class="outline-text-4" id="text-orgca9d27b">
+<div id="outline-container-org398a3ac" class="outline-4">
+<h4 id="org398a3ac">Keybindings</h4>
+<div class="outline-text-4" id="text-org398a3ac">
 <p>
-Reset EXWM
+Keybindings to switch the current workspace
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-r"</span>) 'exwm-reset)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-global-keys
+    `(([?\s-r] . exwm-reset) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-r: Reset (to line-mode).
+</span>      ([?\s-w] . exwm-workspace-switch) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-w: Switch workspace.
+</span>      ([?\s-&amp;] . (<span style="font-weight: bold;">lambda</span> (cmd) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-&amp;: Launch application.
+</span>                   (<span style="font-weight: bold;">interactive</span> (list (read-shell-command <span style="font-style: italic;">"$ "</span>)))
+                   (start-process-shell-command cmd nil cmd)))
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-N: Switch to certain workspace.
+</span>      ,@(mapcar (<span style="font-weight: bold;">lambda</span> (i)
+                  `(,(kbd (format <span style="font-style: italic;">"s-%d"</span> i)) .
+                    (<span style="font-weight: bold;">lambda</span> ()
+                      (<span style="font-weight: bold;">interactive</span>)
+                      (exwm-workspace-switch-create ,i))))
+                (number-sequence 0 9))))
 </pre>
 </div>
-
-<p>
-Switch workspace
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-w"</span>) 'exwm-workspace-switch)
-</pre>
-</div>
-
 <p>
 Kill the current buffer unless it is a messaging app so that I can
 receive notifications in the background.
@@ -2426,7 +2463,8 @@ receive notifications in the background.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-except-message-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">if</span> (is-messaging-app)
-      (previous-buffer)
+      (previous
+     -buffer)
     (kill-this-buffer)))
 
 (exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-except-message-apps)
@@ -2501,24 +2539,11 @@ Lists all of my firefox tabs
 (exwm-input-set-key (kbd <span style="font-style: italic;">"s-f"</span>) #'list-firefox)
 </pre>
 </div>
-<p>
-Keybindings to switch the current workspace
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-global-keys
-    `( ,@(mapcar (<span style="font-weight: bold;">lambda</span> (i)
-                  `(,(kbd (format <span style="font-style: italic;">"s-%d"</span> i)) .
-                    (<span style="font-weight: bold;">lambda</span> ()
-                      (<span style="font-weight: bold;">interactive</span>)
-                      (exwm-workspace-switch-create ,(- i 1)))))
-                (number-sequence 1 9))))
-</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-org22b5a3e" class="outline-4">
-<h4 id="org22b5a3e">Enable EXWM</h4>
-<div class="outline-text-4" id="text-org22b5a3e">
+<div id="outline-container-orge08bc6c" class="outline-4">
+<h4 id="orge08bc6c">Enable EXWM</h4>
+<div class="outline-text-4" id="text-orge08bc6c">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
