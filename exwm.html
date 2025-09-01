@@ -150,9 +150,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-org8e4e356" class="outline-2">
-<h2 id="org8e4e356">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org8e4e356">
+<div id="outline-container-org6a1717b" class="outline-2">
+<h2 id="org6a1717b">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org6a1717b">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +218,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org294d739" class="outline-2">
-<h2 id="org294d739">Background processes</h2>
-<div class="outline-text-2" id="text-org294d739">
+<div id="outline-container-org926714c" class="outline-2">
+<h2 id="org926714c">Background processes</h2>
+<div class="outline-text-2" id="text-org926714c">
 <p>
 Helper function to run a program in the background
 </p>
@@ -321,9 +321,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-org16075e5" class="outline-2">
-<h2 id="org16075e5">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org16075e5">
+<div id="outline-container-org4d04063" class="outline-2">
+<h2 id="org4d04063">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org4d04063">
 <p>
 Set the initial workspace for each display
 </p>
@@ -369,26 +369,29 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org04d4223" class="outline-2">
-<h2 id="org04d4223">Keybindings</h2>
-<div class="outline-text-2" id="text-org04d4223">
+<div id="outline-container-orgb8d021b" class="outline-2">
+<h2 id="orgb8d021b">Keybindings</h2>
+<div class="outline-text-2" id="text-orgb8d021b">
 <p>
 Keybindings to switch the current workspace
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-global-keys
-    `(([?\s-r] . exwm-reset) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-r: Reset (to line-mode).
-</span>      ([?\s-w] . exwm-workspace-switch) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-w: Switch workspace.
-</span>      ([?\s-&amp;] . (<span style="font-weight: bold;">lambda</span> (cmd) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-&amp;: Launch application.
-</span>                   (<span style="font-weight: bold;">interactive</span> (list (read-shell-command <span style="font-style: italic;">"$ "</span>)))
-                   (start-process-shell-command cmd nil cmd)))
-      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-N: Switch to certain workspace.
-</span>      ,@(mapcar (<span style="font-weight: bold;">lambda</span> (i)
-                  `(,(kbd (format <span style="font-style: italic;">"s-%d"</span> i)) .
-                    (<span style="font-weight: bold;">lambda</span> ()
-                      (<span style="font-weight: bold;">interactive</span>)
-                      (exwm-workspace-switch-create ,i))))
-                (number-sequence 0 9))))
+<pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">setq</span> exwm-input-global-keys
+      `(([?\s-r] . exwm-reset) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-r: Reset (to line-mode).
+</span>        ([?\s-w] . exwm-workspace-switch) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-w: Switch workspace.
+</span>        ([?\s-&amp;] . (<span style="font-weight: bold;">lambda</span> (cmd) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-&amp;: Launch application.
+</span>                     (<span style="font-weight: bold;">interactive</span> (list (read-shell-command <span style="font-style: italic;">"$ "</span>)))
+                     (start-process-shell-command cmd nil cmd)))
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">s-N: Switch to certain workspace.
+</span>        ,@(mapcar (<span style="font-weight: bold;">lambda</span> (i)
+                    `(,(kbd (format <span style="font-style: italic;">"s-%d"</span> i)) .
+                      (<span style="font-weight: bold;">lambda</span> ()
+                        (<span style="font-weight: bold;">interactive</span>)
+                        (exwm-workspace-switch-create ,i))))
+                  (number-sequence 1 9))))
+
+(add-hook #'exwm-init-hook
+        (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>) (exwm-workspace-switch-create 1)))
 </pre>
 </div>
 <p>
@@ -477,9 +480,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org5967d67" class="outline-2">
-<h2 id="org5967d67">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org5967d67">
+<div id="outline-container-org23a3225" class="outline-2">
+<h2 id="org23a3225">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org23a3225">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
