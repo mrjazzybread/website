@@ -85,11 +85,10 @@ Better splitting of windows
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-split-window-right</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> arg)
   <span style="font-style: italic;">"Split the current window 70/30 rather than 50/50.
 A single-digit prefix argument gives the top window arg*10%.
-   Writeroom window must be treated specially."</span>
+   We use window-total-width to account for writeroom-mode."</span>
   (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"P"</span>)
-  (<span style="font-weight: bold;">let</span> ((proportion (* (<span style="font-weight: bold;">or</span> arg 6)
-                     (<span style="font-weight: bold;">if</span> writeroom-mode 0.14 0.1))))
-    (split-window-right (round (* proportion (window-width))))))
+  (<span style="font-weight: bold;">let</span> ((proportion (* (<span style="font-weight: bold;">or</span> arg 6) .1)))
+    (split-window-right (round (* proportion (window-total-width))))))
 
 (global-set-key (kbd <span style="font-style: italic;">"C-x 3"</span>) 'my-split-window-right)
 </pre>
@@ -115,11 +114,11 @@ Functions to shutdown and reboot the system
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/shutdown</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -h now"</span>))
+  (eshell-command <span style="font-style: italic;">"sudo shutdown -h now"</span>))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/reboot</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -r now"</span>))
+  (eshell-command <span style="font-style: italic;">"sudo shutdown -r now"</span>))
 </pre>
 </div>
 <p>
@@ -150,9 +149,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-org0252651" class="outline-2">
-<h2 id="org0252651">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org0252651">
+<div id="outline-container-org8e84e3d" class="outline-2">
+<h2 id="org8e84e3d">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org8e84e3d">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -218,9 +217,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-orgd1b598b" class="outline-2">
-<h2 id="orgd1b598b">Background processes</h2>
-<div class="outline-text-2" id="text-orgd1b598b">
+<div id="outline-container-orgacf6a8f" class="outline-2">
+<h2 id="orgacf6a8f">Background processes</h2>
+<div class="outline-text-2" id="text-orgacf6a8f">
 <p>
 Helper function to run a program in the background
 </p>
@@ -250,33 +249,45 @@ Sound display
 <p>
 Messaging apps are started after EXWM is initialized.  We also create
 a hook that moves any newly created window with a messaging app to
-workspace 4.
+workspace 0.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (efs/run-in-background <span style="font-style: italic;">"discord"</span>))
+<pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
+    (<span style="font-weight: bold;">interactive</span>)
+    (efs/run-in-background <span style="font-style: italic;">"discord"</span>)
+<span style="font-weight: bold; font-style: italic;">;    </span><span style="font-weight: bold; font-style: italic;">(efs/run-in-background "slack")
+</span>)
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-messaging-app</span> ()
-  (member (buffer-name)
-        '(<span style="font-style: italic;">"slack"</span>
-          <span style="font-style: italic;">"discord"</span>)))
+  (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-messaging-app</span> ()
+    (member (buffer-name)
+          '(<span style="font-style: italic;">"slack"</span>
+            <span style="font-style: italic;">"discord"</span>)))
 
-(add-hook 'exwm-manage-finish-hook
-        (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
-          (<span style="font-weight: bold;">when</span> (is-messaging-app)
-              (exwm-workspace-move-window 0)
-            )))
+  (add-hook 'exwm-manage-finish-hook
+          (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
+            (<span style="font-weight: bold;">when</span> (is-messaging-app)
+                (exwm-workspace-move-window 0)
+              )))
 
-(add-hook 'exwm-init-hook #'messaging-apps)
+  (add-hook 'exwm-init-hook #'messaging-apps)
 </pre>
 </div>
-
 <p>
-Music player
+Add songs to mingus
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"mpd &amp;&amp; mpd-notification &amp;&amp; ~/.config/work.sh"</span>)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defmacro</span> <span style="font-weight: bold;">without-yes-or-no</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> body)
+<span style="font-style: italic;">"Override `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">yes-or-no-p</span><span style="font-style: italic;">' &amp; `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">y-or-n-p</span><span style="font-style: italic;">',
+ not to prompt for input and return t."</span>
+(<span style="font-weight: bold;">declare</span> (indent 1))
+`(<span style="font-weight: bold;">cl-letf</span> (((symbol-function 'yes-or-no-p) (<span style="font-weight: bold;">lambda</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> _) t))
+           ((symbol-function 'y-or-n-p) (<span style="font-weight: bold;">lambda</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> _) t)))
+  ,@body))
+
+(without-yes-or-no (mingus-load-all))
+(mingus-shuffle)
+(mingus-play)
+(mingus-pause)
 </pre>
 </div>
 
@@ -321,9 +332,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-orgb860763" class="outline-2">
-<h2 id="orgb860763">Multiple monitors</h2>
-<div class="outline-text-2" id="text-orgb860763">
+<div id="outline-container-orge0c9d68" class="outline-2">
+<h2 id="orge0c9d68">Multiple monitors</h2>
+<div class="outline-text-2" id="text-orge0c9d68">
 <p>
 Set the initial workspace for each display
 </p>
@@ -369,9 +380,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org5c3e724" class="outline-2">
-<h2 id="org5c3e724">Keybindings</h2>
-<div class="outline-text-2" id="text-org5c3e724">
+<div id="outline-container-org2f7061f" class="outline-2">
+<h2 id="org2f7061f">Keybindings</h2>
+<div class="outline-text-2" id="text-org2f7061f">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -394,19 +405,12 @@ Keybindings to switch the current workspace
         (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>) (exwm-workspace-switch-create 1)))
 </pre>
 </div>
+
 <p>
-Kill the current buffer unless it is a messaging app so that I can
-receive notifications in the background.
+Kills the current buffer.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-except-message-apps</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">if</span> (is-messaging-app)
-      (previous
-     -buffer)
-    (kill-this-buffer)))
-
-(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-except-message-apps)
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-current-buffer)
 </pre>
 </div>
 
@@ -480,9 +484,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org2ddc5e2" class="outline-2">
-<h2 id="org2ddc5e2">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org2ddc5e2">
+<div id="outline-container-orgfd9bf9c" class="outline-2">
+<h2 id="orgfd9bf9c">Enable EXWM</h2>
+<div class="outline-text-2" id="text-orgfd9bf9c">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
