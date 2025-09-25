@@ -149,9 +149,9 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-orgbe3a428" class="outline-2">
-<h2 id="orgbe3a428">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orgbe3a428">
+<div id="outline-container-orgdedeaa0" class="outline-2">
+<h2 id="orgdedeaa0">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgdedeaa0">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -217,9 +217,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-orge507639" class="outline-2">
-<h2 id="orge507639">Background processes</h2>
-<div class="outline-text-2" id="text-orge507639">
+<div id="outline-container-org173b03e" class="outline-2">
+<h2 id="org173b03e">Background processes</h2>
+<div class="outline-text-2" id="text-org173b03e">
 <p>
 Helper function to run a program in the background
 </p>
@@ -255,19 +255,19 @@ workspace 0.
 <pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
     (<span style="font-weight: bold;">interactive</span>)
     (efs/run-in-background <span style="font-style: italic;">"discord"</span>)
+    (efs/run-in-background <span style="font-style: italic;">"alacritty -e sh -c 'ncmpcpp -s visualizer'"</span>)
 <span style="font-weight: bold; font-style: italic;">;    </span><span style="font-weight: bold; font-style: italic;">(efs/run-in-background "slack")
 </span>)
 
   (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-messaging-app</span> ()
     (member (buffer-name)
-          '(<span style="font-style: italic;">"slack"</span>
-            <span style="font-style: italic;">"discord"</span>)))
+          '(<span style="font-style: italic;">"slack"</span> <span style="font-style: italic;">"discord"</span> <span style="font-style: italic;">"Alacritty"</span>)))
 
   (add-hook 'exwm-manage-finish-hook
-          (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
-            (<span style="font-weight: bold;">when</span> (is-messaging-app)
-                (exwm-workspace-move-window 0)
-              )))
+        (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>)
+          (<span style="font-weight: bold;">when</span> (is-messaging-app)
+              (exwm-workspace-move-window 0)
+            )))
 
   (add-hook 'exwm-init-hook #'messaging-apps)
 </pre>
@@ -332,9 +332,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-org3eb8828" class="outline-2">
-<h2 id="org3eb8828">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org3eb8828">
+<div id="outline-container-org635a1a7" class="outline-2">
+<h2 id="org635a1a7">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org635a1a7">
 <p>
 Set the initial workspace for each display
 </p>
@@ -380,9 +380,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org9a0a576" class="outline-2">
-<h2 id="org9a0a576">Keybindings</h2>
-<div class="outline-text-2" id="text-org9a0a576">
+<div id="outline-container-org80580ae" class="outline-2">
+<h2 id="org80580ae">Keybindings</h2>
+<div class="outline-text-2" id="text-org80580ae">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -484,9 +484,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org297bf5b" class="outline-2">
-<h2 id="org297bf5b">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org297bf5b">
+<div id="outline-container-orgbd2f897" class="outline-2">
+<h2 id="orgbd2f897">Enable EXWM</h2>
+<div class="outline-text-2" id="text-orgbd2f897">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
