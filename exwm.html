@@ -114,11 +114,11 @@ Functions to shutdown and reboot the system
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/shutdown</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -h now"</span>))
+  (async-shell-command <span style="font-style: italic;">"shutdown -h now"</span>))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/reboot</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -r now"</span>))
+  (async-shell-command <span style="font-style: italic;">"shutdown -r now"</span>))
 </pre>
 </div>
 <p>
@@ -149,9 +149,19 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
-<div id="outline-container-org5b8f2e5" class="outline-2">
-<h2 id="org5b8f2e5">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org5b8f2e5">
+
+<p>
+Transparent emacs frames.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (70 . 70)))
+</pre>
+</div>
+
+<div id="outline-container-orgcd766b4" class="outline-2">
+<h2 id="orgcd766b4">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgcd766b4">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -217,9 +227,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org2785143" class="outline-2">
-<h2 id="org2785143">Background processes</h2>
-<div class="outline-text-2" id="text-org2785143">
+<div id="outline-container-org550d7c9" class="outline-2">
+<h2 id="org550d7c9">Background processes</h2>
+<div class="outline-text-2" id="text-org550d7c9">
 <p>
 Helper function to run a program in the background
 </p>
@@ -334,9 +344,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-org18685b2" class="outline-2">
-<h2 id="org18685b2">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org18685b2">
+<div id="outline-container-org9655f5b" class="outline-2">
+<h2 id="org9655f5b">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org9655f5b">
 <p>
 Set the initial workspace for each display
 </p>
@@ -382,9 +392,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org12cec61" class="outline-2">
-<h2 id="org12cec61">Keybindings</h2>
-<div class="outline-text-2" id="text-org12cec61">
+<div id="outline-container-org82c6dc4" class="outline-2">
+<h2 id="org82c6dc4">Keybindings</h2>
+<div class="outline-text-2" id="text-org82c6dc4">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -491,9 +501,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org2fb4e10" class="outline-2">
-<h2 id="org2fb4e10">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org2fb4e10">
+<div id="outline-container-org12281e3" class="outline-2">
+<h2 id="org12281e3">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org12281e3">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance

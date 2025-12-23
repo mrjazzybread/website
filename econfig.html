@@ -16,9 +16,9 @@
 <pre class="src src-emacs-lisp">(load-file <span style="font-style: italic;">"~/.config/sensitive.el"</span>)
 </pre>
 </div>
-<div id="outline-container-orgdebfdb0" class="outline-2">
-<h2 id="orgdebfdb0">Package Configuration</h2>
-<div class="outline-text-2" id="text-orgdebfdb0">
+<div id="outline-container-org08b5983" class="outline-2">
+<h2 id="org08b5983">Package Configuration</h2>
+<div class="outline-text-2" id="text-org08b5983">
 <p>
 Add MELPA to the list of recognized archives
 </p>
@@ -39,14 +39,6 @@ messages
 
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">use-package</span>)
 (<span style="font-weight: bold;">setq</span> use-package-verbose t)
-</pre>
-</div>
-<p>
-Updates the local cache if it is missing
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(unless package-archive-contents
-</span><span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(package-refresh-contents))</span>
 </pre>
 </div>
 <p>
@@ -72,9 +64,9 @@ GNU keys to enable downloading packages
 </div>
 </div>
 </div>
-<div id="outline-container-org9e06337" class="outline-2">
-<h2 id="org9e06337">Appearance</h2>
-<div class="outline-text-2" id="text-org9e06337">
+<div id="outline-container-orgf8c1e5f" class="outline-2">
+<h2 id="orgf8c1e5f">Appearance</h2>
+<div class="outline-text-2" id="text-orgf8c1e5f">
 <p>
 Disable Splash Screen
 </p>
@@ -92,8 +84,6 @@ Define font style and height
 <span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">The initial frame (useful for the gui)
 </span>(<span style="font-weight: bold;">setq</span> initial-frame-alist '((font . <span style="font-style: italic;">"Roboto Mono 22"</span>)))
 (add-to-list 'initial-frame-alist '(background-color . <span style="font-style: italic;">"#34293E"</span>))
-<span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Only relevant for terminals
-</span>(set-background-color <span style="font-style: italic;">"black"</span>)
 </pre>
 </div>
 <p>
@@ -135,50 +125,13 @@ Pretty mode line
 (doom-modeline-def-modeline 'main
  '(bar matches buffer-info buffer-position now-playing)
  '(time major-mode))
-
 </pre>
 </div>
-
-<p>
-Transparent emacs frames.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
-(add-to-list 'default-frame-alist '(alpha . (70 . 70)))
-</pre>
-</div>
-
 <p>
 Display time in mode line
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(display-time-mode 1)
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orge97bee2" class="outline-2">
-<h2 id="orge97bee2">Some Miscellaneous Configurations</h2>
-<div class="outline-text-2" id="text-orge97bee2">
-<p>
-enable creation of pairs of brackets or quotes when one is inserted.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> skeleton-pair t)
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"("</span> 'skeleton-pair-insert-maybe)
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"{"</span> 'skeleton-pair-insert-maybe)
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"["</span> 'skeleton-pair-insert-maybe)
-(<span style="font-weight: bold;">bind-key</span> (char-to-string 34) 'skeleton-pair-insert-maybe)
-<span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">char 34 is the single quote, putting the character itself
-</span><span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">ruins prettify symbols mode</span>
-</pre>
-</div>
-<p>
-Enable Emacs to track changes made to files by different programs.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-auto-revert-mode 1)
 </pre>
 </div>
 <p>
@@ -188,51 +141,32 @@ Allows me to see the column number as well as the line number.
 <pre class="src src-emacs-lisp">(column-number-mode)
 </pre>
 </div>
-<p>
-Bookmarks are preserved throughout different sessions
-</p>
+</div>
+</div>
+<div id="outline-container-orgf86c5eb" class="outline-2">
+<h2 id="orgf86c5eb"><code>utf-8</code></h2>
+<div class="outline-text-2" id="text-orgf86c5eb">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> bookmark-save-flag 0)
+<pre class="src src-emacs-lisp">(prefer-coding-system       'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(<span style="font-weight: bold;">setq</span> default-buffer-file-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(set-selection-coding-system 'utf-8)
+(<span style="font-weight: bold;">setq</span> x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 </pre>
 </div>
-<p>
-Keybindings for navigating functions
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-M-p"</span> #'beginning-of-defun)
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-M-n"</span> #'end-of-defun)
-</pre>
 </div>
-<p>
-Better scroll
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (display-graphic-p)
-  (<span style="font-weight: bold;">setq</span> mouse-wheel-scroll-amount '(2 ((shift) . 1))
-        mouse-wheel-progressive-speed nil))
-</pre>
 </div>
+<div id="outline-container-org40f5242" class="outline-2">
+<h2 id="org40f5242">Conveniences</h2>
+<div class="outline-text-2" id="text-org40f5242">
 <p>
-opens files at the last visited location
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(save-place-mode 1)
-</pre>
-</div>
-<p>
-don't use ui dialogs
+Don't use ui dialogs
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> use-dialog-box nil)
-</pre>
-</div>
-<p>
-Keybinding for quickly evaluating <code>elisp</code> code
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(add-hook 'lisp-interaction-mode-hook
-          (<span style="font-weight: bold;">lambda</span> () (local-set-key
-                      (kbd <span style="font-style: italic;">"C-c C-c"</span>) #'eval-region)))
 </pre>
 </div>
 <p>
@@ -249,22 +183,12 @@ Enable <code>recentf</code> mode to remember recently opened files
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> recentf-max-saved-items 10000)
 (recentf-mode 1)
 
-(global-set-key (kbd <span style="font-style: italic;">"C-x C-b"</span>) #'recentf)
-
 (add-to-list 'recentf-exclude
            (<span style="font-weight: bold;">lambda</span> (s) (cl-search <span style="font-style: italic;">"/test/"</span> s)))
 (add-to-list 'recentf-exclude
            (<span style="font-weight: bold;">lambda</span> (s) (cl-search <span style="font-style: italic;">"/tmp/"</span> s)))
 (add-to-list 'recentf-exclude
            (<span style="font-weight: bold;">lambda</span> (s) (cl-search <span style="font-style: italic;">"/sudo:"</span> s)))
-</pre>
-</div>
-<p>
-Keybindings for splitting a window instead clones the frame
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(bind-key "C-x 3" #'clone-frame)
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(bind-key "C-x 2" #'clone-frame)</span>
 </pre>
 </div>
 <p>
@@ -276,12 +200,28 @@ files.
 </pre>
 </div>
 <p>
-Add binding to go to previous and next buffer.
+Undo and redo modifications to the window configuration.  Use repeat
+mode to easily undo multiple modifications.
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(winner-mode)
 (global-set-key <span style="font-style: italic;">"\C-xp"</span> 'winner-undo)
 (global-set-key <span style="font-style: italic;">"\C-xn"</span> 'winner-redo)
+
+(repeat-mode 1)
+
+(<span style="font-weight: bold;">setq</span> winner-repeat-map
+      (<span style="font-weight: bold;">let</span> ((map (make-sparse-keymap)))
+      (define-key map (kbd <span style="font-style: italic;">"p"</span>) 'winner-undo)
+        (define-key map (kbd <span style="font-style: italic;">"n"</span>) 'winner-redo)
+      map))
+</pre>
+</div>
+<p>
+Disable repeat mode in Dired
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-jump-map nil)
 </pre>
 </div>
 <p>
@@ -290,6 +230,168 @@ Set scratch buffer major mode to <code>org-mode</code>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> initial-major-mode 'org-mode)
 (<span style="font-weight: bold;">setq</span> initial-scratch-message <span style="font-style: italic;">""</span>)
+</pre>
+</div>
+<p>
+Better keybinding to run a shell command
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"M-s s"</span>) #'async-shell-command)
+</pre>
+</div>
+<p>
+When running a shell command, do not display the command buffer until
+there is output.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> async-shell-command-display-buffer nil)
+</pre>
+</div>
+<p>
+Minibuffer history persists across multiple sessions
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(savehist-mode)
+</pre>
+</div>
+<p>
+Ensures that backups and auto-saves go to a separate directory instead
+of stinking up the working directory.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">backup-dir</span> (expand-file-name <span style="font-style: italic;">"~/.emacs.d/backup/"</span>))
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">autosave-dir</span> (expand-file-name <span style="font-style: italic;">"~/.emacs.d/autosave/"</span>))
+(<span style="font-weight: bold;">setq</span> backup-directory-alist (list (cons <span style="font-style: italic;">".*"</span> backup-dir)))
+(<span style="font-weight: bold;">setq</span> auto-save-list-file-prefix autosave-dir)
+(<span style="font-weight: bold;">setq</span> auto-save-file-name-transforms `((<span style="font-style: italic;">".*"</span> ,autosave-dir t)))
+</pre>
+</div>
+<p>
+Package to interface with MPD
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> mingus)
+</pre>
+</div>
+<p>
+Package for using connecting and pairing Bluetooth devices
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> bluetooth)
+</pre>
+</div>
+<p>
+Package for restoring and reading from the trash folder
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> trashed)
+</pre>
+</div>
+<p>
+Package that displays when I am in Emacs on discord
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> elcord)
+(<span style="font-weight: bold;">setq</span> elcord-display-buffer-details nil)
+(<span style="font-weight: bold;">setq</span> elcord-editor-icon <span style="font-style: italic;">"doom_cute_icon"</span>)
+(elcord-mode)
+</pre>
+</div>
+<p>
+Updates the PATH according to the environment in which Emacs is running
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> exec-path-from-shell)
+(<span style="font-weight: bold;">when</span> (daemonp)
+  (exec-path-from-shell-initialize))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb3a2b1f" class="outline-3">
+<h3 id="orgb3a2b1f">Buffer Navigation</h3>
+<div class="outline-text-3" id="text-orgb3a2b1f">
+<p>
+Function for jumping to another part of the buffer quickly
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> avy)
+(<span style="font-weight: bold;">setq</span> avy-timeout-seconds 0.3)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"M-j"</span> 'avy-goto-char-timer)
+</pre>
+</div>
+<p>
+Keybindings for navigating functions
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-M-p"</span> #'beginning-of-defun)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"C-M-n"</span> #'end-of-defun)
+</pre>
+</div>
+<p>
+Opens files at the last visited location
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(save-place-mode 1)
+</pre>
+</div>
+<p>
+Key binding for returning to the beginning of the line ignores
+indentation
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-a"</span>) #'back-to-indentation)
+</pre>
+</div>
+<p>
+Shows an indexed view of the current buffer and allows for
+straightforward navigation
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> consult)
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">consult-org-maybe</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">if</span> (eq major-mode 'org-mode)
+      (consult-org-heading)
+    (consult-imenu)))
+
+(global-set-key (kbd <span style="font-style: italic;">"M-g i"</span>) #'consult-org-maybe)
+</pre>
+</div>
+<p>
+Faster scroll
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (display-graphic-p)
+  (<span style="font-weight: bold;">setq</span> mouse-wheel-scroll-amount '(2 ((shift) . 1))
+        mouse-wheel-progressive-speed nil))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org93adc3c" class="outline-3">
+<h3 id="org93adc3c">Editing Buffers</h3>
+<div class="outline-text-3" id="text-org93adc3c">
+<p>
+Enable creation of pairs of brackets or quotes when one is inserted.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> skeleton-pair t)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"("</span> 'skeleton-pair-insert-maybe)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"{"</span> 'skeleton-pair-insert-maybe)
+(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"["</span> 'skeleton-pair-insert-maybe)
+(<span style="font-weight: bold;">bind-key</span> (char-to-string 34) 'skeleton-pair-insert-maybe)
+<span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">char 34 is the single quote, putting the character itself
+</span><span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">ruins prettify symbols mode</span>
+</pre>
+</div>
+<p>
+Enable Emacs to track changes made to files by different programs.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> auto-revert-interval 1)
+(global-auto-revert-mode 1)
 </pre>
 </div>
 <p>
@@ -319,56 +421,6 @@ Yanking a string replaces the current selection
 </pre>
 </div>
 <p>
-Gospel thing
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-header</span> ()
-    (<span style="font-weight: bold;">interactive</span>)
-    (insert <span style="font-style: italic;">"(**************************************************************************)
-(*                                                                        *)
-(*  GOSPEL -- A Specification Language for OCaml                          *)
-(*                                                                        *)
-(*  Copyright (c) 2018- The VOCaL Project                                 *)
-(*                                                                        *)
-(*  This software is free software, distributed under the MIT license     *)
-(*  (as described in file LICENSE enclosed).                              *)
-(**************************************************************************)
-"</span>))
-</pre>
-</div>
-<p>
-Key binding for returning to the beginning of the line ignores
-indentation
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-a"</span>) #'back-to-indentation)
-</pre>
-</div>
-<p>
-Markdown windows are viewed without markup, similar to org mode
-visualisation.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> markdown-hide-markup t)
-</pre>
-</div>
-<p>
-Better keybinding to run a shell command
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"M-s s"</span>) #'async-shell-command)
-</pre>
-</div>
-<p>
-When running a shell command, do not display the command buffer until
-there is output.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> async-shell-command-display-buffer nil)
-</pre>
-</div>
-<p>
 Command to insert the current file name
 </p>
 <div class="org-src-container">
@@ -379,143 +431,19 @@ Command to insert the current file name
 </pre>
 </div>
 <p>
-Minibuffer history persists across multiple sessions
+Command to consult and insert from kill-ring
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(savehist-mode)
-</pre>
-</div>
-<p>
-Some macros to help writing Rocq proofs of Gospel signatures.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-abstract</span> (var)
-  (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"sName:"</span>)
-  (insert
-   (format
-    <span style="font-style: italic;">"Global Instance _%s_inst : _%s_sig :="</span>
-    var var))
-  (newline 1 t)
-  (insert (format <span style="font-style: italic;">"{ %s :=  }."</span> var))
-  (backward-char 3))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-lemma</span> (var)
-  (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"sName:"</span>)
-  (insert
-   (format
-    <span style="font-style: italic;">"#[refine] Global Instance _%s_inst : _%s_sig := { }."</span>
-    var var var))
-  (newline 1 t)
-  (insert <span style="font-style: italic;">"Proof."</span>)
-  (newline 1 t))
-
-
-</pre>
-</div>
-</div>
-<div id="outline-container-org65060fe" class="outline-3">
-<h3 id="org65060fe"><code>utf-8</code></h3>
-<div class="outline-text-3" id="text-org65060fe">
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(prefer-coding-system       'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(<span style="font-weight: bold;">setq</span> default-buffer-file-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-(set-selection-coding-system 'utf-8)
-(<span style="font-weight: bold;">setq</span> x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org9f3ed36" class="outline-3">
-<h3 id="org9f3ed36">Backup files</h3>
-<div class="outline-text-3" id="text-org9f3ed36">
-<p>
-Ensures that backups and auto-saves go to a separate directory instead
-of stinking up the working directory.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">backup-dir</span> (expand-file-name <span style="font-style: italic;">"~/.emacs.d/backup/"</span>))
-(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">autosave-dir</span> (expand-file-name <span style="font-style: italic;">"~/.emacs.d/autosave/"</span>))
-(<span style="font-weight: bold;">setq</span> backup-directory-alist (list (cons <span style="font-style: italic;">".*"</span> backup-dir)))
-(<span style="font-weight: bold;">setq</span> auto-save-list-file-prefix autosave-dir)
-(<span style="font-weight: bold;">setq</span> auto-save-file-name-transforms `((<span style="font-style: italic;">".*"</span> ,autosave-dir t)))
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org3436bc4" class="outline-3">
-<h3 id="org3436bc4">Miscellaneous Packages</h3>
-<div class="outline-text-3" id="text-org3436bc4">
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> pacmacs)
-(<span style="font-weight: bold;">use-package</span> fireplace)
-(<span style="font-weight: bold;">use-package</span> mingus)
-(<span style="font-weight: bold;">use-package</span> bluetooth)
-(<span style="font-weight: bold;">use-package</span> trashed)
-
-(<span style="font-weight: bold;">use-package</span> elcord
-  <span style="font-weight: bold;">:custom</span> (elcord-display-buffer-details nil)
-  <span style="font-weight: bold;">:custom</span> (elcord-editor-icon <span style="font-style: italic;">"doom_cute_icon"</span>))
-
-(elcord-mode)
-
-(<span style="font-weight: bold;">use-package</span> avy
-  <span style="font-weight: bold;">:custom</span> (avy-timeout-seconds 0.3))
-(<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"M-j"</span> 'avy-goto-char-timer)
-
-(<span style="font-weight: bold;">use-package</span> exec-path-from-shell)
-(<span style="font-weight: bold;">when</span> (daemonp)
-  (exec-path-from-shell-initialize))
-(<span style="font-weight: bold;">use-package</span> consult)
-(global-set-key (kbd <span style="font-style: italic;">"C-c y"</span>) #'consult-yank-from-kill-ring)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-c y"</span>) #'consult-yank-from-kill-ring)
 (global-set-key (kbd <span style="font-style: italic;">"C-x C-SPC"</span>) #'consult-mark)
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">consult-org-maybe</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">if</span> (eq major-mode 'org-mode)
-      (consult-org-heading)
-    (consult-imenu)))
-
-(global-set-key (kbd <span style="font-style: italic;">"M-g i"</span>) #'consult-org-maybe)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org779d358" class="outline-3">
-<h3 id="org779d358">Repeat mode</h3>
-<div class="outline-text-3" id="text-org779d358">
-<p>
-This allows me to easily switch to another buffer using "p" and "n"
-when I have already used a buffer navigation command.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(repeat-mode 1)
-
-(<span style="font-weight: bold;">setq</span> winner-repeat-map
-      (<span style="font-weight: bold;">let</span> ((map (make-sparse-keymap)))
-      (define-key map (kbd <span style="font-style: italic;">"p"</span>) 'winner-undo)
-        (define-key map (kbd <span style="font-style: italic;">"n"</span>) 'winner-redo)
-      map))
-
-</pre>
 </div>
-<p>
-Disable repeat mode in Dired
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dired-jump-map nil)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org87353c0" class="outline-3">
-<h3 id="org87353c0">Popup windows</h3>
-<div class="outline-text-3" id="text-org87353c0">
+<div id="outline-container-org62a22c4" class="outline-2">
+<h2 id="org62a22c4">Popup windows</h2>
+<div class="outline-text-2" id="text-org62a22c4">
 <p>
 This makes it so every pop up window appears in the current window.
 Special rule for "magit-diff" to prevent it from taking up the entire
@@ -539,9 +467,9 @@ window when committing.
 </div>
 </div>
 
-<div id="outline-container-orgac521c6" class="outline-3">
-<h3 id="orgac521c6">GPG</h3>
-<div class="outline-text-3" id="text-orgac521c6">
+<div id="outline-container-orge2a92a6" class="outline-2">
+<h2 id="orge2a92a6">GPG</h2>
+<div class="outline-text-2" id="text-orge2a92a6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">let's get encryption established
 </span>(<span style="font-weight: bold;">use-package</span> pinentry)
@@ -564,172 +492,126 @@ window when committing.
 </div>
 </div>
 </div>
-<div id="outline-container-org5012d0e" class="outline-3">
-<h3 id="org5012d0e">Kill Processes</h3>
-<div class="outline-text-3" id="text-org5012d0e">
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> dwim-shell-command)
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">map</span>)
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">proced</span>)
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">seq</span>)
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">dwim-shell-commands-kill-process</span> ()
-  <span style="font-style: italic;">"Select and kill process."</span>
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">let*</span> ((pid-width 5)
-         (comm-width 25)
-         (user-width 10)
-         (processes (proced-process-attributes))
-         (candidates
-          (mapcar (<span style="font-weight: bold;">lambda</span> (attributes)
-                    (<span style="font-weight: bold;">let*</span> ((process (cdr attributes))
-                           (pid (format (format <span style="font-style: italic;">"%%%ds"</span> pid-width) (map-elt process 'pid)))
-                           (user (format (format <span style="font-style: italic;">"%%-%ds"</span> user-width)
-                                         (truncate-string-to-width
-                                          (map-elt process 'user) user-width nil nil t)))
-                           (comm (format (format <span style="font-style: italic;">"%%-%ds"</span> comm-width)
-                                         (truncate-string-to-width
-                                          (map-elt process 'comm) comm-width nil nil t)))
-                           (args-width (- (window-width) (+ pid-width user-width comm-width 3)))
-                           (args (map-elt process 'args)))
-                      (cons (<span style="font-weight: bold;">if</span> args
-                                (format <span style="font-style: italic;">"%s %s %s %s"</span> pid user comm (truncate-string-to-width args args-width nil nil t))
-                              (format <span style="font-style: italic;">"%s %s %s"</span> pid user comm))
-                            process)))
-                  processes))
-         (selection (map-elt candidates
-                             (completing-read <span style="font-style: italic;">"kill process: "</span>
-                                              (seq-sort
-                                               (<span style="font-weight: bold;">lambda</span> (p1 p2)
-                                                 (string-lessp (nth 2 (split-string (string-trim (car p1))))
-                                                               (nth 2 (split-string (string-trim (car p2))))))
-                                               candidates) <span style="font-weight: bold;">nil t)))</span>
-         (prompt-title (format <span style="font-style: italic;">"%s %s %s"</span>
-                               (map-elt selection 'pid)
-                               (map-elt selection 'user)
-                               (map-elt selection 'comm))))
-    (<span style="font-weight: bold;">when</span> (y-or-n-p (format <span style="font-style: italic;">"Kill? %s"</span> prompt-title))
-      (dwim-shell-command-on-marked-files
-       (format <span style="font-style: italic;">"Kill %s"</span> prompt-title)
-       (format <span style="font-style: italic;">"kill -9 %d"</span> (map-elt selection 'pid))
-       <span style="font-weight: bold;">:utils</span> <span style="font-style: italic;">"kill"</span>
-       <span style="font-weight: bold;">:error-autofocus</span> t
-       <span style="font-weight: bold;">:silent-success</span> t))))
-</pre>
+<div id="outline-container-orgb4fd765" class="outline-2">
+<h2 id="orgb4fd765">Coding Packages</h2>
+<div class="outline-text-2" id="text-orgb4fd765">
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-org5829be9" class="outline-2">
-<h2 id="org5829be9">Coding Packages</h2>
-<div class="outline-text-2" id="text-org5829be9">
-</div>
-<div id="outline-container-org96be2c4" class="outline-3">
-<h3 id="org96be2c4"><code>Flymake</code></h3>
-<div class="outline-text-3" id="text-org96be2c4">
+<div id="outline-container-org55a2b82" class="outline-3">
+<h3 id="org55a2b82"><code>Flymake</code></h3>
+<div class="outline-text-3" id="text-org55a2b82">
 <p>
 Package used by Eglot for highlighting errors
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> flymake
-  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> flymake-mode-map
-         (<span style="font-style: italic;">"\C-c \C-x"</span> . flymake-goto-next-error))
-  <span style="font-weight: bold;">:hook</span> (prog-mode . flymake-mode)
-  )
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> flymake)
+(add-hook 'prog-mode-hook #'flymake-mode)
+(keymap-set flymake-mode-map <span style="font-style: italic;">"C-c C-x"</span> #'flymake-goto-next-error)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge05e33a" class="outline-3">
-<h3 id="orge05e33a">Company</h3>
-<div class="outline-text-3" id="text-orge05e33a">
+<div id="outline-container-org88aae4c" class="outline-3">
+<h3 id="org88aae4c">Corfu</h3>
+<div class="outline-text-3" id="text-org88aae4c">
 <p>
 Package for completion suggestions
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">use-package</span> company)
-(global-company-mode 1)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package corfu
-</span><span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">:custom (corfu-auto t))
-</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(global-corfu-mode 1)
-</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package nerd-icons-corfu)
-</span><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)</span>
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> corfu)
+(<span style="font-weight: bold;">setq</span> corfu-auto t)
+
+(global-corfu-mode 1)
+
+(<span style="font-weight: bold;">use-package</span> nerd-icons-corfu)
+(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgdd1e3f7" class="outline-3">
-<h3 id="orgdd1e3f7">OCaml packages</h3>
-<div class="outline-text-3" id="text-orgdd1e3f7">
+<div id="outline-container-org359a229" class="outline-3">
+<h3 id="org359a229">OCaml packages</h3>
+<div class="outline-text-3" id="text-org359a229">
+<p>
+Dune is bad and stupid and so I use a custom build command that goes
+to the root of the project and then calls dune.
+</p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ocaml-compile</span> ()
   (<span style="font-weight: bold;">setq</span> compile-command <span style="font-style: italic;">"~/.config/ocompile.sh"</span>))
 
-(<span style="font-weight: bold;">use-package</span> tuareg
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">changes the default compile command
-</span>  <span style="font-weight: bold;">:hook</span> (tuareg-mode . ocaml-compile))
-
-(<span style="font-weight: bold;">use-package</span> ocamlformat
-  <span style="font-weight: bold;">:custom</span> (ocamlformat-enable 'enable-outside-detected-project)
-  <span style="font-weight: bold;">:custom</span> (ocamlformat-show-errors nil)
-  <span style="font-weight: bold;">:hook</span> (before-save . ocamlformat-before-save))
-
-(<span style="font-weight: bold;">use-package</span> dune)
+(<span style="font-weight: bold;">use-package</span> tuareg)
+(add-hook 'tuareg-mode-hook #'ocaml-compile)
 </pre>
 </div>
-</div>
-</div>
-<div id="outline-container-org70f239a" class="outline-3">
-<h3 id="org70f239a">Rust packages</h3>
-<div class="outline-text-3" id="text-org70f239a">
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic
-  <span style="font-weight: bold;">:config</span> (<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot))
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org531f827" class="outline-3">
-<h3 id="org531f827"><code>Eglot</code></h3>
-<div class="outline-text-3" id="text-org531f827">
 <p>
-Package for language servers
+Format OCaml code after saving the buffer
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> ocamlformat)
+(<span style="font-weight: bold;">setq</span> ocamlformat-enable 'enable-outside-detected-project)
+(<span style="font-weight: bold;">setq</span> ocamlformat-show-errors nil)
+(add-hook 'before-save-hook #'ocamlformat-before-save)
+</pre>
+</div>
+<p>
+Dune package
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> dune)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbcb0c5d" class="outline-3">
+<h3 id="orgbcb0c5d">Rust packages</h3>
+<div class="outline-text-3" id="text-orgbcb0c5d">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic)
+(<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org236be16" class="outline-3">
+<h3 id="org236be16"><code>Eglot</code></h3>
+<div class="outline-text-3" id="text-org236be16">
+<p>
+Prevent <code>Eglot</code> from being using when writing Rocq.
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">lsp-no-coq</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">unless</span> (eq major-mode 'coq-mode) (eglot-ensure)))
 
-(<span style="font-weight: bold;">use-package</span> eglot
-    <span style="font-weight: bold;">:hook</span> (prog-mode . lsp-no-coq))
+(<span style="font-weight: bold;">use-package</span> eglot)
+(add-hook 'prog-mode-hook #'lsp-no-coq)
 </pre>
 </div>
 <p>
-Neat eldoc popup
+Eldoc popup.  Useful for displaying documentation and errors.  I have
+it set to a keybinding and not a timer since I prefer to control what
+pop ups appear.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eldoc-box
-  <span style="font-weight: bold;">:custom</span> (eldoc-box-only-multi-line t))
-
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eldoc-box)
+(<span style="font-weight: bold;">setq</span> eldoc-box-only-multi-line t)
 (<span style="font-weight: bold;">bind-key</span> <span style="font-style: italic;">"\C-hj"</span> #'eldoc-box-help-at-point)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf088e3c" class="outline-3">
-<h3 id="orgf088e3c">Git packages</h3>
-<div class="outline-text-3" id="text-orgf088e3c">
+<div id="outline-container-org625c2c3" class="outline-3">
+<h3 id="org625c2c3">Git packages</h3>
+<div class="outline-text-3" id="text-org625c2c3">
 <p>
-I will always use <code>magit</code> though. <code>magit</code> :)
+Folks&#x2026; It's <code>Magit</code>.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> magit
-  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> magit-mode-map
-              (<span style="font-style: italic;">"C-c C-p"</span> . magit-section-up)))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> magit)
+
+(keymap-set magit-mode-map <span style="font-style: italic;">"C-c C-p"</span> #'magit-section-up)
 
 (<span style="font-weight: bold;">setq</span> magit-display-buffer-function
       #'magit-display-buffer-traditional)
@@ -742,9 +624,12 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org1513a69" class="outline-3">
-<h3 id="org1513a69">Miscellaneous Coding Packages</h3>
-<div class="outline-text-3" id="text-org1513a69">
+<div id="outline-container-org9aa0de8" class="outline-3">
+<h3 id="org9aa0de8">Yaml</h3>
+<div class="outline-text-3" id="text-org9aa0de8">
+<p>
+Not a lot to be said here
+</p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> yaml-mode)
 </pre>
@@ -752,9 +637,10 @@ I will always use <code>magit</code> though. <code>magit</code> :)
 </div>
 </div>
 </div>
-<div id="outline-container-org89e1e2f" class="outline-2">
-<h2 id="org89e1e2f"><code>Dired</code></h2>
-<div class="outline-text-2" id="text-org89e1e2f">
+
+<div id="outline-container-orgd635448" class="outline-2">
+<h2 id="orgd635448"><code>Dired</code></h2>
+<div class="outline-text-2" id="text-orgd635448">
 <p>
 Deleted files are moved to the trash folder
 </p>
@@ -849,10 +735,9 @@ Keeps track of visited <code>Dired</code> buffers
 More convenient way to search through sub-directories.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> dired-subtree
-  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> dired-mode-map
-        (<span style="font-style: italic;">"i"</span> . dired-subtree-insert)
-        (<span style="font-style: italic;">"DEL"</span> . dired-subtree-remove)))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> dired-subtree)
+(keymap-set dired-mode-map <span style="font-style: italic;">"i"</span> #'dired-subtree-insert)
+(keymap-set dired-mode-map <span style="font-style: italic;">"DEL"</span> #'dired-subtree-remove)
 </pre>
 </div>
 <p>
@@ -888,8 +773,8 @@ Quickly browse files in read only mode
   (view-browse (<span style="font-weight: bold;">lambda</span> () (dired-previous-line 1)))
   )
 
-<span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(define-key view-mode-map (kbd "n") 'view-next-file)
-</span><span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(define-key view-mode-map (kbd "p") 'view-previous-file)</span>
+(define-key view-mode-map (kbd <span style="font-style: italic;">"n"</span>) 'view-next-file)
+(define-key view-mode-map (kbd <span style="font-style: italic;">"p"</span>) 'view-previous-file)
 </pre>
 </div>
 <p>
@@ -910,128 +795,156 @@ another window in the same frame, it selects that buffer by default
 </div>
 </div>
 </div>
-<div id="outline-container-org4280257" class="outline-2">
-<h2 id="org4280257">Email</h2>
-<div class="outline-text-2" id="text-org4280257">
+<div id="outline-container-org1c1757f" class="outline-2">
+<h2 id="org1c1757f">Email</h2>
+<div class="outline-text-2" id="text-org1c1757f">
+<p>
+Use mu4e to manage emails.  Naturally, requires mu4e to already be
+installed.
+</p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">  (<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
-
-  (<span style="font-weight: bold;">setq</span> user-mail-address <span style="font-style: italic;">"tl.soares@campus.fct.unl.pt"</span>)
-
-  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">mu4e</span>)
-  (<span style="font-weight: bold;">use-package</span> async)
-
-  (<span style="font-weight: bold;">use-package</span> mu4e
-    <span style="font-weight: bold;">:ensure</span> nil
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:load-path "/usr/share/emacs/site-lisp/mu4e/"
-</span>    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:defer 20 ; Wait until 20 seconds after startup
-</span>    <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> mu4e-headers-mode-map
-            (<span style="font-style: italic;">"q"</span> . mu4e-dashboard))
-    <span style="font-weight: bold;">:config</span>
-
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This is set to '</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">t</span><span style="font-weight: bold; font-style: italic;">' to avoid mail syncing issues when using mbsync
-</span>    (<span style="font-weight: bold;">setq</span> mu4e-change-filenames-when-moving t)
-    (<span style="font-weight: bold;">setq</span> mu4e-context-policy <span style="font-style: italic;">"pick-first"</span>)
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Refresh mail using isync every minute
-</span>    (<span style="font-weight: bold;">setq</span> mu4e-update-interval 60)
-    (<span style="font-weight: bold;">setq</span> mu4e-get-mail-command <span style="font-style: italic;">"mbsync -a"</span>)
-
-    (<span style="font-weight: bold;">setq</span> mu4e-maildir <span style="font-style: italic;">"~/mail"</span>)
-
-    (<span style="font-weight: bold;">setq</span> mu4e-contexts
-          (list
-           <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Work account
-</span>           (make-mu4e-context
-            <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"FCT"</span>
-            <span style="font-weight: bold;">:match-func</span>
-            (<span style="font-weight: bold;">lambda</span> (msg)
-              (<span style="font-weight: bold;">when</span> msg
-                (string-prefix-p <span style="font-style: italic;">"/gmail"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
-            <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email1)
-                    (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
-                (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.gmail.com"</span>)
-                (smtpmail-smtp-service . 465)
-                (smtpmail-stream-type . ssl)
-                    (mu4e-drafts-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>)
-                    (mu4e-sent-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Sent Mail"</span>)
-                    (mu4e-refile-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>)
-                    (mu4e-trash-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>)))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">mu4e</span>)
+</pre>
+</div>
+<p>
+Fancy dashboard for mu4e.  Requires local file
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> async)
+(load <span style="font-style: italic;">"~/.mu4e-dashboard/mu4e-dashboard.el"</span>)
+</pre>
+</div>
+<p>
+Function to use for sending emails.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> message-send-mail-function 'smtpmail-send-it)
+</pre>
+</div>
+<p>
+Quitting mu4e returns to the dashboard
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(keymap-set mu4e-headers-mode-map <span style="font-style: italic;">"q"</span> #'mu4e-dashboard)
+</pre>
+</div>
+<p>
+Avoids mail syncing issues
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-change-filenames-when-moving t)
+(<span style="font-weight: bold;">setq</span> mu4e-context-policy <span style="font-style: italic;">"pick-first"</span>)
+</pre>
+</div>
+<p>
+Refreshes email every minute
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-update-interval 60)
+(<span style="font-weight: bold;">setq</span> mu4e-get-mail-command <span style="font-style: italic;">"mbsync -a"</span>)
+</pre>
+</div>
+<p>
+Set mail directory
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-maildir <span style="font-style: italic;">"~/mail"</span>)
+</pre>
+</div>
+<p>
+Creates two contexts for my two work emails.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-contexts
+      (list
+       <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Work account
+</span>       (make-mu4e-context
+        <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"FCT"</span>
+        <span style="font-weight: bold;">:match-func</span>
+        (<span style="font-weight: bold;">lambda</span> (msg)
+          (<span style="font-weight: bold;">when</span> msg
+            (string-prefix-p <span style="font-style: italic;">"/gmail"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+        <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email1)
+                (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
+              (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.gmail.com"</span>)
+              (smtpmail-smtp-service . 465)
+              (smtpmail-stream-type . ssl)
+                (mu4e-drafts-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>)
+                (mu4e-sent-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Sent Mail"</span>)
+                (mu4e-refile-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>)
+                (mu4e-trash-folder  . <span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>)))
        (make-mu4e-context
-            <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Inria"</span>
-            <span style="font-weight: bold;">:match-func</span>
-            (<span style="font-weight: bold;">lambda</span> (msg)
-              (<span style="font-weight: bold;">when</span> msg
-                (string-prefix-p <span style="font-style: italic;">"/inria"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
-            <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email2)
-                    (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
-                (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.inria.fr"</span>)
-                (smtpmail-smtp-service . 587)
-                (smtpmail-stream-type . nil)
-                    (mu4e-drafts-folder  . <span style="font-style: italic;">"/inria/Drafts"</span>)
-                    (mu4e-sent-folder  . <span style="font-style: italic;">"/inria/Sent"</span>)
-                    (mu4e-trash-folder  . <span style="font-style: italic;">"/inria/Trash"</span>)))
+        <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Inria"</span>
+        <span style="font-weight: bold;">:match-func</span>
+        (<span style="font-weight: bold;">lambda</span> (msg)
+          (<span style="font-weight: bold;">when</span> msg
+            (string-prefix-p <span style="font-style: italic;">"/inria"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+        <span style="font-weight: bold;">:vars</span> `((user-mail-address . ,email2)
+                (user-full-name    . <span style="font-style: italic;">"Tiago Soares"</span>)
+              (smtpmail-smtp-server . <span style="font-style: italic;">"smtp.inria.fr"</span>)
+              (smtpmail-smtp-service . 587)
+              (smtpmail-stream-type . nil)
+                (mu4e-drafts-folder  . <span style="font-style: italic;">"/inria/Drafts"</span>)
+                (mu4e-sent-folder  . <span style="font-style: italic;">"/inria/Sent"</span>)
+                (mu4e-trash-folder  . <span style="font-style: italic;">"/inria/Trash"</span>)))
 
        )
       )
-    (<span style="font-weight: bold;">setq</span> mu4e-maildir-shortcuts
-      '((<span style="font-style: italic;">"/gmail/inbox"</span>             . ?f)
-            (<span style="font-style: italic;">"/inria/inbox"</span>             . ?i)
-            (<span style="font-style: italic;">"/gmail/[Gmail]/Trash"</span>     . ?t)
-            (<span style="font-style: italic;">"/gmail/[Gmail]/Drafts"</span>    . ?d)
-            (<span style="font-style: italic;">"/gmail/[Gmail]/All Mail"</span>  . ?a)))
-    )
-
-  (<span style="font-weight: bold;">use-package</span> mu4e-alert
+</pre>
+</div>
+<p>
+Notifications for mu4e
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> mu4e-alert
     <span style="font-weight: bold;">:custom</span> (mu4e-alert-style 'libnotify))
-  (mu4e-alert-enable-notifications)
-
-
-<span style="font-weight: bold; font-style: italic;">;  </span><span style="font-weight: bold; font-style: italic;">(use-package go-translate)
-</span> <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">(setq gt-langs '(fr en))
-</span>  <span style="font-weight: bold; font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">(setq gt-default-translator (gt-translator :engines (gt-google-engine)))
-</span>
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
-</span>
-<span style="font-weight: bold; font-style: italic;">;  </span><span style="font-weight: bold; font-style: italic;">(setq gt-default-translator
-</span> <span style="font-weight: bold; font-style: italic;">;       </span><span style="font-weight: bold; font-style: italic;">(gt-translator
-</span>  <span style="font-weight: bold; font-style: italic;">;       </span><span style="font-weight: bold; font-style: italic;">:taker   (gt-taker :text 'buffer :pick 'paragraph)  ; config the Taker
-</span>   <span style="font-weight: bold; font-style: italic;">;      </span><span style="font-weight: bold; font-style: italic;">:engines (list (gt-bing-engine) (gt-google-engine)) ; specify the Engines
-</span>    <span style="font-weight: bold; font-style: italic;">;     </span><span style="font-weight: bold; font-style: italic;">:render  (gt-buffer-render)))                       ; config the Render
-</span>
-  (<span style="font-weight: bold;">setq</span> mu4e-headers-fields '((<span style="font-weight: bold;">:human-date</span> . 12) (<span style="font-weight: bold;">:from</span> . 22) (<span style="font-weight: bold;">:subject</span>)))
-
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it send all paragraphs in the buffer to Bing and Google,
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and output the results with a new Buffer.
-</span>
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This configuration means:
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize the default translator, let it translate between en and fr via Google Translate,
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">and the result will be displayed in the Echo Area.
-</span>
-  (add-hook 'mu4e-view-mode-hook #'writeroom-mode)
-  (add-hook 'mu4e-headers-mode-hook #'writeroom-mode)
-  (add-hook 'message-mode-hook #'auto-fill-mode)
-  (load <span style="font-style: italic;">"~/.mu4e-dashboard/mu4e-dashboard.el"</span>)
-
-  (mu4e)
-
-  (<span style="font-weight: bold;">setq</span> message-cite-reply-position 'above)
-
-  (<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
+(mu4e-alert-enable-notifications)
+</pre>
+</div>
+<p>
+Human readable header fields
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-headers-fields '((<span style="font-weight: bold;">:human-date</span> . 12) (<span style="font-weight: bold;">:from</span> . 22) (<span style="font-weight: bold;">:subject</span>)))
+</pre>
+</div>
+<p>
+Better reading and writing experience for emails
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-hook 'mu4e-view-mode-hook #'writeroom-mode)
+(add-hook 'mu4e-headers-mode-hook #'writeroom-mode)
+(add-hook 'message-mode-hook #'auto-fill-mode)
+</pre>
+</div>
+<p>
+Suppress annoying "Indexing&#x2026; message"
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mu4e-hide-index-messages t)
+</pre>
+</div>
+<p>
+Start mu4e
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(mu4e)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge2c9eea" class="outline-2">
-<h2 id="orge2c9eea">Org</h2>
-<div class="outline-text-2" id="text-orge2c9eea">
+<div id="outline-container-org3e183ac" class="outline-2">
+<h2 id="org3e183ac">Org</h2>
+<div class="outline-text-2" id="text-org3e183ac">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org)
+</pre>
 </div>
-<div id="outline-container-org09d80b6" class="outline-3">
-<h3 id="org09d80b6">Some Basic Bookkeeping</h3>
-<div class="outline-text-3" id="text-org09d80b6">
+</div>
+<div id="outline-container-org97e1c0c" class="outline-3">
+<h3 id="org97e1c0c">Some Basic Bookkeeping</h3>
+<div class="outline-text-3" id="text-org97e1c0c">
 <p>
 Some helpful variables
 </p>
@@ -1074,14 +987,13 @@ Restore the window configuration when quitting the agenda view
 <p>
 Enable notifications for Org agenda items
 </p>
-
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-alert
-  <span style="font-weight: bold;">:custom</span> (alert-default-style 'libnotify)
-  <span style="font-weight: bold;">:custom</span> (org-alert-interval 300)
-  <span style="font-weight: bold;">:custom</span> (org-alert-notify-cutoff 10)
-  <span style="font-weight: bold;">:custom</span> (org-alert-notify-after-event-cutoff 0)
-  )
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-alert)
+(<span style="font-weight: bold;">setq</span> alert-default-style 'libnotify)
+(<span style="font-weight: bold;">setq</span> org-alert-interval 300)
+(<span style="font-weight: bold;">setq</span> org-alert-notify-cutoff 10)
+(<span style="font-weight: bold;">setq</span> org-alert-notify-after-event-cutoff 0)
+
 (org-alert-enable)
 </pre>
 </div>
@@ -1105,9 +1017,9 @@ This is very important
 </div>
 </div>
 </div>
-<div id="outline-container-org2e235d7" class="outline-3">
-<h3 id="org2e235d7">Appearance</h3>
-<div class="outline-text-3" id="text-org2e235d7">
+<div id="outline-container-org23cfc0d" class="outline-3">
+<h3 id="org23cfc0d">Appearance</h3>
+<div class="outline-text-3" id="text-org23cfc0d">
 <p>
 Hide emphasis markers and macro braces
 </p>
@@ -1172,9 +1084,14 @@ Automatic latex preview in Org mode
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-startup-with-latex-preview t)
-
-(<span style="font-weight: bold;">use-package</span> org-fragtog
-  <span style="font-weight: bold;">:hook</span> (org-mode . org-fragtog-mode))
+</pre>
+</div>
+<p>
+Package for editing latex snippets in Org-mode.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-fragtog)
+(add-hook 'org-mode-hook #'org-fragtog-mode)
 </pre>
 </div>
 <p>
@@ -1186,23 +1103,26 @@ Scale up latex preview in Org mode
 </pre>
 </div>
 <p>
-Automatically converts strings to emojis
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> emojify)
-</pre>
-</div>
-<p>
 Org agenda takes up the full window
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-agenda-window-setup 'only-window)
 </pre>
 </div>
+<p>
+Org agenda does not display the files in which items are written in.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-agenda-prefix-format
+      '((agenda . <span style="font-style: italic;">"%?-12t% s"</span>)
+      (todo . <span style="font-style: italic;">"%-12:c"</span>) (tags . <span style="font-style: italic;">"%-12:c"</span>)
+      (search . <span style="font-style: italic;">"%-12:c"</span>)))
+</pre>
 </div>
-<div id="outline-container-orgf4c1643" class="outline-4">
-<h4 id="orgf4c1643">Org Pretty Symbols</h4>
-<div class="outline-text-4" id="text-orgf4c1643">
+</div>
+<div id="outline-container-org1010819" class="outline-4">
+<h4 id="org1010819">Org Pretty Symbols</h4>
+<div class="outline-text-4" id="text-org1010819">
 <p>
 Function for adding pretty symbols for Org mode. Most of these are
 just so that Org mode environments aren't awful to look at.
@@ -1229,14 +1149,16 @@ just so that Org mode environments aren't awful to look at.
   (<span style="font-weight: bold;">push</span> '(<span style="font-style: italic;">"\\/"</span> . ?&#8744;) prettify-symbols-alist)
   (<span style="font-weight: bold;">push</span> '(<span style="font-style: italic;">"&lt;-"</span> . ?&#8592;) prettify-symbols-alist)
   (prettify-symbols-mode 1))
+
+(add-hook 'org-mode-hook #'add-symbols)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org032910f" class="outline-3">
-<h3 id="org032910f">Org capture templates</h3>
-<div class="outline-text-3" id="text-org032910f">
+<div id="outline-container-org23b5bee" class="outline-3">
+<h3 id="org23b5bee">Org capture templates</h3>
+<div class="outline-text-3" id="text-org23b5bee">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-capture-templates
       '(
@@ -1268,9 +1190,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org7c61d43" class="outline-3">
-<h3 id="org7c61d43">Org Keywords</h3>
-<div class="outline-text-3" id="text-org7c61d43">
+<div id="outline-container-orgf69144f" class="outline-3">
+<h3 id="orgf69144f">Org Keywords</h3>
+<div class="outline-text-3" id="text-orgf69144f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-todo-keywords
       '((sequence <span style="font-style: italic;">"APPOINTMENT(p)"</span> <span style="font-style: italic;">"SPEC(s)"</span> <span style="font-style: italic;">"TODO(t)"</span> <span style="font-style: italic;">"IN-PROGRESS(i@/!)"</span> <span style="font-style: italic;">"VERIFYING(v!)"</span> <span style="font-style: italic;">"BLOCKED(b@)"</span> <span style="font-style: italic;">"&#128065;&#65039;&#128068;&#128065;&#65039;(q)"</span> <span style="font-style: italic;">"|"</span> <span style="font-style: italic;">"DONE(d!)"</span> <span style="font-style: italic;">"OBE(o@!)"</span> <span style="font-style: italic;">"WONT-DO(w@/!)"</span> )
@@ -1291,9 +1213,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org80224a2" class="outline-3">
-<h3 id="org80224a2">Inserting Org Example Blocks</h3>
-<div class="outline-text-3" id="text-org80224a2">
+<div id="outline-container-org8c96f42" class="outline-3">
+<h3 id="org8c96f42">Inserting Org Example Blocks</h3>
+<div class="outline-text-3" id="text-org8c96f42">
 <p>
 Function for wrapping text around a block
 </p>
@@ -1357,9 +1279,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-org119fa15" class="outline-3">
-<h3 id="org119fa15">Remove Spell Checking in Code Blocks</h3>
-<div class="outline-text-3" id="text-org119fa15">
+<div id="outline-container-orgf559f46" class="outline-3">
+<h3 id="orgf559f46">Remove Spell Checking in Code Blocks</h3>
+<div class="outline-text-3" id="text-orgf559f46">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_SRC"</span> . <span style="font-style: italic;">"#\\+END_SRC"</span>))
 (add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_EXAMPLE"</span> . <span style="font-style: italic;">"#\\+END_EXAMPLE"</span>))
@@ -1374,9 +1296,9 @@ Function to insert a macro
 </div>
 </div>
 </div>
-<div id="outline-container-orga90ee4e" class="outline-3">
-<h3 id="orga90ee4e">Org Key Bindings and Hooks</h3>
-<div class="outline-text-3" id="text-orga90ee4e">
+<div id="outline-container-orgd625ab7" class="outline-3">
+<h3 id="orgd625ab7">Org Key Bindings and Hooks</h3>
+<div class="outline-text-3" id="text-orgd625ab7">
 <p>
 Global key bindings to access and update the agenda.
 </p>
@@ -1385,26 +1307,29 @@ Global key bindings to access and update the agenda.
 (global-set-key <span style="font-style: italic;">"\C-cc"</span> 'org-capture)
 </pre>
 </div>
+
 <p>
-Concise way of using the previous definitions to configure Org.
+Keybindings to navigate agenda view
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org
-  <span style="font-weight: bold;">:hook</span> (org-mode . add-symbols)
-  <span style="font-weight: bold;">:bind</span>
-  (<span style="font-weight: bold;">:map</span> org-mode-map
-        (<span style="font-style: italic;">"C-c C-x C-x"</span> . org-insert-code-env))
-  <span style="font-weight: bold;">:bind</span>
-  (<span style="font-weight: bold;">:map</span> org-mode-map
-        (<span style="font-style: italic;">"C-c C-x C-m"</span> . org-insert-macro))
-  )
+<pre class="src src-emacs-lisp">(keymap-set org-agenda-keymap <span style="font-style: italic;">"n"</span> #'org-agenda-next-item)
+(keymap-set org-agenda-keymap <span style="font-style: italic;">"p"</span> #'org-agenda-previous-item)
+</pre>
+</div>
+
+<p>
+Keybindings to insert code environments
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(keymap-set org-mode-map <span style="font-style: italic;">"C-c C-x C-x"</span> #'org-insert-code-env)
+(keymap-set org-mode-map <span style="font-style: italic;">"C-c C-x C-m"</span> #'org-insert-macro)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org41b128b" class="outline-3">
-<h3 id="org41b128b">French Notes</h3>
-<div class="outline-text-3" id="text-org41b128b">
+<div id="outline-container-org8c927ad" class="outline-3">
+<h3 id="org8c927ad">French Notes</h3>
+<div class="outline-text-3" id="text-org8c927ad">
 <p>
 Function for inserting a conjugation table for french verbs
 </p>
@@ -1434,9 +1359,9 @@ Function for inserting a conjugation table for french verbs
 </div>
 </div>
 </div>
-<div id="outline-container-org22d44b1" class="outline-3">
-<h3 id="org22d44b1">LaTeX export</h3>
-<div class="outline-text-3" id="text-org22d44b1">
+<div id="outline-container-orgea44a08" class="outline-3">
+<h3 id="orgea44a08">LaTeX export</h3>
+<div class="outline-text-3" id="text-orgea44a08">
 <p>
 Add common scientific paper classes.
 </p>
@@ -1467,22 +1392,21 @@ Disable exporting with table of contents.
 </div>
 </div>
 </div>
-<div id="outline-container-org4cfcbb3" class="outline-3">
-<h3 id="org4cfcbb3">Org Roam</h3>
-<div class="outline-text-3" id="text-org4cfcbb3">
+<div id="outline-container-org2445e3f" class="outline-3">
+<h3 id="org2445e3f">Org Roam</h3>
+<div class="outline-text-3" id="text-org2445e3f">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam
-    <span style="font-weight: bold;">:custom</span>
-    (org-roam-directory (file-truename <span style="font-style: italic;">"~/roam"</span>))
-    (org-roam-file-exclude-regexp '(<span style="font-style: italic;">"data/"</span> <span style="font-style: italic;">"daily/"</span>))
-    (org-roam-completion-everywhere t)
-    <span style="font-weight: bold;">:bind</span> ((<span style="font-style: italic;">"C-c n l"</span> . org-roam-buffer-toggle)
-           (<span style="font-style: italic;">"C-c n f"</span> . org-roam-node-find)
-           (<span style="font-style: italic;">"C-c n g"</span> . org-roam-graph)
-           (<span style="font-style: italic;">"C-c n i"</span> . org-roam-node-insert)
-           (<span style="font-style: italic;">"C-c n c"</span> . org-roam-capture)
-           <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Dailies
-</span>           (<span style="font-style: italic;">"C-c n j"</span> . org-roam-dailies-capture-today)))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam)
+(<span style="font-weight: bold;">setq</span> org-roam-directory (file-truename <span style="font-style: italic;">"~/roam"</span>))
+(<span style="font-weight: bold;">setq</span> org-roam-file-exclude-regexp '(<span style="font-style: italic;">"data/"</span> <span style="font-style: italic;">"daily/"</span>))
+(<span style="font-weight: bold;">setq</span> org-roam-completion-everywhere t)
+
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n l"</span> #'org-roam-buffer-toggle)
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n f"</span> #'org-roam-node-find)
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n g"</span> #'org-roam-graph)
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n i"</span> #'org-roam-node-insert)
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n c"</span> #'org-roam-capture)
+(keymap-set org-roam-mode-map <span style="font-style: italic;">"C-c n j"</span> #'org-roam-dailies-capture-today)
 
 (org-roam-db-autosync-mode)
 </pre>
@@ -1520,9 +1444,9 @@ Capture template for org roam dailies
 </div>
 </div>
 </div>
-<div id="outline-container-org38bffa3" class="outline-2">
-<h2 id="org38bffa3">PDFs</h2>
-<div class="outline-text-2" id="text-org38bffa3">
+<div id="outline-container-orge74d68a" class="outline-2">
+<h2 id="orge74d68a">PDFs</h2>
+<div class="outline-text-2" id="text-orge74d68a">
 <p>
 Opens the current file in <code>zathura</code> and kills the Doc View buffer.
 </p>
@@ -1558,20 +1482,29 @@ Function to run a latex process in the background.
 </div>
 </div>
 </div>
-<div id="outline-container-org5afccdc" class="outline-2">
-<h2 id="org5afccdc">Proof General</h2>
-<div class="outline-text-2" id="text-org5afccdc">
+<div id="outline-container-org355d8c7" class="outline-2">
+<h2 id="org355d8c7">Proof General</h2>
+<div class="outline-text-2" id="text-org355d8c7">
 <p>
-Package for working with Coq
+Package for working with Rocq
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> proof-general
-  <span style="font-weight: bold;">:custom</span>
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">when starting a proof, splits windows so that the goals
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">window is larger than the response window
-</span>  (proof-three-window-mode-policy 'hybrid)
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Removes the EXTREMELY annoying proof general splash screen
-</span>  (proof-splash-enable nil))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> proof-general)
+</pre>
+</div>
+<p>
+Removes the EXTREMELY annoying proof general splash screen
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> proof-splash-enable nil)
+</pre>
+</div>
+<p>
+When starting a proof, splits windows so that the goals window is
+larger than the response window
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> proof-three-window-mode-policy 'hybrid)
 </pre>
 </div>
 <p>
@@ -1611,9 +1544,9 @@ Why3 configuration
 </pre>
 </div>
 </div>
-<div id="outline-container-org69bf86d" class="outline-3">
-<h3 id="org69bf86d">Unicode Symbols for Iris</h3>
-<div class="outline-text-3" id="text-org69bf86d">
+<div id="outline-container-org176d265" class="outline-3">
+<h3 id="org176d265">Unicode Symbols for Iris</h3>
+<div class="outline-text-3" id="text-org176d265">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Input of unicode symbols
 </span>(<span style="font-weight: bold;">use-package</span> math-symbol-lists)
@@ -1696,9 +1629,9 @@ Why3 configuration
 </div>
 </div>
 </div>
-<div id="outline-container-org439c268" class="outline-2">
-<h2 id="org439c268">Settings for Text Mode</h2>
-<div class="outline-text-2" id="text-org439c268">
+<div id="outline-container-orge0e2f02" class="outline-2">
+<h2 id="orge0e2f02">Settings for Text Mode</h2>
+<div class="outline-text-2" id="text-orge0e2f02">
 <p>
 Enable auto-fill.
 </p>
@@ -1711,11 +1644,10 @@ Enable auto-fill.
 Enable <code>Writeroom</code> mode for a more comfortable writing experience.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> writeroom-mode
-  <span style="font-weight: bold;">:hook</span> (text-mode . writeroom-mode)
-  <span style="font-weight: bold;">:custom</span> (writeroom-mode-line t)
-  <span style="font-weight: bold;">:custom</span> (writeroom-maximize-window nil)
-  )
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> writeroom-mode)
+(add-hook 'text-mode-hook #'writeroom-mode)
+(<span style="font-weight: bold;">setq</span> writeroom-mode-line t)
+(<span style="font-weight: bold;">setq</span> writeroom-maximize-window nil)
 </pre>
 </div>
 <p>
@@ -1730,15 +1662,12 @@ something is changing it)
 Enable <code>Flyspell</code> for spell checking
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> flyspell
-  <span style="font-weight: bold;">:hook</span> (text-mode . flyspell-mode)
-  <span style="font-weight: bold;">:hook</span> (prog-mode . flyspell-prog-mode))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> flyspell)
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
-(<span style="font-weight: bold;">use-package</span> flyspell-correct
-  <span style="font-weight: bold;">:bind</span>
-  (<span style="font-weight: bold;">:map</span> flyspell-mode-map
-        (<span style="font-style: italic;">"M-$"</span> . flyspell-correct-wrapper))
-  <span style="font-weight: bold;">:after</span> flyspell)
+(<span style="font-weight: bold;">use-package</span> flyspell-correct)
+(keymap-set flyspell-mode-map <span style="font-style: italic;">"M-$"</span> #'flyspell-correct-wrapper)
 </pre>
 </div>
 <p>
@@ -1758,20 +1687,6 @@ Disable word completion in text-mode
 </pre>
 </div>
 <p>
-Add the preamble necessary to write math symbols in a latex Gospel
-code block.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-unicode</span> () (<span style="font-weight: bold;">interactive</span>) (tag-word-or-region <span style="font-style: italic;">"*?$"</span> <span style="font-style: italic;">"$?*"</span>))
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">latex</span>)
-
-(<span style="font-weight: bold;">use-package</span> auctex
-  <span style="font-weight: bold;">:bind</span>
-  (<span style="font-weight: bold;">:map</span> LaTeX-mode-map
-        (<span style="font-style: italic;">"C-c C-x C-m"</span> . gospel-unicode)))
-</pre>
-</div>
-<p>
 Automatic insertion of right brace in Latex-mode
 </p>
 <div class="org-src-container">
@@ -1780,16 +1695,15 @@ Automatic insertion of right brace in Latex-mode
 </div>
 </div>
 </div>
-<div id="outline-container-orgc160aa3" class="outline-2">
-<h2 id="orgc160aa3">Minibuffer completion w/Vertico</h2>
-<div class="outline-text-2" id="text-orgc160aa3">
+<div id="outline-container-org3c9635d" class="outline-2">
+<h2 id="org3c9635d">Minibuffer completion w/Vertico</h2>
+<div class="outline-text-2" id="text-org3c9635d">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> vertico)
 (vertico-mode 1)
 (vertico-multiform-mode 1)
 </pre>
 </div>
-
 <p>
 Allows using minibuffer commands within the minibuffer.
 </p>
@@ -1797,7 +1711,6 @@ Allows using minibuffer commands within the minibuffer.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> enable-recursive-minibuffers t)
 </pre>
 </div>
-
 <p>
 TAB works the same way as in other completion systems.
 </p>
@@ -1805,7 +1718,6 @@ TAB works the same way as in other completion systems.
 <pre class="src src-emacs-lisp">(keymap-set vertico-map <span style="font-style: italic;">"TAB"</span> #'minibuffer-complete)
 </pre>
 </div>
-
 <p>
 Completion at point uses Vertico
 </p>
@@ -1813,24 +1725,17 @@ Completion at point uses Vertico
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> completion-in-region-function #'consult-completion-in-region)
 </pre>
 </div>
-
 <p>
 Orderless allows for more flexible completion styles.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Optionally use the `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">orderless</span><span style="font-weight: bold; font-style: italic;">' completion style.
-</span>(<span style="font-weight: bold;">use-package</span> orderless
-  <span style="font-weight: bold;">:custom</span>
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Configure a custom style dispatcher (see the Consult wiki)
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
-</span>  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(orderless-component-separator #'orderless-escapable-split-on-space)
-</span>  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles partial-completion))))
-  (completion-category-defaults nil) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Disable defaults, use our settings
-</span>  (completion-pcm-leading-wildcard t)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Emacs 31: partial-completion behaves like substring</span>
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> orderless)
+(<span style="font-weight: bold;">setq</span> completion-styles '(orderless basic))
+(<span style="font-weight: bold;">setq</span> completion-category-overrides '((file (styles partial-completion))))
+(<span style="font-weight: bold;">setq</span> completion-category-defaults nil) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Disable defaults, use orderless settings
+</span>(<span style="font-weight: bold;">setq</span> completion-pcm-leading-wildcard t) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Emacs 31: partial-completion behaves like substring</span>
 </pre>
 </div>
-
 <p>
 More information in minibuffer
 </p>
@@ -1838,23 +1743,20 @@ More information in minibuffer
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> marginalia)
 </pre>
 </div>
-
 <p>
 Icons in minibuffer
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> all-the-icons)
 
-(<span style="font-weight: bold;">use-package</span> all-the-icons-completion
-  <span style="font-weight: bold;">:after</span> (marginalia all-the-icons)
-  <span style="font-weight: bold;">:hook</span> (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  <span style="font-weight: bold;">:init</span>
-  (all-the-icons-completion-mode))
+(<span style="font-weight: bold;">use-package</span> all-the-icons-completion)
+(add-hook 'marginalia-mode-hook
+        #'all-the-icons-completion-marginalia-setup)
 
+(all-the-icons-completion-mode)
 (marginalia-mode)
 </pre>
 </div>
-
 <p>
 Vertico completion in a posframe
 </p>
@@ -1863,7 +1765,6 @@ Vertico completion in a posframe
 (vertico-posframe-mode 1)
 </pre>
 </div>
-
 <p>
 Non-transparent popup
 </p>
@@ -1871,7 +1772,6 @@ Non-transparent popup
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> vertico-posframe-parameters '((alpha . 100)))
 </pre>
 </div>
-
 <p>
 Fixed size Vertico posframe
 </p>
@@ -1885,15 +1785,6 @@ Fixed size Vertico posframe
 (<span style="font-weight: bold;">setq</span> vertico-posframe-size-function #'my-vertico-posframe-get-size)
 </pre>
 </div>
-
-<p>
-Replace I-search with consult line
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-s"</span>) #'consult-line)
-</pre>
-</div>
-
 <p>
 Do not use posframe for consult line and consult mark
 </p>
@@ -1906,7 +1797,6 @@ Do not use posframe for consult line and consult mark
         (t posframe)))
 </pre>
 </div>
-
 <p>
 Overrides the normal find file by using the string at point as a
 possible candidate
@@ -1915,16 +1805,13 @@ possible candidate
 <pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-x C-f"</span>) #'find-file-at-point)
 </pre>
 </div>
-
 <p>
 Switch to buffer with <code>recentf</code> files.
 </p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-x b"</span>) #'consult-buffer)
 </pre>
 </div>
-
 <p>
 No live preview when switching buffers
 </p>
@@ -1932,45 +1819,63 @@ No live preview when switching buffers
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> consult-preview-excluded-buffers t)
 </pre>
 </div>
+<p>
+Replace I-search with consult-line.  Vertico cycle is set to <code>t</code> so that
+we can go to candidates in previous lines.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> vertico-cycle t)
+(global-set-key (kbd <span style="font-style: italic;">"C-s"</span>) #'consult-line)
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org500e78f" class="outline-2">
-<h2 id="org500e78f"><code>Eshell</code></h2>
-<div class="outline-text-2" id="text-org500e78f">
+<div id="outline-container-orgd24ae73" class="outline-2">
+<h2 id="orgd24ae73"><code>Eshell</code></h2>
+<div class="outline-text-2" id="text-orgd24ae73">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eshell)
+</pre>
+</div>
+
 <p>
 Fish like suggestions for <code>eshell</code>
 </p>
-
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> company)
-
-(<span style="font-weight: bold;">use-package</span> esh-autosuggest
-  <span style="font-weight: bold;">:hook</span> (eshell-mode . esh-autosuggest-mode)
-  <span style="font-weight: bold;">:custom</span> (eshell-history-size 50000)
-  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">since esh autosuggest uses the eshell history, we increase it so
-</span>  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">that we have more possible suggesions
-</span>  <span style="font-weight: bold;">:custom</span> (company-minimum-prefix-length 1)
-  <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> esh-autosuggest-active-map
-              (<span style="font-style: italic;">"C-f"</span> . esh-autosuggest-complete-word)
-              (<span style="font-style: italic;">"C-e"</span> . company-complete))
-  )
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> esh-autosuggest)
+(add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+</pre>
+</div>
+<p>
+Same keybindings as zsh.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(keymap-set esh-autosuggest-active-map <span style="font-style: italic;">"C-f"</span>
+           #'esh-autosuggest-complete-word)
+(keymap-set esh-autosuggest-active-map <span style="font-style: italic;">"C-e"</span>
+           #'esh-autosuggest-complete-word)
+</pre>
+</div>
+<p>
+Increase the history size.  This is helpful when using <code>esh-autosuggest</code>
+since that package checks the history for completion candidates.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-history-size 50000)
 </pre>
 </div>
 <p>
 Pretty <code>eshell</code> prompt
 </p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(load-file <span style="font-style: italic;">"/home/tiago/.config/prompt.el"</span>)
 (<span style="font-weight: bold;">setq</span> eshell-prompt-function #'epe-theme-dakrone)
 </pre>
 </div>
-
 <p>
 Function for clearing the shell
 </p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eshell-clear</span> ()
   (<span style="font-weight: bold;">interactive</span>)
@@ -1989,7 +1894,6 @@ Function for getting to the base of any project. Useful for spawning
 shells since having it at the root of the project is generally more
 convenient.
 </p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">project-files</span>
   '(<span style="font-style: italic;">"dune-project"</span> <span style="font-style: italic;">"package.json"</span>
@@ -2090,36 +1994,87 @@ Buffer name matches eshell directory
 (add-hook 'eshell-directory-change-hook #'sync-dir-in-buffer-name)
 </pre>
 </div>
-
+<p>
+No message when starting <code>eshell</code>
+</p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(add-hook 'eshell-mode-hook
-          (<span style="font-weight: bold;">lambda</span> ()
-            (define-key eshell-mode-map (kbd <span style="font-style: italic;">"C-l"</span>) #'eshell-clear)))
-
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">eshell</span>)
-(<span style="font-weight: bold;">use-package</span> eshell
-  <span style="font-weight: bold;">:custom</span> (eshell-banner-message <span style="font-style: italic;">""</span>))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eshell-banner-message <span style="font-style: italic;">""</span>)
 </pre>
 </div>
-
+<p>
+Keybinding to clear the shell
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(keymap-set eshell-mode-map <span style="font-style: italic;">"C-l"</span> #'eshell-clear)
+</pre>
+</div>
 <p>
 We use eat to run any commands that require visuals
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eat
-  <span style="font-weight: bold;">:custom</span> (eat-kill-buffer-on-exit t)
-  <span style="font-weight: bold;">:hook</span> (eshell-mode . eat-eshell-mode))
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eat)
+(<span style="font-weight: bold;">setq</span> eat-kill-buffer-on-exit t)
+(add-hook 'eshell-mode-hook #'eat-eshell-mode)
 </pre>
 </div>
-
+</div>
+</div>
+<div id="outline-container-org1954179" class="outline-2">
+<h2 id="org1954179">Gospel Specific Things</h2>
+<div class="outline-text-2" id="text-org1954179">
 <p>
-Enable elisp <code>sudo</code> in <code>eshell</code>
+Some macros to help writing Rocq proofs of Gospel signatures.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">em-tramp</span>)
-(<span style="font-weight: bold;">setq</span> eshell-prefer-lisp-variables t)
-(<span style="font-weight: bold;">setq</span> eshell-prefer-lisp-functions t)
-(<span style="font-weight: bold;">setq</span> password-cache-expiry 3600)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-abstract</span> (var)
+  (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"sName:"</span>)
+  (insert
+   (format
+    <span style="font-style: italic;">"Global Instance _%s_inst : _%s_sig :="</span>
+    var var))
+  (newline 1 t)
+  (insert (format <span style="font-style: italic;">"{ %s :=  }."</span> var))
+  (backward-char 3))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-lemma</span> (var)
+  (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"sName:"</span>)
+  (insert
+   (format
+    <span style="font-style: italic;">"#[refine] Global Instance _%s_inst : _%s_sig := { }."</span>
+    var var var))
+  (newline 1 t)
+  (insert <span style="font-style: italic;">"Proof."</span>)
+  (newline 1 t))
+
+
+</pre>
+</div>
+<p>
+Function to insert Gospel header
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-header</span> ()
+      (<span style="font-weight: bold;">interactive</span>)
+      (insert <span style="font-style: italic;">"(**************************************************************************)
+(*                                                                        *)
+(*  GOSPEL -- A Specification Language for OCaml                          *)
+(*                                                                        *)
+(*  Copyright (c) 2018- The VOCaL Project                                 *)
+(*                                                                        *)
+(*  This software is free software, distributed under the MIT license     *)
+(*  (as described in file LICENSE enclosed).                              *)
+(**************************************************************************)
+  "</span>))
+</pre>
+</div>
+<p>
+Add the preamble necessary to write math symbols in a latex Gospel
+code block.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">gospel-unicode</span> () (<span style="font-weight: bold;">interactive</span>) (tag-word-or-region <span style="font-style: italic;">"*?$"</span> <span style="font-style: italic;">"$?*"</span>))
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">latex</span>)
+(keymap-set LaTeX-mode-map <span style="font-style: italic;">"C-c C-x C-m"</span> #'gospel-unicode)
 </pre>
 </div>
 <p>
@@ -2228,11 +2183,11 @@ Functions to shutdown and reboot the system
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/shutdown</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -h now"</span>))
+  (async-shell-command <span style="font-style: italic;">"shutdown -h now"</span>))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/reboot</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (async-shell-command <span style="font-style: italic;">"sudo shutdown -r now"</span>))
+  (async-shell-command <span style="font-style: italic;">"shutdown -r now"</span>))
 </pre>
 </div>
 <p>
@@ -2263,10 +2218,20 @@ EXWM allows switching to X windows in a different workspace.
 (<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers 1)
 </pre>
 </div>
+
+<p>
+Transparent emacs frames.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (70 . 70)))
+</pre>
 </div>
-<div id="outline-container-org04a721e" class="outline-3">
-<h3 id="org04a721e">Keybindings for desktop utilities</h3>
-<div class="outline-text-3" id="text-org04a721e">
+</div>
+
+<div id="outline-container-org3df7699" class="outline-3">
+<h3 id="org3df7699">Keybindings for desktop utilities</h3>
+<div class="outline-text-3" id="text-org3df7699">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -2332,9 +2297,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org72eb80d" class="outline-3">
-<h3 id="org72eb80d">Background processes</h3>
-<div class="outline-text-3" id="text-org72eb80d">
+<div id="outline-container-org0f0ddc9" class="outline-3">
+<h3 id="org0f0ddc9">Background processes</h3>
+<div class="outline-text-3" id="text-org0f0ddc9">
 <p>
 Helper function to run a program in the background
 </p>
@@ -2449,9 +2414,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-orga174ef7" class="outline-3">
-<h3 id="orga174ef7">Multiple monitors</h3>
-<div class="outline-text-3" id="text-orga174ef7">
+<div id="outline-container-org1621189" class="outline-3">
+<h3 id="org1621189">Multiple monitors</h3>
+<div class="outline-text-3" id="text-org1621189">
 <p>
 Set the initial workspace for each display
 </p>
@@ -2497,9 +2462,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org287bdfd" class="outline-3">
-<h3 id="org287bdfd">Keybindings</h3>
-<div class="outline-text-3" id="text-org287bdfd">
+<div id="outline-container-orgdcffbfa" class="outline-3">
+<h3 id="orgdcffbfa">Keybindings</h3>
+<div class="outline-text-3" id="text-orgdcffbfa">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -2606,9 +2571,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org57c4085" class="outline-3">
-<h3 id="org57c4085">Enable EXWM</h3>
-<div class="outline-text-3" id="text-org57c4085">
+<div id="outline-container-orgfb8e177" class="outline-3">
+<h3 id="orgfb8e177">Enable EXWM</h3>
+<div class="outline-text-3" id="text-orgfb8e177">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
