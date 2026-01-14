@@ -159,9 +159,9 @@ Transparent emacs frames.
 </pre>
 </div>
 
-<div id="outline-container-orga8b897c" class="outline-2">
-<h2 id="orga8b897c">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orga8b897c">
+<div id="outline-container-orgf8faef3" class="outline-2">
+<h2 id="orgf8faef3">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgf8faef3">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -227,9 +227,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org0265a6e" class="outline-2">
-<h2 id="org0265a6e">Background processes</h2>
-<div class="outline-text-2" id="text-org0265a6e">
+<div id="outline-container-org4b0e507" class="outline-2">
+<h2 id="org4b0e507">Background processes</h2>
+<div class="outline-text-2" id="text-org4b0e507">
 <p>
 Helper function to run a program in the background
 </p>
@@ -264,22 +264,7 @@ workspace 0.
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (efs/run-in-background <span style="font-style: italic;">"discord"</span>))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-substring</span> (haystack needle)
-  (string-match-p (regexp-quote needle) haystack))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-messaging-app</span> ()
-  (seq-drop-while
-   (<span style="font-weight: bold;">lambda</span> (elt) (not (is-substring (buffer-name) elt)))
-   '(<span style="font-style: italic;">"discord"</span>)))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">minimize-messaging-app</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">when</span> (is-messaging-app)
-    (exwm-workspace-move-window 0)))
-
-(add-hook 'exwm-manage-finish-hook #'minimize-messaging-app)
+  (efs/run-in-background <span style="font-style: italic;">"discord --start-minimized"</span>))
 
 (add-hook 'exwm-init-hook #'messaging-apps)
 </pre>
@@ -296,10 +281,12 @@ Add songs to mingus
            ((symbol-function 'y-or-n-p) (<span style="font-weight: bold;">lambda</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> _) t)))
   ,@body))
 
-(without-yes-or-no (mingus-load-all))
-(mingus-shuffle)
-(mingus-play)
-(mingus-pause)
+<span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">checks if mpd is already playing
+</span>(<span style="font-weight: bold;">unless</span> (mpd-get-current-song mpd-inter-conn)
+  (without-yes-or-no (mingus-load-all))
+  (mingus-shuffle)
+  (mingus-play)
+  (mingus-pause))
 </pre>
 </div>
 
@@ -344,9 +331,9 @@ Compositor
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf2af23" class="outline-2">
-<h2 id="orgcf2af23">Multiple monitors</h2>
-<div class="outline-text-2" id="text-orgcf2af23">
+<div id="outline-container-org311c63b" class="outline-2">
+<h2 id="org311c63b">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org311c63b">
 <p>
 Set the initial workspace for each display
 </p>
@@ -392,9 +379,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org088ba26" class="outline-2">
-<h2 id="org088ba26">Keybindings</h2>
-<div class="outline-text-2" id="text-org088ba26">
+<div id="outline-container-orgf603745" class="outline-2">
+<h2 id="orgf603745">Keybindings</h2>
+<div class="outline-text-2" id="text-orgf603745">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -422,12 +409,7 @@ Keybindings to switch the current workspace
 Kills the current buffer.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kill-or-minimize</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">unless</span> (minimize-messaging-app)
-    (kill-current-buffer)))
-
-(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-or-minimize)
+<pre class="src src-emacs-lisp">(exwm-input-set-key (kbd <span style="font-style: italic;">"s-c"</span>) 'kill-current-buffer)
 </pre>
 </div>
 
@@ -499,9 +481,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-orgb300172" class="outline-2">
-<h2 id="orgb300172">Enable EXWM</h2>
-<div class="outline-text-2" id="text-orgb300172">
+<div id="outline-container-org51c20c3" class="outline-2">
+<h2 id="org51c20c3">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org51c20c3">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
