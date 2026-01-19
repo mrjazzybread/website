@@ -71,14 +71,6 @@ respective tabs.
 </pre>
 </div>
 <p>
-Enable a system tray in the minibuffer. This is where icons for the
-network manager and other background applications will be.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(exwm-systemtray-mode)
-</pre>
-</div>
-<p>
 Better splitting of windows
 </p>
 <div class="org-src-container">
@@ -159,9 +151,101 @@ Transparent emacs frames.
 </pre>
 </div>
 
-<div id="outline-container-orgda14ebb" class="outline-2">
-<h2 id="orgda14ebb">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orgda14ebb">
+<div id="outline-container-org73a72a9" class="outline-2">
+<h2 id="org73a72a9">Battery Notifications</h2>
+<div class="outline-text-2" id="text-org73a72a9">
+<p>
+Id for critical notifications.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">notification-id</span> nil)
+</pre>
+</div>
+<p>
+This variable is <code>t</code> if the battery was previously charging.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">was-charging</span> t)
+</pre>
+</div>
+<p>
+This variable is <code>t</code> if the battery was previously fully charged.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">was-full</span> nil)
+</pre>
+</div>
+<p>
+Notifications for different battery states
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-critical-notification</span> (charge)
+  (<span style="font-weight: bold;">setq</span> notification-id
+      (notifications-notify
+       <span style="font-weight: bold;">:timeout</span> 0 <span style="font-weight: bold;">:urgency</span> 'high
+       <span style="font-weight: bold;">:title</span> (format <span style="font-style: italic;">"Battery level critical %d%%!"</span> charge)
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/low-battery.png"</span>
+       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging-notification</span> ()
+  (<span style="font-weight: bold;">setq</span> notification-id
+      (notifications-notify
+       <span style="font-weight: bold;">:urgency</span> 'medium
+       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charging!"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charging.png"</span>
+       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-discharging-notification</span> ()
+  (<span style="font-weight: bold;">setq</span> notification-id
+      (notifications-notify
+       <span style="font-weight: bold;">:urgency</span> 'medium
+       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery discharging!"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charging.png"</span>
+       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charged-notification</span> ()
+  (<span style="font-weight: bold;">setq</span> notification-id
+      (notifications-notify
+       <span style="font-weight: bold;">:urgency</span> 'medium
+       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charged!"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charged.png"</span>
+       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-charging</span> (data)
+  (equal (alist-get ?L data) <span style="font-style: italic;">"on-line"</span>))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">charge</span> (data)
+  (string-to-number (alist-get ?p data)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">critical-battery</span> (data)
+  (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> (not (is-charging data))
+           (&lt; (charge data) 10))
+      (battery-critical-notification charge)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging</span> (data)
+  (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> was-charging (not (is-charging data)))
+    (battery-discharging-notification))
+  (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> (not was-charging) (is-charging data))
+    (battery-charging-notification))
+  (<span style="font-weight: bold;">setq</span> was-charging (is-charging data)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-full</span> (data)
+  (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">and</span> (eq (charge data) 100) (is-charging data))
+      (<span style="font-weight: bold;">unless</span> was-full
+        (<span style="font-weight: bold;">setq</span> was-full t)
+        (battery-charged-notification))
+      (<span style="font-weight: bold;">setq</span> was-full nil)))
+
+(<span style="font-weight: bold;">setq</span> battery-update-functions
+      '(critical-battery battery-charging battery-full))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d7289a" class="outline-2">
+<h2 id="org3d7289a">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org3d7289a">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -227,9 +311,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org7b9fe93" class="outline-2">
-<h2 id="org7b9fe93">Background processes</h2>
-<div class="outline-text-2" id="text-org7b9fe93">
+<div id="outline-container-org585c395" class="outline-2">
+<h2 id="org585c395">Background processes</h2>
+<div class="outline-text-2" id="text-org585c395">
 <p>
 Helper function to run a program in the background
 </p>
@@ -237,14 +321,6 @@ Helper function to run a program in the background
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/run-in-background</span> (command)
   (<span style="font-weight: bold;">let</span> ((command-parts (split-string command <span style="font-style: italic;">"[ ]+"</span>)))
     (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
-</pre>
-</div>
-
-<p>
-Network manager applet
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"nm-applet"</span>)
 </pre>
 </div>
 
@@ -257,20 +333,20 @@ Sound display
 </div>
 
 <p>
-Messaging apps are started after EXWM is initialized.  We also create
-a hook that moves any newly created window with a messaging app to
-workspace 0.
+Run applications after EXWM has initialized.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">messaging-apps</span> ()
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">startup-apps</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  (efs/run-in-background <span style="font-style: italic;">"discord --start-minimized"</span>))
+  (efs/run-in-background <span style="font-style: italic;">"discord --start-minimized"</span>)
+  (efs/run-in-background <span style="font-style: italic;">"dunst"</span>)
+  (efs/run-in-background <span style="font-style: italic;">"picom"</span>))
 
-(add-hook 'exwm-init-hook #'messaging-apps)
+(add-hook 'exwm-init-hook #'startup-apps)
 </pre>
 </div>
 <p>
-Add songs to mingus
+Add songs to Mingus
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defmacro</span> <span style="font-weight: bold;">without-yes-or-no</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> body)
@@ -305,35 +381,12 @@ Auto-pause media when headphones are disconnected
 <pre class="src src-emacs-lisp">(start-process-shell-command <span style="font-style: italic;">"autopause"</span> nil <span style="font-style: italic;">"~/.config/autopause.sh"</span>)
 </pre>
 </div>
-
-<p>
-Notification daemon
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"dunst"</span>)
-</pre>
+</div>
 </div>
 
-<p>
-Battery notifications
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"cbatticon"</span>)
-</pre>
-</div>
-
-<p>
-Compositor
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(efs/run-in-background <span style="font-style: italic;">"picom"</span>)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orge8b20dc" class="outline-2">
-<h2 id="orge8b20dc">Multiple monitors</h2>
-<div class="outline-text-2" id="text-orge8b20dc">
+<div id="outline-container-orgdc811fe" class="outline-2">
+<h2 id="orgdc811fe">Multiple monitors</h2>
+<div class="outline-text-2" id="text-orgdc811fe">
 <p>
 Set the initial workspace for each display
 </p>
@@ -379,9 +432,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-org5ec702c" class="outline-2">
-<h2 id="org5ec702c">Keybindings</h2>
-<div class="outline-text-2" id="text-org5ec702c">
+<div id="outline-container-org7eeeacf" class="outline-2">
+<h2 id="org7eeeacf">Keybindings</h2>
+<div class="outline-text-2" id="text-org7eeeacf">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -474,16 +527,16 @@ Lists all of my firefox tabs
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">minibuffer-with-setup-hook</span>
       (<span style="font-weight: bold;">lambda</span> () (insert <span style="font-style: italic;">"firefox "</span>))
-    (call-interactively #'switch-to-buffer)))
+    (call-interactively #'consult-buffer)))
 
 (exwm-input-set-key (kbd <span style="font-style: italic;">"s-f"</span>) #'list-firefox)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9800a40" class="outline-2">
-<h2 id="org9800a40">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org9800a40">
+<div id="outline-container-orgc9b7690" class="outline-2">
+<h2 id="orgc9b7690">Enable EXWM</h2>
+<div class="outline-text-2" id="text-orgc9b7690">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
