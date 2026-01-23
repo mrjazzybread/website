@@ -151,9 +151,9 @@ Transparent emacs frames.
 </pre>
 </div>
 
-<div id="outline-container-orgb295bb2" class="outline-2">
-<h2 id="orgb295bb2">Battery Notifications</h2>
-<div class="outline-text-2" id="text-orgb295bb2">
+<div id="outline-container-org8cead3a" class="outline-2">
+<h2 id="org8cead3a">Battery Notifications</h2>
+<div class="outline-text-2" id="text-org8cead3a">
 <p>
 Id for critical notifications.
 </p>
@@ -184,7 +184,7 @@ Notifications for different battery states
       (notifications-notify
        <span style="font-weight: bold;">:timeout</span> 0 <span style="font-weight: bold;">:urgency</span> 'high
        <span style="font-weight: bold;">:title</span> (format <span style="font-style: italic;">"Battery level critical %d%%!"</span> charge)
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/low-battery.png"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/low-battery.png"</span>
        <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging-notification</span> ()
@@ -192,7 +192,7 @@ Notifications for different battery states
       (notifications-notify
        <span style="font-weight: bold;">:urgency</span> 'medium
        <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charging!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charging.png"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
        <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-discharging-notification</span> ()
@@ -200,7 +200,7 @@ Notifications for different battery states
       (notifications-notify
        <span style="font-weight: bold;">:urgency</span> 'medium
        <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery discharging!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charging.png"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
        <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charged-notification</span> ()
@@ -208,19 +208,19 @@ Notifications for different battery states
       (notifications-notify
        <span style="font-weight: bold;">:urgency</span> 'medium
        <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charged!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/roam/daily/personal/battery-charged.png"</span>
+       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charged.png"</span>
        <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-charging</span> (data)
   (equal (alist-get ?L data) <span style="font-style: italic;">"on-line"</span>))
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">charge</span> (data)
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">dcharge</span> (data)
   (string-to-number (alist-get ?p data)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">critical-battery</span> (data)
   (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> (not (is-charging data))
-           (&lt; (charge data) 10))
-      (battery-critical-notification charge)))
+           (&lt; (dcharge data) 10))
+    (battery-critical-notification (dcharge data))))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging</span> (data)
   (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> was-charging (not (is-charging data)))
@@ -230,7 +230,7 @@ Notifications for different battery states
   (<span style="font-weight: bold;">setq</span> was-charging (is-charging data)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-full</span> (data)
-  (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">and</span> (eq (charge data) 100) (is-charging data))
+  (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">and</span> (eq (dcharge data) 100) (is-charging data))
       (<span style="font-weight: bold;">unless</span> was-full
         (<span style="font-weight: bold;">setq</span> was-full t)
         (battery-charged-notification))
@@ -243,9 +243,9 @@ Notifications for different battery states
 </div>
 </div>
 
-<div id="outline-container-orge78bc35" class="outline-2">
-<h2 id="orge78bc35">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-orge78bc35">
+<div id="outline-container-org3ff7176" class="outline-2">
+<h2 id="org3ff7176">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-org3ff7176">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -311,9 +311,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-orga7c4d50" class="outline-2">
-<h2 id="orga7c4d50">Background processes</h2>
-<div class="outline-text-2" id="text-orga7c4d50">
+<div id="outline-container-org7c14127" class="outline-2">
+<h2 id="org7c14127">Background processes</h2>
+<div class="outline-text-2" id="text-org7c14127">
 <p>
 Helper function to run a program in the background
 </p>
@@ -384,9 +384,9 @@ Auto-pause media when headphones are disconnected
 </div>
 </div>
 
-<div id="outline-container-org5de1f37" class="outline-2">
-<h2 id="org5de1f37">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org5de1f37">
+<div id="outline-container-org9ac57ee" class="outline-2">
+<h2 id="org9ac57ee">Multiple monitors</h2>
+<div class="outline-text-2" id="text-org9ac57ee">
 <p>
 Set the initial workspace for each display
 </p>
@@ -432,9 +432,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgf5cdc1d" class="outline-2">
-<h2 id="orgf5cdc1d">Keybindings</h2>
-<div class="outline-text-2" id="text-orgf5cdc1d">
+<div id="outline-container-orgb8a49b7" class="outline-2">
+<h2 id="orgb8a49b7">Keybindings</h2>
+<div class="outline-text-2" id="text-orgb8a49b7">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -534,9 +534,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-orgd5c32cb" class="outline-2">
-<h2 id="orgd5c32cb">Enable EXWM</h2>
-<div class="outline-text-2" id="text-orgd5c32cb">
+<div id="outline-container-org8f5e91c" class="outline-2">
+<h2 id="org8f5e91c">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org8f5e91c">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
