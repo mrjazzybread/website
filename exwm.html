@@ -151,9 +151,9 @@ Transparent emacs frames.
 </pre>
 </div>
 
-<div id="outline-container-org8cead3a" class="outline-2">
-<h2 id="org8cead3a">Battery Notifications</h2>
-<div class="outline-text-2" id="text-org8cead3a">
+<div id="outline-container-orge7703d5" class="outline-2">
+<h2 id="orge7703d5">Battery Notifications</h2>
+<div class="outline-text-2" id="text-orge7703d5">
 <p>
 Id for critical notifications.
 </p>
@@ -236,16 +236,19 @@ Notifications for different battery states
         (battery-charged-notification))
       (<span style="font-weight: bold;">setq</span> was-full nil)))
 
-(<span style="font-weight: bold;">setq</span> battery-update-functions
-      '(critical-battery battery-charging battery-full))
+
+(add-hook 'exwm-init-hook
+        (<span style="font-weight: bold;">lambda</span> ()
+          (<span style="font-weight: bold;">setq</span> battery-update-functions
+                '(critical-battery battery-charging battery-full))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org3ff7176" class="outline-2">
-<h2 id="org3ff7176">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org3ff7176">
+<div id="outline-container-orgda2cdf8" class="outline-2">
+<h2 id="orgda2cdf8">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgda2cdf8">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -311,9 +314,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 
-<div id="outline-container-org7c14127" class="outline-2">
-<h2 id="org7c14127">Background processes</h2>
-<div class="outline-text-2" id="text-org7c14127">
+<div id="outline-container-org4296dd9" class="outline-2">
+<h2 id="org4296dd9">Background processes</h2>
+<div class="outline-text-2" id="text-org4296dd9">
 <p>
 Helper function to run a program in the background
 </p>
@@ -384,9 +387,9 @@ Auto-pause media when headphones are disconnected
 </div>
 </div>
 
-<div id="outline-container-org9ac57ee" class="outline-2">
-<h2 id="org9ac57ee">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org9ac57ee">
+<div id="outline-container-orga2b979d" class="outline-2">
+<h2 id="orga2b979d">Multiple monitors</h2>
+<div class="outline-text-2" id="text-orga2b979d">
 <p>
 Set the initial workspace for each display
 </p>
@@ -432,9 +435,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb8a49b7" class="outline-2">
-<h2 id="orgb8a49b7">Keybindings</h2>
-<div class="outline-text-2" id="text-orgb8a49b7">
+<div id="outline-container-org31ce575" class="outline-2">
+<h2 id="org31ce575">Keybindings</h2>
+<div class="outline-text-2" id="text-org31ce575">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -534,9 +537,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org8f5e91c" class="outline-2">
-<h2 id="org8f5e91c">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org8f5e91c">
+<div id="outline-container-org5f9eb0f" class="outline-2">
+<h2 id="org5f9eb0f">Enable EXWM</h2>
+<div class="outline-text-2" id="text-org5f9eb0f">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
