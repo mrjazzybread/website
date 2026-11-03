@@ -27,7 +27,7 @@ Make it so that EXWM buffers are named after the window they are managing
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-hook 'exwm-update-class-hook
-        (<span style="font-weight: bold;">lambda</span> () (exwm-workspace-rename-buffer exwm-class-name)))
+          (<span style="font-weight: bold;">lambda</span> () (exwm-workspace-rename-buffer exwm-class-name)))
 </pre>
 </div>
 
@@ -39,25 +39,25 @@ on the right. This way, we can use Emacs keybindings in X windows.
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-input-simulation-keys
       '(([?\C-b] . [left])
         ([?\C-f] . [right])
-      ([?\M-f] . [C-right])
-      ([?\M-b] . [C-left])
+        ([?\M-f] . [C-right])
+        ([?\M-b] . [C-left])
         ([?\C-p] . [up])
         ([?\C-n] . [down])
         ([?\C-a] . [home])
         ([?\C-e] . [end])
         ([?\M-v] . [prior])
-      ([?\M-w] . [C-c])
-      ([?\C-y] . [C-v])
-      ([?\C-_] . [C-z])
+        ([?\M-w] . [C-c])
+        ([?\C-y] . [C-v])
+        ([?\C-_] . [C-z])
         ([?\C-v] . [next])
         ([?\C-d] . [delete])
-      ([?\C-s] . [C-f])
+        ([?\C-s] . [C-f])
         ([?\C-k] . [S-end delete])
-      ([?\C- ] . [C-a])
-      ([?\C-g] . [escape])
-      ([?\C-j] . [S-return])
-      ([?\C-w] . [C-x])
-      ))
+        ([?\C- ] . [C-a])
+        ([?\C-g] . [escape])
+        ([?\C-j] . [S-return])
+        ([?\C-w] . [C-x])
+        ))
 </pre>
 </div>
 <p>
@@ -162,10 +162,9 @@ Update dot files.
    <span style="font-style: italic;">"cd $HOME/.dot-files &amp;&amp; git pull"</span>)
 </pre>
 </div>
-
-<div id="outline-container-org3e9abf7" class="outline-2">
-<h2 id="org3e9abf7">Battery Notifications</h2>
-<div class="outline-text-2" id="text-org3e9abf7">
+<div id="outline-container-orgd4ab78d" class="outline-2">
+<h2 id="orgd4ab78d">Battery Notifications</h2>
+<div class="outline-text-2" id="text-orgd4ab78d">
 <p>
 Id for critical notifications.
 </p>
@@ -193,35 +192,35 @@ Notifications for different battery states
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-critical-notification</span> (charge)
   (<span style="font-weight: bold;">setq</span> notification-id
-      (notifications-notify
-       <span style="font-weight: bold;">:timeout</span> 0 <span style="font-weight: bold;">:urgency</span> 'high
-       <span style="font-weight: bold;">:title</span> (format <span style="font-style: italic;">"Battery level critical %d%%!"</span> charge)
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/low-battery.png"</span>
-       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+        (notifications-notify
+         <span style="font-weight: bold;">:timeout</span> 0 <span style="font-weight: bold;">:urgency</span> 'high
+         <span style="font-weight: bold;">:title</span> (format <span style="font-style: italic;">"Battery level critical %d%%!"</span> charge)
+         <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/low-battery.png"</span>
+         <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging-notification</span> ()
   (<span style="font-weight: bold;">setq</span> notification-id
-      (notifications-notify
-       <span style="font-weight: bold;">:urgency</span> 'medium
-       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charging!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
-       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+        (notifications-notify
+         <span style="font-weight: bold;">:urgency</span> 'medium
+         <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charging!"</span>
+         <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
+         <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-discharging-notification</span> ()
   (<span style="font-weight: bold;">setq</span> notification-id
-      (notifications-notify
-       <span style="font-weight: bold;">:urgency</span> 'medium
-       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery discharging!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
-       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+        (notifications-notify
+         <span style="font-weight: bold;">:urgency</span> 'medium
+         <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery discharging!"</span>
+         <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charging.png"</span>
+         <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charged-notification</span> ()
   (<span style="font-weight: bold;">setq</span> notification-id
-      (notifications-notify
-       <span style="font-weight: bold;">:urgency</span> 'medium
-       <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charged!"</span>
-       <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charged.png"</span>
-       <span style="font-weight: bold;">:replaces-id</span> notification-id)))
+        (notifications-notify
+         <span style="font-weight: bold;">:urgency</span> 'medium
+         <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Battery charged!"</span>
+         <span style="font-weight: bold;">:app-icon</span> <span style="font-style: italic;">"/home/tiago/.dot-files/battery-charged.png"</span>
+         <span style="font-weight: bold;">:replaces-id</span> notification-id)))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">is-charging</span> (data)
   (equal (alist-get ?L data) <span style="font-style: italic;">"on-line"</span>))
@@ -235,7 +234,7 @@ Notifications for different battery states
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">critical-battery</span> (data)
   (<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">and</span> (not (is-connected data))
-           (&lt; (dcharge data) 10))
+             (&lt; (dcharge data) 10))
     (battery-critical-notification (dcharge data))))
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-charging</span> (data)
@@ -247,24 +246,23 @@ Notifications for different battery states
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">battery-full</span> (data)
   (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">and</span> (eq (dcharge data) 100) (is-charging data))
-      (<span style="font-weight: bold;">unless</span> was-full
-        (<span style="font-weight: bold;">setq</span> was-full t)
-        (battery-charged-notification))
+        (<span style="font-weight: bold;">unless</span> was-full
+          (<span style="font-weight: bold;">setq</span> was-full t)
+          (battery-charged-notification))
       (<span style="font-weight: bold;">setq</span> was-full nil)))
 
 
 (add-hook 'exwm-init-hook
-        (<span style="font-weight: bold;">lambda</span> ()
-          (<span style="font-weight: bold;">setq</span> battery-update-functions
-                '(critical-battery battery-charging battery-full))))
+          (<span style="font-weight: bold;">lambda</span> ()
+            (<span style="font-weight: bold;">setq</span> battery-update-functions
+                  '(critical-battery battery-charging battery-full))))
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org6602cb3" class="outline-2">
-<h2 id="org6602cb3">Keybindings for desktop utilities</h2>
-<div class="outline-text-2" id="text-org6602cb3">
+<div id="outline-container-orgc7c1edc" class="outline-2">
+<h2 id="orgc7c1edc">Keybindings for desktop utilities</h2>
+<div class="outline-text-2" id="text-orgc7c1edc">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -329,10 +327,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9a4ccca" class="outline-2">
-<h2 id="org9a4ccca">Background processes</h2>
-<div class="outline-text-2" id="text-org9a4ccca">
+<div id="outline-container-org7becf7b" class="outline-2">
+<h2 id="org7becf7b">Background processes</h2>
+<div class="outline-text-2" id="text-org7becf7b">
 <p>
 Helper function to run a program in the background
 </p>
@@ -381,10 +378,9 @@ Auto-pause media when headphones are disconnected
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2c4f2ac" class="outline-2">
-<h2 id="org2c4f2ac">Multiple monitors</h2>
-<div class="outline-text-2" id="text-org2c4f2ac">
+<div id="outline-container-orga15f3e2" class="outline-2">
+<h2 id="orga15f3e2">Multiple monitors</h2>
+<div class="outline-text-2" id="text-orga15f3e2">
 <p>
 Set the initial workspace for each display
 </p>
@@ -430,9 +426,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd835c0d" class="outline-2">
-<h2 id="orgd835c0d">Keybindings</h2>
-<div class="outline-text-2" id="text-orgd835c0d">
+<div id="outline-container-orgf166ab6" class="outline-2">
+<h2 id="orgf166ab6">Keybindings</h2>
+<div class="outline-text-2" id="text-orgf166ab6">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -452,7 +448,7 @@ Keybindings to switch the current workspace
                   (number-sequence 0 9))))
 
 (add-hook #'exwm-init-hook
-        (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>) (exwm-workspace-switch-create 1)))
+          (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">interactive</span>) (exwm-workspace-switch-create 1)))
 </pre>
 </div>
 
@@ -532,9 +528,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org83604e8" class="outline-2">
-<h2 id="org83604e8">Enable EXWM</h2>
-<div class="outline-text-2" id="text-org83604e8">
+<div id="outline-container-orgd2cd278" class="outline-2">
+<h2 id="orgd2cd278">Enable EXWM</h2>
+<div class="outline-text-2" id="text-orgd2cd278">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
@@ -563,7 +559,7 @@ to put this in.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.7.11)</p>
 </div>
 </body>
 </html>
