@@ -17,9 +17,9 @@
 </span>(load-file <span style="font-style: italic;">"~/.config/sensitive.el"</span>)
 </pre>
 </div>
-<div id="outline-container-org9183d9c" class="outline-2">
-<h2 id="org9183d9c">Package Configuration</h2>
-<div class="outline-text-2" id="text-org9183d9c">
+<div id="outline-container-org2ce9145" class="outline-2">
+<h2 id="org2ce9145">Package Configuration</h2>
+<div class="outline-text-2" id="text-org2ce9145">
 <p>
 Add MELPA to the list of recognized archives
 </p>
@@ -57,9 +57,9 @@ GNU keys to enable downloading packages
 </div>
 </div>
 </div>
-<div id="outline-container-org7e530bc" class="outline-2">
-<h2 id="org7e530bc">Appearance</h2>
-<div class="outline-text-2" id="text-org7e530bc">
+<div id="outline-container-orge0b6ab4" class="outline-2">
+<h2 id="orge0b6ab4">Appearance</h2>
+<div class="outline-text-2" id="text-orge0b6ab4">
 <p>
 Define font style and height
 </p>
@@ -106,9 +106,18 @@ Pretty mode line
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> doom-modeline)
 (doom-modeline-mode 1)
 
+(doom-modeline-def-segment emms-info
+  <span style="font-style: italic;">"Metadata regarding the current file, such as dimensions for images."</span>
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">TODO: Include other information
+</span>    (format <span style="font-style: italic;">"%s %s %s"</span>
+            (<span style="font-weight: bold;">if</span> emms-player-paused-p <span style="font-style: italic;">"&#62091;"</span> <span style="font-style: italic;">"&#61515;"</span>)
+            (emms-track-get (emms-playlist-current-selected-track)
+             'info-title)
+            emms-playing-time-string))
+
 (doom-modeline-def-modeline 'main
- '(bar matches buffer-info buffer-position)
- '(time major-mode battery))
+  '(bar matches buffer-info buffer-position)
+  '(emms-info time major-mode battery))
 </pre>
 </div>
 <p>
@@ -134,18 +143,18 @@ Cute icon for notifications
 </div>
 </div>
 </div>
-<div id="outline-container-org9e4c98d" class="outline-2">
-<h2 id="org9e4c98d"><code>utf-8</code></h2>
-<div class="outline-text-2" id="text-org9e4c98d">
+<div id="outline-container-org6079c65" class="outline-2">
+<h2 id="org6079c65"><code>utf-8</code></h2>
+<div class="outline-text-2" id="text-org6079c65">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(set-locale-environment <span style="font-style: italic;">"UTF-8"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org65538c1" class="outline-2">
-<h2 id="org65538c1">Conveniences</h2>
-<div class="outline-text-2" id="text-org65538c1">
+<div id="outline-container-org7a78f44" class="outline-2">
+<h2 id="org7a78f44">Conveniences</h2>
+<div class="outline-text-2" id="text-org7a78f44">
 <p>
 Don't use ui dialogs
 </p>
@@ -312,9 +321,9 @@ A single-digit prefix argument gives the top window arg*10%.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgb7df9c1" class="outline-3">
-<h3 id="orgb7df9c1">Editing Buffers</h3>
-<div class="outline-text-3" id="text-orgb7df9c1">
+<div id="outline-container-orgc96c6bd" class="outline-3">
+<h3 id="orgc96c6bd">Editing Buffers</h3>
+<div class="outline-text-3" id="text-orgc96c6bd">
 <p>
 Enable creation of pairs of brackets or quotes when one is inserted.
 </p>
@@ -397,9 +406,9 @@ Functions to shutdown and reboot the system.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb843e62" class="outline-2">
-<h2 id="orgb843e62">Popup windows</h2>
-<div class="outline-text-2" id="text-orgb843e62">
+<div id="outline-container-org928bb4f" class="outline-2">
+<h2 id="org928bb4f">Popup windows</h2>
+<div class="outline-text-2" id="text-org928bb4f">
 <p>
 This makes it so every pop up window appears in the current window.
 We add special rules for the minor and major modes that are allowed to
@@ -422,9 +431,9 @@ perform splits on the current window layout.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc88be10" class="outline-2">
-<h2 id="orgc88be10">GPG</h2>
-<div class="outline-text-2" id="text-orgc88be10">
+<div id="outline-container-orgface793" class="outline-2">
+<h2 id="orgface793">GPG</h2>
+<div class="outline-text-2" id="text-orgface793">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">let's get encryption established
 </span>(<span style="font-weight: bold;">use-package</span> pinentry)
@@ -447,13 +456,13 @@ perform splits on the current window layout.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb8014e4" class="outline-2">
-<h2 id="orgb8014e4">Coding Packages</h2>
-<div class="outline-text-2" id="text-orgb8014e4">
+<div id="outline-container-org6adb779" class="outline-2">
+<h2 id="org6adb779">Coding Packages</h2>
+<div class="outline-text-2" id="text-org6adb779">
 </div>
-<div id="outline-container-org2b76261" class="outline-3">
-<h3 id="org2b76261">Compilation</h3>
-<div class="outline-text-3" id="text-org2b76261">
+<div id="outline-container-orgb63f03e" class="outline-3">
+<h3 id="orgb63f03e">Compilation</h3>
+<div class="outline-text-3" id="text-orgb63f03e">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> compile)
 </pre>
@@ -474,9 +483,9 @@ Kill compilation buffer and window
 </div>
 </div>
 </div>
-<div id="outline-container-org471da26" class="outline-3">
-<h3 id="org471da26"><code>Flymake</code></h3>
-<div class="outline-text-3" id="text-org471da26">
+<div id="outline-container-org1530c2f" class="outline-3">
+<h3 id="org1530c2f"><code>Flymake</code></h3>
+<div class="outline-text-3" id="text-org1530c2f">
 <p>
 Package used by Eglot for highlighting errors
 </p>
@@ -488,9 +497,9 @@ Package used by Eglot for highlighting errors
 </div>
 </div>
 </div>
-<div id="outline-container-orgccedf40" class="outline-3">
-<h3 id="orgccedf40">Corfu</h3>
-<div class="outline-text-3" id="text-orgccedf40">
+<div id="outline-container-org3129eb2" class="outline-3">
+<h3 id="org3129eb2">Corfu</h3>
+<div class="outline-text-3" id="text-org3129eb2">
 <p>
 Package for completion suggestions
 </p>
@@ -509,9 +518,9 @@ Package for completion suggestions
 </div>
 </div>
 </div>
-<div id="outline-container-orgc2c7bc2" class="outline-3">
-<h3 id="orgc2c7bc2">OCaml packages</h3>
-<div class="outline-text-3" id="text-orgc2c7bc2">
+<div id="outline-container-orgbdd8246" class="outline-3">
+<h3 id="orgbdd8246">OCaml packages</h3>
+<div class="outline-text-3" id="text-orgbdd8246">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> tuareg
   <span style="font-weight: bold;">:vc</span> (<span style="font-weight: bold;">:url</span> <span style="font-style: italic;">"https://github.com/mrjazzybread/tuareg"</span>
@@ -559,9 +568,9 @@ Dune package
 </div>
 </div>
 </div>
-<div id="outline-container-org7a9ecda" class="outline-3">
-<h3 id="org7a9ecda">Rust packages</h3>
-<div class="outline-text-3" id="text-org7a9ecda">
+<div id="outline-container-org329f34b" class="outline-3">
+<h3 id="org329f34b">Rust packages</h3>
+<div class="outline-text-3" id="text-org329f34b">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> rustic)
 (<span style="font-weight: bold;">setq</span> rustic-lsp-client #'eglot)
@@ -569,9 +578,9 @@ Dune package
 </div>
 </div>
 </div>
-<div id="outline-container-orgab4c007" class="outline-3">
-<h3 id="orgab4c007"><code>Eglot</code></h3>
-<div class="outline-text-3" id="text-orgab4c007">
+<div id="outline-container-org282537d" class="outline-3">
+<h3 id="org282537d"><code>Eglot</code></h3>
+<div class="outline-text-3" id="text-org282537d">
 <p>
 Prevent <code>Eglot</code> from being using when writing Rocq.
 </p>
@@ -605,9 +614,9 @@ Prevent <code>Eglot</code> from displaying code actions.
 </div>
 </div>
 </div>
-<div id="outline-container-orgceae0af" class="outline-3">
-<h3 id="orgceae0af">Git packages</h3>
-<div class="outline-text-3" id="text-orgceae0af">
+<div id="outline-container-orgbd5394d" class="outline-3">
+<h3 id="orgbd5394d">Git packages</h3>
+<div class="outline-text-3" id="text-orgbd5394d">
 <p>
 Folks&#x2026; It's <code>Magit</code>.
 </p>
@@ -644,9 +653,9 @@ Commit on every file save.  I use this to sync my agenda files automatically.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc18ce52" class="outline-3">
-<h3 id="orgc18ce52">Miscellaneous Coding packages</h3>
-<div class="outline-text-3" id="text-orgc18ce52">
+<div id="outline-container-orgcb9f276" class="outline-3">
+<h3 id="orgcb9f276">Miscellaneous Coding packages</h3>
+<div class="outline-text-3" id="text-orgcb9f276">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> yaml-mode)
 (<span style="font-weight: bold;">use-package</span> boogie-friends)
@@ -656,9 +665,9 @@ Commit on every file save.  I use this to sync my agenda files automatically.
 </div>
 </div>
 </div>
-<div id="outline-container-org500aa10" class="outline-2">
-<h2 id="org500aa10"><code>Dired</code></h2>
-<div class="outline-text-2" id="text-org500aa10">
+<div id="outline-container-orga6af465" class="outline-2">
+<h2 id="orga6af465"><code>Dired</code></h2>
+<div class="outline-text-2" id="text-orga6af465">
 <p>
 By default, deleting a file removes it from your file system.  This
 makes it so that deleting files moves them to the trash folder.
@@ -766,9 +775,9 @@ another window in the same frame, it selects that buffer by default
 </div>
 </div>
 </div>
-<div id="outline-container-org1f14d95" class="outline-2">
-<h2 id="org1f14d95">Email</h2>
-<div class="outline-text-2" id="text-org1f14d95">
+<div id="outline-container-orga9362e9" class="outline-2">
+<h2 id="orga9362e9">Email</h2>
+<div class="outline-text-2" id="text-orga9362e9">
 <p>
 Use mu4e to manage emails.  Naturally, requires mu4e to already be
 installed.
@@ -919,13 +928,13 @@ Start mu4e
 </div>
 </div>
 </div>
-<div id="outline-container-org54c4538" class="outline-2">
-<h2 id="org54c4538">Org</h2>
-<div class="outline-text-2" id="text-org54c4538">
+<div id="outline-container-org05c7b49" class="outline-2">
+<h2 id="org05c7b49">Org</h2>
+<div class="outline-text-2" id="text-org05c7b49">
 </div>
-<div id="outline-container-org13629a1" class="outline-3">
-<h3 id="org13629a1">Some Basic Bookkeeping</h3>
-<div class="outline-text-3" id="text-org13629a1">
+<div id="outline-container-org53e9acd" class="outline-3">
+<h3 id="org53e9acd">Some Basic Bookkeeping</h3>
+<div class="outline-text-3" id="text-org53e9acd">
 <p>
 Automatically commit changes to org files.
 </p>
@@ -1055,9 +1064,9 @@ In column view mode only show the name of the heading by default
 </div>
 </div>
 </div>
-<div id="outline-container-org8b9f3c3" class="outline-3">
-<h3 id="org8b9f3c3">Appearance</h3>
-<div class="outline-text-3" id="text-org8b9f3c3">
+<div id="outline-container-orgad83d51" class="outline-3">
+<h3 id="orgad83d51">Appearance</h3>
+<div class="outline-text-3" id="text-orgad83d51">
 <p>
 Hide emphasis markers and macro braces
 </p>
@@ -1208,9 +1217,9 @@ Decrease the size of latex previews
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbc5c17a" class="outline-4">
-<h4 id="orgbc5c17a">Org Pretty Symbols</h4>
-<div class="outline-text-4" id="text-orgbc5c17a">
+<div id="outline-container-org30cffc4" class="outline-4">
+<h4 id="org30cffc4">Org Pretty Symbols</h4>
+<div class="outline-text-4" id="text-org30cffc4">
 <p>
 Function for adding pretty symbols for Org mode. Most of these are
 just so that Org mode environments aren't awful to look at.
@@ -1239,9 +1248,9 @@ just so that Org mode environments aren't awful to look at.
 </div>
 </div>
 </div>
-<div id="outline-container-org517e753" class="outline-3">
-<h3 id="org517e753">Count number of albums</h3>
-<div class="outline-text-3" id="text-org517e753">
+<div id="outline-container-orgb489ba1" class="outline-3">
+<h3 id="orgb489ba1">Count number of albums</h3>
+<div class="outline-text-3" id="text-orgb489ba1">
 <p>
 Counts the number of listened albums headings
 </p>
@@ -1256,9 +1265,9 @@ Counts the number of listened albums headings
 </div>
 </div>
 </div>
-<div id="outline-container-orgcdac3c5" class="outline-3">
-<h3 id="orgcdac3c5">Remove Spell Checking in Code Blocks</h3>
-<div class="outline-text-3" id="text-orgcdac3c5">
+<div id="outline-container-orge9b0b01" class="outline-3">
+<h3 id="orge9b0b01">Remove Spell Checking in Code Blocks</h3>
+<div class="outline-text-3" id="text-orge9b0b01">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_SRC"</span> . <span style="font-style: italic;">"#\\+END_SRC"</span>))
 (add-to-list 'ispell-skip-region-alist '(<span style="font-style: italic;">"^#\\+BEGIN_EXAMPLE"</span> . <span style="font-style: italic;">"#\\+END_EXAMPLE"</span>))
@@ -1273,9 +1282,9 @@ Counts the number of listened albums headings
 </div>
 </div>
 </div>
-<div id="outline-container-org39c5296" class="outline-3">
-<h3 id="org39c5296">Org Key Bindings and Hooks</h3>
-<div class="outline-text-3" id="text-org39c5296">
+<div id="outline-container-org0d44389" class="outline-3">
+<h3 id="org0d44389">Org Key Bindings and Hooks</h3>
+<div class="outline-text-3" id="text-org0d44389">
 <p>
 Global key bindings to access and update the agenda.
 </p>
@@ -1295,9 +1304,9 @@ Keybindings to navigate agenda view
 </div>
 </div>
 </div>
-<div id="outline-container-org16a821f" class="outline-3">
-<h3 id="org16a821f">Org Roam</h3>
-<div class="outline-text-3" id="text-org16a821f">
+<div id="outline-container-org3ccf640" class="outline-3">
+<h3 id="org3ccf640">Org Roam</h3>
+<div class="outline-text-3" id="text-org3ccf640">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> org-roam)
 (<span style="font-weight: bold;">setq</span> org-roam-directory (file-truename <span style="font-style: italic;">"~/roam"</span>))
@@ -1338,9 +1347,9 @@ Capture template for org roam dailies
 </div>
 </div>
 </div>
-<div id="outline-container-org040b8ce" class="outline-2">
-<h2 id="org040b8ce">PDFs</h2>
-<div class="outline-text-2" id="text-org040b8ce">
+<div id="outline-container-org3582f45" class="outline-2">
+<h2 id="org3582f45">PDFs</h2>
+<div class="outline-text-2" id="text-org3582f45">
 <p>
 Opens the current file in <code>zathura</code> and kills the Doc View buffer.
 </p>
@@ -1376,9 +1385,9 @@ Function to run a latex process in the background.
 </div>
 </div>
 </div>
-<div id="outline-container-org2889765" class="outline-2">
-<h2 id="org2889765">Proof General</h2>
-<div class="outline-text-2" id="text-org2889765">
+<div id="outline-container-orgcdfd9e5" class="outline-2">
+<h2 id="orgcdfd9e5">Proof General</h2>
+<div class="outline-text-2" id="text-orgcdfd9e5">
 <p>
 Package for working with Rocq
 </p>
@@ -1438,9 +1447,9 @@ Why3 configuration
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd9bc4c2" class="outline-3">
-<h3 id="orgd9bc4c2">Unicode Symbols for Iris</h3>
-<div class="outline-text-3" id="text-orgd9bc4c2">
+<div id="outline-container-org2e9f029" class="outline-3">
+<h3 id="org2e9f029">Unicode Symbols for Iris</h3>
+<div class="outline-text-3" id="text-org2e9f029">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Input of unicode symbols
 </span>(<span style="font-weight: bold;">use-package</span> math-symbol-lists)
@@ -1524,9 +1533,9 @@ Why3 configuration
 </div>
 </div>
 </div>
-<div id="outline-container-org075f43d" class="outline-2">
-<h2 id="org075f43d">Settings for Text Mode</h2>
-<div class="outline-text-2" id="text-org075f43d">
+<div id="outline-container-org6ba6fdd" class="outline-2">
+<h2 id="org6ba6fdd">Settings for Text Mode</h2>
+<div class="outline-text-2" id="text-org6ba6fdd">
 <p>
 Enable auto-fill.
 </p>
@@ -1597,9 +1606,9 @@ Hide Markdown markup
 </div>
 </div>
 </div>
-<div id="outline-container-orgaaa334b" class="outline-2">
-<h2 id="orgaaa334b">Minibuffer completion w/Vertico</h2>
-<div class="outline-text-2" id="text-orgaaa334b">
+<div id="outline-container-orgf716bf7" class="outline-2">
+<h2 id="orgf716bf7">Minibuffer completion w/Vertico</h2>
+<div class="outline-text-2" id="text-orgf716bf7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> vertico)
 (vertico-mode 1)
@@ -1684,9 +1693,9 @@ we can go to candidates in lines previous to the one we started in.
 </div>
 </div>
 </div>
-<div id="outline-container-org611aedb" class="outline-2">
-<h2 id="org611aedb"><code>Eshell</code></h2>
-<div class="outline-text-2" id="text-org611aedb">
+<div id="outline-container-org9b77664" class="outline-2">
+<h2 id="org9b77664"><code>Eshell</code></h2>
+<div class="outline-text-2" id="text-org9b77664">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> eshell)
 </pre>
@@ -1816,9 +1825,9 @@ We use eat to run any commands that require visuals
 </div>
 </div>
 </div>
-<div id="outline-container-org4575de3" class="outline-2">
-<h2 id="org4575de3">Typst</h2>
-<div class="outline-text-2" id="text-org4575de3">
+<div id="outline-container-org504e353" class="outline-2">
+<h2 id="org504e353">Typst</h2>
+<div class="outline-text-2" id="text-org504e353">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> typst-ts-mode)
 </pre>
@@ -1835,9 +1844,9 @@ Command to compile a Typst project.
 </div>
 </div>
 </div>
-<div id="outline-container-org6dc4c57" class="outline-2">
-<h2 id="org6dc4c57">Elfeed</h2>
-<div class="outline-text-2" id="text-org6dc4c57">
+<div id="outline-container-orgfc791ba" class="outline-2">
+<h2 id="orgfc791ba">Elfeed</h2>
+<div class="outline-text-2" id="text-orgfc791ba">
 <p>
 Package to read RSS feeds.
 </p>
@@ -1866,9 +1875,9 @@ RSS feed database
 </div>
 </div>
 </div>
-<div id="outline-container-org127f76a" class="outline-2">
-<h2 id="org127f76a">Multimedia</h2>
-<div class="outline-text-2" id="text-org127f76a">
+<div id="outline-container-orgbe41683" class="outline-2">
+<h2 id="orgbe41683">Multimedia</h2>
+<div class="outline-text-2" id="text-orgbe41683">
 <p>
 Loads my music library onto EMMS (Emacs Multimedia System)
 </p>
@@ -1897,9 +1906,9 @@ Makes it so <code>playerctl</code> works with EMMS.
 </div>
 </div>
 </div>
-<div id="outline-container-orga146fef" class="outline-2">
-<h2 id="orga146fef">Gospel Specific Things</h2>
-<div class="outline-text-2" id="text-orga146fef">
+<div id="outline-container-orgf222c96" class="outline-2">
+<h2 id="orgf222c96">Gospel Specific Things</h2>
+<div class="outline-text-2" id="text-orgf222c96">
 <p>
 Some macros to help writing Rocq proofs of Gospel signatures.
 </p>
@@ -2138,9 +2147,9 @@ Update dot files.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf9ea1b5" class="outline-3">
-<h3 id="orgf9ea1b5">Battery Notifications</h3>
-<div class="outline-text-3" id="text-orgf9ea1b5">
+<div id="outline-container-org799efdb" class="outline-3">
+<h3 id="org799efdb">Battery Notifications</h3>
+<div class="outline-text-3" id="text-org799efdb">
 <p>
 Id for critical notifications.
 </p>
@@ -2236,9 +2245,9 @@ Notifications for different battery states
 </div>
 </div>
 </div>
-<div id="outline-container-org5d0e5d7" class="outline-3">
-<h3 id="org5d0e5d7">Keybindings for desktop utilities</h3>
-<div class="outline-text-3" id="text-org5d0e5d7">
+<div id="outline-container-orgb10a073" class="outline-3">
+<h3 id="orgb10a073">Keybindings for desktop utilities</h3>
+<div class="outline-text-3" id="text-orgb10a073">
 <p>
 We use the <code>desktop-environment</code> package to help us change the volume,
 adjust brightness, etc&#x2026;
@@ -2303,9 +2312,9 @@ Locking the screen also pauses any media
 </div>
 </div>
 </div>
-<div id="outline-container-org3d1af70" class="outline-3">
-<h3 id="org3d1af70">Background processes</h3>
-<div class="outline-text-3" id="text-org3d1af70">
+<div id="outline-container-org8f7bcc8" class="outline-3">
+<h3 id="org8f7bcc8">Background processes</h3>
+<div class="outline-text-3" id="text-org8f7bcc8">
 <p>
 Helper function to run a program in the background
 </p>
@@ -2354,9 +2363,9 @@ Auto-pause media when headphones are disconnected
 </div>
 </div>
 </div>
-<div id="outline-container-org63517a3" class="outline-3">
-<h3 id="org63517a3">Multiple monitors</h3>
-<div class="outline-text-3" id="text-org63517a3">
+<div id="outline-container-orgf51db98" class="outline-3">
+<h3 id="orgf51db98">Multiple monitors</h3>
+<div class="outline-text-3" id="text-orgf51db98">
 <p>
 Set the initial workspace for each display
 </p>
@@ -2402,9 +2411,9 @@ are correctly configured.
 </div>
 </div>
 </div>
-<div id="outline-container-orgfc1cb1d" class="outline-3">
-<h3 id="orgfc1cb1d">Keybindings</h3>
-<div class="outline-text-3" id="text-orgfc1cb1d">
+<div id="outline-container-orga1390d6" class="outline-3">
+<h3 id="orga1390d6">Keybindings</h3>
+<div class="outline-text-3" id="text-orga1390d6">
 <p>
 Keybindings to switch the current workspace
 </p>
@@ -2504,9 +2513,9 @@ Lists all of my firefox tabs
 </div>
 </div>
 </div>
-<div id="outline-container-org7d54849" class="outline-3">
-<h3 id="org7d54849">Enable EXWM</h3>
-<div class="outline-text-3" id="text-org7d54849">
+<div id="outline-container-org9651cbb" class="outline-3">
+<h3 id="org9651cbb">Enable EXWM</h3>
+<div class="outline-text-3" id="text-org9651cbb">
 <p>
 I call <code>scratch-buffer</code> first so that each new workspace opens in a
 scratch buffer.  I then call server-start to turn the Emacs instance
